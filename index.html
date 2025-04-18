@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eAG/A1C Conversion Calculator</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="container mx-auto px-4 py-8 max-w-5xl">
+        <!-- Header Section -->
+        <header class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-blue-600 mb-4">eAG/A1C Conversion Calculator</h1>
+            <p class="text-lg text-gray-700">
+                A tool to convert between estimated Average Glucose (eAG) and A1C measurements for diabetes management.
+            </p>
+        </header>
+
+        <main class="flex flex-col lg:flex-row gap-8">
+            <!-- Calculator Section -->
+            <section class="bg-white rounded-lg shadow-md p-6 lg:w-1/2">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-6">Calculator</h2>
+                
+                <!-- Conversion Direction Selection -->
+                <div class="mb-6">
+                    <p class="text-gray-700 mb-2 font-medium">Choose conversion direction:</p>
+                    <div class="flex flex-wrap gap-4">
+                        <label class="flex items-center cursor-pointer">
+                            <input type="radio" name="conversion-direction" value="a1c-to-eag" class="form-radio h-5 w-5 text-blue-600" checked>
+                            <span class="ml-2 text-gray-700">A1C to eAG</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer">
+                            <input type="radio" name="conversion-direction" value="eag-to-a1c" class="form-radio h-5 w-5 text-blue-600">
+                            <span class="ml-2 text-gray-700">eAG to A1C</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Input Section -->
+                <div class="mb-6">
+                    <div id="a1c-input-container">
+                        <label for="a1c-input" class="block text-gray-700 mb-2 font-medium">Enter A1C value (%):</label>
+                        <input type="number" id="a1c-input" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="e.g., 7.0" step="0.1" min="0">
+                        <p class="text-sm text-gray-500 mt-1">Enter a value between 4.0 and 14.0</p>
+                    </div>
+                    
+                    <div id="eag-input-container" class="hidden">
+                        <label for="eag-input" class="block text-gray-700 mb-2 font-medium">Enter eAG value:</label>
+                        <input type="number" id="eag-input" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="e.g., 154" step="1" min="0">
+                        
+                        <div class="mt-3">
+                            <p class="text-gray-700 mb-2 font-medium">Units:</p>
+                            <div class="flex gap-4">
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="eag-units" value="mgdl" class="form-radio h-5 w-5 text-blue-600" checked>
+                                    <span class="ml-2 text-gray-700">mg/dL</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="eag-units" value="mmoll" class="form-radio h-5 w-5 text-blue-600">
+                                    <span class="ml-2 text-gray-700">mmol/L</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Calculate Button -->
+                <button id="calculate-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-md transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                    Calculate
+                </button>
+                
+                <!-- Results Display -->
+                <div id="result-container" class="mt-6 p-4 bg-gray-50 rounded-md border border-gray-200 hidden">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Result:</h3>
+                    <div id="result-value" class="text-2xl font-bold text-blue-600"></div>
+                    <p id="result-explanation" class="mt-2 text-gray-600"></p>
+                </div>
+                
+                <!-- Error Display -->
+                <div id="error-container" class="mt-6 p-4 bg-red-50 rounded-md border border-red-200 hidden">
+                    <h3 class="text-lg font-semibold text-red-800 mb-2">Error:</h3>
+                    <p id="error-message" class="text-red-600"></p>
+                </div>
+            </section>
+
+            <!-- Educational Content Section -->
+            <section class="bg-white rounded-lg shadow-md p-6 lg:w-1/2">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-6">Educational Information</h2>
+                
+                <!-- What are eAG and A1C? -->
+                <div class="mb-6">
+                    <button class="accordion-btn flex justify-between items-center w-full py-3 px-4 bg-gray-100 hover:bg-gray-200 rounded-md text-left">
+                        <span class="font-medium">What are eAG and A1C?</span>
+                        <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="accordion-content hidden mt-2 px-4 py-3 bg-gray-50 rounded-md">
+                        <h3 class="text-lg font-medium text-gray-800 mb-2">A1C (HbA1c)</h3>
+                        <p class="mb-3 text-gray-700">
+                            A1C is a blood test that reflects your average blood glucose levels over the past 2-3 months. It measures the percentage of hemoglobin proteins in your blood that have glucose attached to them.
+                        </p>
+                        <p class="mb-4 text-gray-700">
+                            For most adults with diabetes, the American Diabetes Association recommends an A1C target of less than 7%, which indicates good blood sugar control.
+                        </p>
+                        
+                        <h3 class="text-lg font-medium text-gray-800 mb-2">eAG (Estimated Average Glucose)</h3>
+                        <p class="mb-3 text-gray-700">
+                            eAG converts the A1C percentage into the same units (mg/dL or mmol/L) that you see on your glucose meter, making it easier to understand your average blood sugar level.
+                        </p>
+                        <p class="text-gray-700">
+                            For example, an A1C of 7% corresponds to an eAG of approximately 154 mg/dL or 8.6 mmol/L.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Positive Factors -->
+                <div class="mb-6">
+                    <button class="accordion-btn flex justify-between items-center w-full py-3 px-4 bg-gray-100 hover:bg-gray-200 rounded-md text-left">
+                        <span class="font-medium">Factors That Positively Affect Blood Sugar</span>
+                        <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="accordion-content hidden mt-2 px-4 py-3 bg-gray-50 rounded-md">
+                        <h3 class="text-lg font-medium text-gray-800 mb-2">Healthy Diet</h3>
+                        <p class="mb-3 text-gray-700">
+                            Focus on a balanced diet rich in vegetables, lean proteins, whole grains, and healthy fats. Limit refined carbohydrates and processed foods.
+                        </p>
+                        
+                        <h3 class="text-lg font-medium text-gray-800 mb-2">Regular Physical Activity</h3>
+                        <p class="mb-3 text-gray-700">
+                            Aim for at least 150 minutes of moderate-intensity exercise per week. Physical activity helps your body use insulin more efficiently.
+                        </p>
+                        
+                        <h3 class="text-lg font-medium text-gray-800 mb-2">Medication Adherence</h3>
+                        <p class="mb-3 text-gray-700">
+                            Take medications as prescribed by your healthcare provider. Consistent medication use helps maintain stable blood glucose levels.
+                        </p>
+                        
+                        <h3 class="text-lg font-medium text-gray-800 mb-2">Regular Monitoring</h3>
+                        <p class="text-gray-700">
+                            Check your blood glucose regularly as recommended by your healthcare provider. This helps you understand how different factors affect your levels.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Negative Factors -->
+                <div class="mb-6">
+                    <button class="accordion-btn flex justify-between items-center w-full py-3 px-4 bg-gray-100 hover:bg-gray-200 rounded-md text-left">
+                        <span class="font-medium">Factors That Negatively Impact Blood Sugar</span>
+                        <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="accordion-content hidden mt-2 px-4 py-3 bg-gray-50 rounded-md">
+                        <h3 class="text-lg font-medium text-gray-800 mb-2">Stress</h3>
+                        <p class="mb-3 text-gray-700">
+                            Stress hormones can raise blood glucose levels. Practice stress-reduction techniques such as meditation, deep breathing, or yoga.
+                        </p>
+                        
+                        <h3 class="text-lg font-medium text-gray-800 mb-2">Poor Diet</h3>
+                        <p class="mb-3 text-gray-700">
+                            High intake of sugary foods, refined carbohydrates, and processed foods can cause blood glucose spikes.
+                        </p>
+                        
+                        <h3 class="text-lg font-medium text-gray-800 mb-2">Illness and Infection</h3>
+                        <p class="mb-3 text-gray-700">
+                            Being sick can raise blood glucose levels as your body releases stress hormones to fight infection.
+                        </p>
+                        
+                        <h3 class="text-lg font-medium text-gray-800 mb-2">Sedentary Lifestyle</h3>
+                        <p class="mb-3 text-gray-700">
+                            Lack of physical activity reduces insulin sensitivity and can lead to higher blood glucose levels.
+                        </p>
+                        
+                        <h3 class="text-lg font-medium text-gray-800 mb-2">Dehydration</h3>
+                        <p class="text-gray-700">
+                            Not drinking enough water can concentrate glucose in the bloodstream, leading to higher readings.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Reference Table -->
+                <div>
+                    <button class="accordion-btn flex justify-between items-center w-full py-3 px-4 bg-gray-100 hover:bg-gray-200 rounded-md text-left">
+                        <span class="font-medium">A1C to eAG Reference Table</span>
+                        <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="accordion-content hidden mt-2 px-4 py-3 bg-gray-50 rounded-md">
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full bg-white">
+                                <thead>
+                                    <tr>
+                                        <th class="py-2 px-4 border-b border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase">A1C (%)</th>
+                                        <th class="py-2 px-4 border-b border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase">eAG (mg/dL)</th>
+                                        <th class="py-2 px-4 border-b border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase">eAG (mmol/L)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="py-2 px-4 border-b border-gray-200">6.0</td>
+                                        <td class="py-2 px-4 border-b border-gray-200">126</td>
+                                        <td class="py-2 px-4 border-b border-gray-200">7.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2 px-4 border-b border-gray-200">6.5</td>
+                                        <td class="py-2 px-4 border-b border-gray-200">140</td>
+                                        <td class="py-2 px-4 border-b border-gray-200">7.8</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2 px-4 border-b border-gray-200">7.0</td>
+                                        <td class="py-2 px-4 border-b border-gray-200">154</td>
+                                        <td class="py-2 px-4 border-b border-gray-200">8.6</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2 px-4 border-b border-gray-200">7.5</td>
+                                        <td class="py-2 px-4 border-b border-gray-200">169</td>
+                                        <td class="py-2 px-4 border-b border-gray-200">9.4</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2 px-4 border-b border-gray-200">8.0</td>
+                                        <td class="py-2 px-4 border-b border-gray-200">183</td>
+                                        <td class="py-2 px-4 border-b border-gray-200">10.1</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2 px-4 border-b border-gray-200">8.5</td>
+                                        <td class="py-2 px-4 border-b border-gray-200">197</td>
+                                        <td class="py-2 px-4 border-b border-gray-200">10.9</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2 px-4 border-b border-gray-200">9.0</td>
+                                        <td class="py-2 px-4 border-b border-gray-200">212</td>
+                                        <td class="py-2 px-4 border-b border-gray-200">11.8</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2 px-4 border-b border-gray-200">9.5</td>
+                                        <td class="py-2 px-4 border-b border-gray-200">226</td>
+                                        <td class="py-2 px-4 border-b border-gray-200">12.6</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2 px-4 border-b border-gray-200">10.0</td>
+                                        <td class="py-2 px-4 border-b border-gray-200">240</td>
+                                        <td class="py-2 px-4 border-b border-gray-200">13.4</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-600">
+                            Formula: eAG (mg/dL) = 28.7 × A1C - 46.7
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer Section -->
+        <footer class="mt-12 text-center text-gray-600 text-sm">
+            <p>Created based on the American Diabetes Association conversion formulas.</p>
+            <p class="mt-2">Formula: eAG (mg/dL) = 28.7 × A1C - 46.7</p>
+        </footer>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

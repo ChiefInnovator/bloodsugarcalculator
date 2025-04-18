@@ -1,0 +1,153 @@
+/* Custom styles for eAG/A1C Calculator */
+
+/* Base styles */
+body {
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    line-height: 1.5;
+    color: #333333;
+}
+
+/* Custom form elements */
+.form-radio {
+    appearance: none;
+    -webkit-appearance: none;
+    border: 1px solid #cbd5e0;
+    border-radius: 50%;
+    outline: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.form-radio:checked {
+    border-color: #3498db;
+    background-color: #3498db;
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='4'/%3e%3c/svg%3e");
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Accordion styles */
+.accordion-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+}
+
+.accordion-btn.active svg {
+    transform: rotate(180deg);
+}
+
+/* Custom focus styles for better accessibility */
+input:focus, 
+button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+}
+
+/* Custom transitions */
+.transition-transform {
+    transition: transform 0.2s ease-in-out;
+}
+
+/* Custom animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Result container highlight */
+.result-highlight {
+    background-color: #ebf8ff;
+    border-color: #90cdf4;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Error container styles */
+#error-container {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Tooltip styles */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: help;
+}
+
+.tooltip .tooltip-text {
+    visibility: hidden;
+    width: 200px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -100px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip .tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    .tooltip .tooltip-text {
+        width: 160px;
+        margin-left: -80px;
+    }
+}
+
+/* Print styles */
+@media print {
+    body {
+        background-color: white;
+    }
+    
+    .container {
+        max-width: 100%;
+        padding: 0;
+    }
+    
+    .accordion-content {
+        display: block !important;
+    }
+    
+    .accordion-btn svg {
+        display: none;
+    }
+    
+    button, 
+    .accordion-btn {
+        background-color: transparent !important;
+    }
+    
+    #calculate-btn {
+        display: none;
+    }
+}
