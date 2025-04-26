@@ -24,12 +24,12 @@
 ## Testing
 - [x] Test calculator functionality with various inputs
 - [x] Test responsive design on different screen sizes
-- [ ] Test in different browsers
-- [ ] Validate HTML and CSS
-- [ ] Fix any bugs or issues
+- [x] Test in different browsers
+- [x] Validate HTML and CSS
+- [x] Fix any bugs or issues
 
 ## Deployment
-- [ ] Prepare files for deployment
-- [ ] Deploy to a public URL for testing
-- [ ] Package code files for user deployment
-- [ ] Document deployment instructions for Azure Static Web App
+- [x] Prepare files for deployment
+- [x] Deploy to a public URL for testing
+- [x] Package code files for user deployment
+- [x] Document deployment instructions for Azure Static Web App
