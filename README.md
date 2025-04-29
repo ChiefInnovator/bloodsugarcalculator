@@ -12,7 +12,7 @@ A web-based calculator for converting between A1C and estimated Average Glucose 
 
 ## Live Demo
 
-The calculator is deployed and available at: [https://fhqrowok.manus.space](https://fhqrowok.manus.space)
+The calculator is deployed and available at: [https://diabetescalculator.ai](https://diabetescalculator.ai)
 
 ## Deployment to Azure Static Web App
 
