@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources - eAG/A1C Conversion Calculator</title>
+    <meta name="description" content="Educational resources about A1C, eAG, blood glucose management, and related topics.">
+    <meta name="robots" content="index, follow">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-100 font-sans flex flex-col min-h-screen">
+    <!-- Ad Space -->
+    <div class="w-full p-6 bg-pink-50 border-2 border-dashed border-pink-300 text-center">
+        <p class="text-gray-500">Ad Space</p>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="bg-blue-600 text-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 max-w-5xl flex justify-between items-center">
+            <a href="index.html" class="text-xl font-bold hover:text-blue-200 transition duration-300">eAG/A1C Calc</a>
+            <div class="space-x-4">
+                <a href="index.html" class="px-3 py-2 rounded hover:bg-blue-700 transition duration-300">Home</a>
+                <a href="resources.html" class="px-3 py-2 rounded hover:bg-blue-700 transition duration-300">Resources</a>
+                <a href="about.html" class="px-3 py-2 rounded hover:bg-blue-700 transition duration-300">About</a>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container mx-auto px-4 py-8 max-w-5xl">
+        <main class="bg-white rounded-lg shadow-md p-6 w-full">
+            <!-- Educational Content Section -->
+            <h2 class="text-2xl font-semibold text-gray-800 mb-6">Educational Information</h2>
+            
+            <!-- What are eAG and A1C? -->
+            <div class="mb-6">
+                <button class="accordion-btn flex justify-between items-center w-full py-3 px-4 bg-gray-100 hover:bg-gray-200 rounded-md text-left">
+                    <span class="font-medium">What are eAG and A1C?</span>
+                    <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div class="accordion-content hidden mt-2 px-4 py-3 bg-gray-50 rounded-md">
+                    <h3 class="text-lg font-medium text-gray-800 mb-2">A1C (HbA1c)</h3>
+                    <p class="mb-3 text-gray-700">
+                        A1C is a blood test that reflects your average blood glucose levels over the past 2-3 months. It measures the percentage of hemoglobin proteins in your blood that have glucose attached to them.
+                    </p>
+                    <p class="mb-4 text-gray-700">
+                        For most adults with diabetes, the <a href="https://diabetes.org/" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">American Diabetes Association</a> recommends an A1C target of less than 7%, which indicates good blood sugar control.
+                    </p>
+                    
+                    <h3 class="text-lg font-medium text-gray-800 mb-2">eAG (Estimated Average Glucose)</h3>
+                    <p class="mb-3 text-gray-700">
+                        eAG converts the A1C percentage into the same units (mg/dL or mmol/L) that you see on your glucose meter, making it easier to understand your average blood sugar level. This concept was introduced by the <a href="https://diabetes.org/" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">American Diabetes Association</a>.
+                    </p>
+                    <p class="text-gray-700">
+                        For example, an A1C of 7% corresponds to an eAG of approximately 154 mg/dL or 8.6 mmol/L.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Positive Factors -->
+            <div class="mb-6">
+                <button class="accordion-btn flex justify-between items-center w-full py-3 px-4 bg-gray-100 hover:bg-gray-200 rounded-md text-left">
+                    <span class="font-medium">Factors That Positively Affect Blood Sugar</span>
+                    <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div class="accordion-content hidden mt-2 px-4 py-3 bg-gray-50 rounded-md">
+                    <h3 class="text-lg font-medium text-gray-800 mb-2">Healthy Diet</h3>
+                    <p class="mb-3 text-gray-700">
+                        Focus on a balanced diet rich in vegetables, lean proteins, whole grains, and healthy fats. Limit refined carbohydrates and processed foods.
+                    </p>
+                    
+                    <h3 class="text-lg font-medium text-gray-800 mb-2">Regular Physical Activity</h3>
+                    <p class="mb-3 text-gray-700">
+                        Aim for at least 150 minutes of moderate-intensity exercise per week. Physical activity helps your body use insulin more efficiently.
+                    </p>
+                    
+                    <h3 class="text-lg font-medium text-gray-800 mb-2">Medication Adherence</h3>
+                    <p class="mb-3 text-gray-700">
+                        Take medications as prescribed by your healthcare provider. Consistent medication use helps maintain stable blood glucose levels.
+                    </p>
+                    
+                    <h3 class="text-lg font-medium text-gray-800 mb-2">Regular Monitoring</h3>
+                    <p class="text-gray-700">
+                        Check your blood glucose regularly as recommended by your healthcare provider. This helps you understand how different factors affect your levels.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Negative Factors -->
+            <div class="mb-6">
+                <button class="accordion-btn flex justify-between items-center w-full py-3 px-4 bg-gray-100 hover:bg-gray-200 rounded-md text-left">
+                    <span class="font-medium">Factors That Negatively Impact Blood Sugar</span>
+                    <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div class="accordion-content hidden mt-2 px-4 py-3 bg-gray-50 rounded-md">
+                    <h3 class="text-lg font-medium text-gray-800 mb-2">Stress</h3>
+                    <p class="mb-3 text-gray-700">
+                        Stress hormones can raise blood glucose levels. Practice stress-reduction techniques such as meditation, deep breathing, or yoga.
+                    </p>
+                    
+                    <h3 class="text-lg font-medium text-gray-800 mb-2">Poor Diet</h3>
+                    <p class="mb-3 text-gray-700">
+                        High intake of sugary foods, refined carbohydrates, and processed foods can cause blood glucose spikes.
+                    </p>
+                    
+                    <h3 class="text-lg font-medium text-gray-800 mb-2">Illness and Infection</h3>
+                    <p class="mb-3 text-gray-700">
+                        Being sick can raise blood glucose levels as your body releases stress hormones to fight infection.
+                    </p>
+                    
+                    <h3 class="text-lg font-medium text-gray-800 mb-2">Sedentary Lifestyle</h3>
+                    <p class="mb-3 text-gray-700">
+                        Lack of physical activity reduces insulin sensitivity and can lead to higher blood glucose levels.
+                    </p>
+                    
+                    <h3 class="text-lg font-medium text-gray-800 mb-2">Dehydration</h3>
+                    <p class="text-gray-700">
+                        Not drinking enough water can concentrate glucose in the bloodstream, leading to higher readings.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Reference Table -->
+            <div class="mb-6">
+                <button class="accordion-btn flex justify-between items-center w-full py-3 px-4 bg-gray-100 hover:bg-gray-200 rounded-md text-left">
+                    <span class="font-medium">A1C to eAG Reference Table</span>
+                    <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div class="accordion-content hidden mt-2 px-4 py-3 bg-gray-50 rounded-md">
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white">
+                            <thead>
+                                <tr>
+                                    <th class="py-2 px-4 border-b border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase">A1C (%)</th>
+                                    <th class="py-2 px-4 border-b border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase">eAG (mg/dL)</th>
+                                    <th class="py-2 px-4 border-b border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase">eAG (mmol/L)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Table rows will be populated by JS or added manually if static -->
+                                <!-- Example Row -->
+                                <tr>
+                                    <td class="py-2 px-4 border-b border-gray-200">6.0</td>
+                                    <td class="py-2 px-4 border-b border-gray-200">126</td>
+                                    <td class="py-2 px-4 border-b border-gray-200">7.0</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2 px-4 border-b border-gray-200">7.0</td>
+                                    <td class="py-2 px-4 border-b border-gray-200">154</td>
+                                    <td class="py-2 px-4 border-b border-gray-200">8.6</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2 px-4 border-b border-gray-200">8.0</td>
+                                    <td class="py-2 px-4 border-b border-gray-200">183</td>
+                                    <td class="py-2 px-4 border-b border-gray-200">10.2</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2 px-4 border-b border-gray-200">9.0</td>
+                                    <td class="py-2 px-4 border-b border-gray-200">212</td>
+                                    <td class="py-2 px-4 border-b border-gray-200">11.8</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2 px-4 border-b border-gray-200">10.0</td>
+                                    <td class="py-2 px-4 border-b border-gray-200">240</td>
+                                    <td class="py-2 px-4 border-b border-gray-200">13.3</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2 px-4 border-b border-gray-200">11.0</td>
+                                    <td class="py-2 px-4 border-b border-gray-200">269</td>
+                                    <td class="py-2 px-4 border-b border-gray-200">14.9</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2 px-4 border-b border-gray-200">12.0</td>
+                                    <td class="py-2 px-4 border-b border-gray-200">298</td>
+                                    <td class="py-2 px-4 border-b border-gray-200">16.5</td>
+                                </tr>
+                                <!-- Add more rows as needed -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="mt-4 text-sm text-gray-600">Source: Adapted from the American Diabetes Association.</p>
+                </div>
+            </div>
+            <!-- End Educational Content Section -->
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 text-center p-6 mt-8">
+        <div class="container mx-auto max-w-5xl">
+            <p class="mb-2">&copy; 2025 Richard Crane. All rights reserved.</p>
+            <div class="space-x-4 text-sm">
+                <a href="terms.html" class="hover:text-white transition duration-300">Terms & Conditions</a>
+                <span>|</span>
+                <a href="privacy.html" class="hover:text-white transition duration-300">Privacy Policy</a>
+                <span>|</span>
+                <a href="cookie.html" class="hover:text-white transition duration-300">Cookie Policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script> 
+</body>
+</html>
