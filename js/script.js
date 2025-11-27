@@ -258,6 +258,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const shareBtn = document.getElementById("share-btn");
     const shareFacebook = document.getElementById("share-facebook");
     const shareTwitter = document.getElementById("share-twitter");
+    const shareEmail = document.getElementById("share-email");
     
     // Toast notification function
     function showToast(message, type = "success") {
@@ -523,6 +524,20 @@ document.addEventListener("DOMContentLoaded", function() {
                 const text = getShareText();
                 const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(shareUrl)}`;
                 window.open(twitterUrl, '_blank', 'width=600,height=400,menubar=no,toolbar=no');
+            });
+        }
+        
+        // Share via Email
+        if (shareEmail) {
+            shareEmail.addEventListener("click", function() {
+                const shareUrl = generateShareUrl();
+                if (!shareUrl) return;
+                
+                const text = getShareText();
+                const subject = "eAG/A1C Calculation Result";
+                const body = `${text}\n\nView the calculation: ${shareUrl}`;
+                const mailtoUrl = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                window.location.href = mailtoUrl;
             });
         }
         
