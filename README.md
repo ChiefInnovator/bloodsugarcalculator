@@ -7,8 +7,11 @@ A web-based calculator for converting between A1C and estimated Average Glucose 
 - **Bidirectional conversion** between A1C and eAG values
 - **Support for both mg/dL and mmol/L units**
 - **Shareable calculations** - Generate a link to share your calculation with others, including the date/time it was made
+- **Social sharing** - Share results via Facebook, X (Twitter), or email
+- **Ask ChatGPT** - Get personalized health optimization advice based on your A1C/eAG results
 - **Calculation timestamp** - Each result shows when it was calculated
 - **Input validation** - Prevents unrealistic values (A1C: 4-20%, eAG: 70-600 mg/dL or 3.9-33.3 mmol/L)
+- **Top Tips** - Practical diabetes management strategies for diet, exercise, monitoring, and medication
 - **Educational resources** - Information about A1C, eAG, diabetes types, and blood glucose management
 - **Cookie consent** - GDPR-compliant consent banner with granular control (Google Consent Mode v2)
 - **Responsive design** - Mobile-friendly with hamburger menu navigation
@@ -20,7 +23,8 @@ The calculator is deployed and available at: [https://diabetescalculator.ai](htt
 
 ## Pages
 
-- **Home** (`index.html`) - Main calculator with conversion functionality
+- **Home** (`index.html`) - Main calculator with conversion functionality and sharing options
+- **Top Tips** (`tips.html`) - Practical diabetes management tips for diet, exercise, monitoring, and medication
 - **Resources** (`resources.html`) - Educational content, A1C/eAG reference table, diabetes information
 - **About** (`about.html`) - Information about the calculator and its creator
 - **Privacy Policy** (`privacy.html`) - Privacy practices and data handling
@@ -53,11 +57,13 @@ To deploy this application to Azure Static Web App:
 - Implements the ADA-approved ADAG study formula
 - Google Analytics and Ads integration with Consent Mode v2
 - Shareable links use URL-safe base64-encoded JSON
+- Developed using Visual Studio Code with GitHub Copilot (Claude Opus 4.5)
 
 ## File Structure
 
 ```
 ├── index.html          # Main calculator page
+├── tips.html           # Top tips for diabetes management
 ├── about.html          # About page
 ├── resources.html      # Educational resources
 ├── privacy.html        # Privacy policy
@@ -67,7 +73,7 @@ To deploy this application to Azure Static Web App:
 ├── css/
 │   └── styles.css      # Custom styles + consent banner
 ├── js/
-│   └── script.js       # Calculator logic, consent management, sharing
+│   └── script.js       # Calculator logic, consent management, sharing, ChatGPT integration
 ├── img/                # Images
 ├── requirements.md     # Project requirements
 ├── design.md           # Design documentation
