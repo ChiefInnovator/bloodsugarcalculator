@@ -259,6 +259,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const shareFacebook = document.getElementById("share-facebook");
     const shareTwitter = document.getElementById("share-twitter");
     const shareEmail = document.getElementById("share-email");
+    const askChatGpt = document.getElementById("ask-chatgpt");
     
     // Toast notification function
     function showToast(message, type = "success") {
@@ -538,6 +539,35 @@ document.addEventListener("DOMContentLoaded", function() {
                 const body = `${text}\n\nView the calculation: ${shareUrl}`;
                 const mailtoUrl = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
                 window.location.href = mailtoUrl;
+            });
+        }
+        
+        // Ask ChatGPT
+        if (askChatGpt) {
+            askChatGpt.addEventListener("click", function() {
+                if (!currentCalculation) return;
+                
+                // Get A1C and eAG values from the calculation
+                let a1cValue, eagValue;
+                if (currentCalculation.type === 'a1c-to-eag') {
+                    a1cValue = currentCalculation.input;
+                    eagValue = currentCalculation.resultMgdl;
+                } else {
+                    a1cValue = currentCalculation.result;
+                    // Convert to mg/dL if needed
+                    if (currentCalculation.units === 'mmoll') {
+                        eagValue = Math.round(currentCalculation.input * 18);
+                    } else {
+                        eagValue = currentCalculation.input;
+                    }
+                }
+                
+                // Construct the prompt
+                const prompt = `Evaluate an A1C of ${a1cValue} percent and an average glucose of ${eagValue} mg/dL. Assess where this falls on the spectrum of optimal metabolic control for fat-loss, longevity, and diabetes prevention. Provide a strategic plan with specific daily actions for nutrition, strength training, cardio, fasting, supplementation, stress reduction, and sleep to drive A1C toward the 4.8 to 5.2 percent range without sacrificing energy or muscle retention.`;
+                
+                // URL encode the prompt and open ChatGPT
+                const chatGptUrl = `https://chat.openai.com/?q=${encodeURIComponent(prompt)}`;
+                window.open(chatGptUrl, '_blank');
             });
         }
         
