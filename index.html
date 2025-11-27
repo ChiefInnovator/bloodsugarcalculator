@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>eAG/A1C Conversion Calculator | Convert Between Blood Glucose Measurements</title>
+    <title>eAG/A1C Diabetes Calculator | Convert Between Blood Glucose Measurements</title>
     <meta name="description" content="Free online calculator to convert between A1C and estimated Average Glucose (eAG) values for diabetes management. Includes educational resources and conversion formulas.">
     <meta name="keywords" content="eAG, A1C, blood glucose, diabetes calculator, glucose conversion, HbA1c, diabetes management">
     <meta name="author" content="Richard Crane">
@@ -17,39 +17,68 @@
     <link rel="icon" href="favicon.ico">
 
     <!-- Open Graph / Social Media Meta Tags -->
-    <meta property="og:title" content="eAG/A1C Conversion Calculator">
+    <meta property="og:title" content="eAG/A1C Diabetes Calculator">
     <meta property="og:description" content="Convert between A1C and estimated Average Glucose (eAG) values for diabetes management.">
     <meta property="og:type" content="website">
-    <!-- <meta property="og:image" content="[URL to an image for social sharing]"> -->
+    <meta property="og:url" content="https://diabetescalculator.ai">
+    <meta property="og:image" content="https://diabetescalculator.ai/img/og-image.png">
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Google Consent Mode v2 - Default denied until user consents -->
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('consent', 'default', {
+            'analytics_storage': 'denied',
+            'ad_storage': 'denied',
+            'ad_user_data': 'denied',
+            'ad_personalization': 'denied',
+            'wait_for_update': 500
+        });
+    </script>
 </head>
 <body class="bg-gray-100 font-sans flex flex-col min-h-screen">
     <!-- Navigation Bar -->
     <nav class="bg-blue-600 text-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-4 py-3 max-w-5xl flex justify-between items-center">
-            <a href="index.html" class="text-xl font-bold hover:text-blue-200 transition duration-300">eAG/A1C Calc</a>
-            <div class="space-x-4">
+            <a href="index.html" class="text-xl font-bold hover:text-blue-200 transition duration-300">eAG/A1C Diabetes Calculator</a>
+            
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden p-2 rounded hover:bg-blue-700 transition duration-300" aria-label="Toggle navigation menu" aria-expanded="false">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path class="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    <path class="close-icon hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex space-x-4">
                 <a href="index.html" class="px-3 py-2 rounded hover:bg-blue-700 transition duration-300">Home</a>
                 <a href="resources.html" class="px-3 py-2 rounded hover:bg-blue-700 transition duration-300">Resources</a>
                 <a href="about.html" class="px-3 py-2 rounded hover:bg-blue-700 transition duration-300">About</a>
             </div>
         </div>
+        
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-blue-700">
+            <div class="container mx-auto px-4 py-2 max-w-5xl flex flex-col space-y-1">
+                <a href="index.html" class="px-3 py-2 rounded hover:bg-blue-800 transition duration-300">Home</a>
+                <a href="resources.html" class="px-3 py-2 rounded hover:bg-blue-800 transition duration-300">Resources</a>
+                <a href="about.html" class="px-3 py-2 rounded hover:bg-blue-800 transition duration-300">About</a>
+            </div>
+        </div>
     </nav>
     
     <div class="container mx-auto px-4 py-8 max-w-5xl flex-grow">
-        <!-- Buy Me Coffee Button -->
-        <div class="flex justify-center mb-6">
-            <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="richcrane" data-color="#5F7FFF" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#ffffff" data-coffee-color="#FFDD00" ></script>
-        </div>
         
         <!-- Header Section -->
         <header class="text-center mb-8">
-            <h1 class="text-3xl md:text-4xl font-bold text-blue-600 mb-4">eAG/A1C Conversion Calculator</h1>
+            <h1 class="text-3xl md:text-4xl font-bold text-blue-600 mb-4">eAG/A1C Diabetes Calculator</h1>
             <p class="text-lg text-gray-700">
                 A tool to convert between estimated Average Glucose (eAG) and A1C measurements for diabetes management.
             </p>
@@ -85,7 +114,8 @@
                     
                     <div id="eag-input-container" class="hidden">
                         <label for="eag-input" class="block text-gray-700 mb-2 font-medium">Enter eAG value:</label>
-                        <input type="number" id="eag-input" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="e.g., 154" step="1" min="0">
+                        <input type="number" id="eag-input" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="e.g., 154" step="1" min="70" max="600">
+                        <p id="eag-hint" class="text-sm text-gray-500 mt-1">Enter a value between 70 and 600 mg/dL (or 3.9-33.3 mmol/L)</p>
                         
                         <div class="mt-3">
                             <p class="text-gray-700 mb-2 font-medium">Units:</p>
@@ -109,10 +139,30 @@
                 </button>
                 
                 <!-- Results Display -->
-                <div id="result-container" class="mt-6 p-4 bg-blue-50 rounded-md border border-blue-200 hidden fade-in">
+                <div id="result-container" class="mt-6 p-4 bg-blue-50 rounded-md border border-blue-200 hidden fade-in relative">
+                    <!-- Share Icons - Top Right -->
+                    <div class="absolute top-3 right-3 flex gap-1">
+                        <button id="share-btn" class="w-8 h-8 flex items-center justify-center text-gray-500 hover:text-gray-700 border border-gray-300 hover:bg-blue-100 rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500" aria-label="Copy link">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
+                            </svg>
+                        </button>
+                        <button id="share-facebook" class="w-8 h-8 flex items-center justify-center text-[#1877F2] border border-gray-300 hover:bg-blue-100 rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500" aria-label="Share to Facebook">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </button>
+                        <button id="share-twitter" class="w-8 h-8 flex items-center justify-center text-black border border-gray-300 hover:bg-blue-100 rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-gray-500" aria-label="Share to X">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    
                     <h3 class="text-lg font-semibold text-gray-800 mb-2">Result:</h3>
                     <div id="result-value" class="text-2xl font-bold text-blue-600"></div>
-                    <p id="result-explanation" class="mt-2 text-gray-600"></p>
+                    <p id="result-explanation" class="mt-2 text-gray-600 pr-24"></p>
+                    <p id="result-timestamp" class="mt-3 text-xs text-gray-400"></p>
                 </div>
                 
                 <!-- Error Display -->
@@ -122,6 +172,22 @@
                 </div>
             </section>
         </main>
+
+        <!-- How to Use Section -->
+        <div class="bg-blue-50 rounded-lg p-4 mt-6 w-full lg:w-3/4 mx-auto">
+            <h2 class="text-lg font-semibold text-blue-800 mb-2">📋 How to Use</h2>
+            <ol class="list-decimal list-inside text-gray-700 space-y-1 text-sm">
+                <li><strong>Select conversion direction:</strong> Choose whether to convert from eAG to A1C or A1C to eAG</li>
+                <li><strong>Enter your value:</strong> Input your A1C percentage or eAG reading (select mg/dL or mmol/L)</li>
+                <li><strong>Click Calculate:</strong> View your converted result with an explanation</li>
+            </ol>
+            <p class="text-xs text-gray-500 mt-2">This calculator uses the ADA-approved formula. Results are for informational purposes only—consult your healthcare provider for medical advice.</p>
+        </div>
+
+        <!-- Support Section -->
+        <div class="flex justify-center mt-8">
+            <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="richcrane" data-color="#5F7FFF" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#ffffff" data-coffee-color="#FFDD00" ></script>
+        </div>
 
         <!-- Educational Content Section Removed - Moved to resources.html -->
 
@@ -137,9 +203,68 @@
                 <a href="privacy.html" class="hover:text-white transition duration-300">Privacy Policy</a>
                 <span>|</span>
                 <a href="cookie.html" class="hover:text-white transition duration-300">Cookie Policy</a>
+                <span>|</span>
+                <a href="#" class="hover:text-white transition duration-300 manage-cookies-link">Manage Cookie Preferences</a>
             </div>
         </div>
     </footer>
+
+    <!-- Cookie Consent Banner -->
+    <div id="cookie-consent-banner" role="dialog" aria-modal="true" aria-labelledby="consent-title">
+        <div class="consent-container">
+            <div class="consent-header">
+                <div class="consent-text">
+                    <h3 id="consent-title">🍪 Cookie Preferences</h3>
+                    <p>We use cookies to improve your experience and show personalized ads. You can customize your preferences or accept all cookies. <a href="cookie.html">Learn more</a></p>
+                </div>
+                <div class="consent-buttons">
+                    <button id="consent-accept-all" class="consent-btn consent-btn-primary">Accept All</button>
+                    <button id="consent-customize" class="consent-btn consent-btn-outline">Customize</button>
+                    <button id="consent-reject" class="consent-btn consent-btn-secondary">Reject Non-Essential</button>
+                </div>
+            </div>
+            
+            <div id="consent-options" class="consent-options">
+                <div class="consent-option">
+                    <div class="consent-option-info">
+                        <h4>Essential Cookies</h4>
+                        <p>Required for the website to function. Cannot be disabled.</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" checked disabled aria-label="Essential cookies - always enabled">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <div class="consent-option">
+                    <div class="consent-option-info">
+                        <h4>Analytics Cookies</h4>
+                        <p>Help us understand how visitors use our website.</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="consent-analytics" aria-label="Analytics cookies">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <div class="consent-option">
+                    <div class="consent-option-info">
+                        <h4>Advertising Cookies</h4>
+                        <p>Used to show relevant ads based on your interests.</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="consent-advertising" aria-label="Advertising cookies">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+            
+            <div id="consent-save-container" class="consent-save-container">
+                <button id="consent-save" class="consent-btn consent-btn-primary">Save Preferences</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 pointer-events-none"></div>
 
     <script src="js/script.js"></script> 
 </body>

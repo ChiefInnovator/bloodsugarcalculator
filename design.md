@@ -1,4 +1,4 @@
-# eAG/A1C Calculator Web Interface Design
+# eAG/A1C Diabetes Calculator Web Interface Design
 
 ## Overall Layout
 
@@ -106,7 +106,7 @@ Each section will include concise, accessible text with appropriate headings and
 
 ```
 +-----------------------------------------------+
-|  eAG/A1C Conversion Calculator                |
+|  eAG/A1C Diabetes Calculator                  |
 |  A tool to convert between blood glucose      |
 |  measurements                                 |
 +-----------------------------------------------+

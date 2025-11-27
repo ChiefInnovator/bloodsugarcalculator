@@ -3,25 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cookie Policy - eAG/A1C Conversion Calculator</title>
-    <meta name="description" content="Cookie Policy for the eAG/A1C Conversion Calculator website.">
+    <title>Cookie Policy - eAG/A1C Diabetes Calculator</title>
+    <meta name="description" content="Cookie Policy for the eAG/A1C Diabetes Calculator website.">
     <meta name="robots" content="noindex, follow">
+    
+    <!-- Favicon links -->
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="icon" href="favicon.ico">
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Google Consent Mode v2 - Default denied until user consents -->
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('consent', 'default', {
+            'analytics_storage': 'denied',
+            'ad_storage': 'denied',
+            'ad_user_data': 'denied',
+            'ad_personalization': 'denied',
+            'wait_for_update': 500
+        });
+    </script>
 </head>
 <body class="bg-gray-100 font-sans flex flex-col min-h-screen">
     <!-- Navigation Bar -->
     <nav class="bg-blue-600 text-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-4 py-3 max-w-5xl flex justify-between items-center">
-            <a href="index.html" class="text-xl font-bold hover:text-blue-200 transition duration-300">eAG/A1C Calc</a>
-            <div class="space-x-4">
+            <a href="index.html" class="text-xl font-bold hover:text-blue-200 transition duration-300">eAG/A1C Diabetes Calculator</a>
+            
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden p-2 rounded hover:bg-blue-700 transition duration-300" aria-label="Toggle navigation menu" aria-expanded="false">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path class="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    <path class="close-icon hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex space-x-4">
                 <a href="index.html" class="px-3 py-2 rounded hover:bg-blue-700 transition duration-300">Home</a>
                 <a href="resources.html" class="px-3 py-2 rounded hover:bg-blue-700 transition duration-300">Resources</a>
                 <a href="about.html" class="px-3 py-2 rounded hover:bg-blue-700 transition duration-300">About</a>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-blue-700">
+            <div class="container mx-auto px-4 py-2 max-w-5xl flex flex-col space-y-1">
+                <a href="index.html" class="px-3 py-2 rounded hover:bg-blue-800 transition duration-300">Home</a>
+                <a href="resources.html" class="px-3 py-2 rounded hover:bg-blue-800 transition duration-300">Resources</a>
+                <a href="about.html" class="px-3 py-2 rounded hover:bg-blue-800 transition duration-300">About</a>
             </div>
         </div>
     </nav>
@@ -30,7 +69,7 @@
         <main class="bg-white rounded-lg shadow-md p-6">
             <h1 class="text-3xl md:text-4xl font-bold text-blue-600 mb-6">Cookie Policy</h1>
             
-            <p class="text-gray-700 mb-4">This Cookie Policy explains what cookies are and how we use them on the eAG/A1C Conversion Calculator website. You should read this policy so you can understand what type of cookies we use, the information we collect using cookies and how that information is used.</p>
+            <p class="text-gray-700 mb-4">This Cookie Policy explains what cookies are and how we use them on the eAG/A1C Diabetes Calculator website. You should read this policy so you can understand what type of cookies we use, the information we collect using cookies and how that information is used.</p>
 
             <h2 class="text-2xl font-semibold text-gray-800 mb-4 mt-6">What Are Cookies?</h2>
             <p class="text-gray-700 mb-4">Cookies are small text files that are stored on your computer or mobile device when you visit a website. They allow the website to recognize your device and remember some information about your preferences or past actions.</p>
@@ -45,17 +84,48 @@
             </ul>
 
             <h2 class="text-2xl font-semibold text-gray-800 mb-4 mt-6">Types of Cookies We Use</h2>
-            <p class="text-gray-700 mb-4">[List specific cookies used, e.g., session cookies, persistent cookies, first-party, third-party cookies like Google Analytics, advertising cookies, etc. Be specific if possible, otherwise keep it general.]</p>
-            <p class="text-gray-700 mb-4">For example, we might use session cookies to maintain your session state and persistent cookies to remember your preferences.</p>
+            
+            <h3 class="text-lg font-medium text-gray-800 mb-2 mt-4">Essential Cookies</h3>
+            <p class="text-gray-700 mb-4">These cookies are necessary for the website to function properly and cannot be disabled.</p>
+            <ul class="list-disc list-inside text-gray-700 mb-4 ml-4">
+                <li><strong>cookieConsent</strong> — Stores your cookie preferences (12 months)</li>
+            </ul>
+
+            <h3 class="text-lg font-medium text-gray-800 mb-2 mt-4">Analytics Cookies (Google Analytics)</h3>
+            <p class="text-gray-700 mb-4">These cookies help us understand how visitors interact with the website by collecting and reporting information anonymously.</p>
+            <ul class="list-disc list-inside text-gray-700 mb-4 ml-4">
+                <li><strong>_ga</strong> — Distinguishes unique users (2 years)</li>
+                <li><strong>_ga_&lt;container-id&gt;</strong> — Maintains session state (2 years)</li>
+                <li><strong>_gid</strong> — Distinguishes users (24 hours)</li>
+                <li><strong>_gat</strong> — Throttles request rate (1 minute)</li>
+            </ul>
+
+            <h3 class="text-lg font-medium text-gray-800 mb-2 mt-4">Advertising Cookies (Google Ads)</h3>
+            <p class="text-gray-700 mb-4">These cookies are used to display advertisements that are relevant to you and your interests.</p>
+            <ul class="list-disc list-inside text-gray-700 mb-4 ml-4">
+                <li><strong>_gcl_au</strong> — Conversion linker for Google Ads (90 days)</li>
+                <li><strong>_gac_&lt;property-id&gt;</strong> — Contains campaign information (90 days)</li>
+                <li><strong>IDE</strong> — Used for remarketing and ad targeting (13 months)</li>
+                <li><strong>NID</strong> — Stores preferences and ad personalization (6 months)</li>
+                <li><strong>1P_JAR</strong> — Gathers site statistics and tracks conversions (1 month)</li>
+            </ul>
 
             <h2 class="text-2xl font-semibold text-gray-800 mb-4 mt-6">Your Choices Regarding Cookies</h2>
-            <p class="text-gray-700 mb-4">You have the right to decide whether to accept or reject cookies. You can exercise your cookie preferences by setting or amending your web browser controls to accept or refuse cookies. If you choose to reject cookies, you may still use our website though your access to some functionality and areas of our website may be restricted.</p>
-            <p class="text-gray-700 mb-4">Most web browsers allow some control of most cookies through the browser settings. To find out more about cookies, including how to see what cookies have been set, visit <a href="https://www.aboutcookies.org" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">www.aboutcookies.org</a> or <a href="https://www.allaboutcookies.org" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">www.allaboutcookies.org</a>.</p>
+            <p class="text-gray-700 mb-4">You have the right to decide whether to accept or reject cookies. You can exercise your cookie preferences by clicking the "Manage Cookie Preferences" button below or in the footer of any page. Your preferences will be remembered for 12 months.</p>
+            <div class="my-4">
+                <button id="manage-cookies-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                    Manage Cookie Preferences
+                </button>
+            </div>
+            <p class="text-gray-700 mb-4">You can also control cookies through your web browser settings. Most web browsers allow some control of most cookies through the browser settings. To find out more about cookies, including how to see what cookies have been set, visit <a href="https://www.aboutcookies.org" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">www.aboutcookies.org</a> or <a href="https://www.allaboutcookies.org" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">www.allaboutcookies.org</a>.</p>
+
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4 mt-6">Consent Duration</h2>
+            <p class="text-gray-700 mb-4">Your cookie consent preferences are stored for 12 months. After this period, you will be asked to confirm your preferences again.</p>
 
             <h2 class="text-2xl font-semibold text-gray-800 mb-4 mt-6">Changes to This Cookie Policy</h2>
             <p class="text-gray-700 mb-4">We may update this Cookie Policy from time to time in order to reflect, for example, changes to the cookies we use or for other operational, legal or regulatory reasons. Please therefore re-visit this Cookie Policy regularly to stay informed about our use of cookies and related technologies.</p>
 
-            <p class="text-gray-600 text-sm mt-8">Last updated: [Date]</p>
+            <p class="text-gray-600 text-sm mt-8">Last updated: November 27, 2025</p>
         </main>
     </div>
 
@@ -69,9 +139,65 @@
                 <a href="privacy.html" class="hover:text-white transition duration-300">Privacy Policy</a>
                 <span>|</span>
                 <a href="cookie.html" class="hover:text-white transition duration-300">Cookie Policy</a>
+                <span>|</span>
+                <a href="#" class="hover:text-white transition duration-300 manage-cookies-link">Manage Cookie Preferences</a>
             </div>
         </div>
     </footer>
+
+    <!-- Cookie Consent Banner -->
+    <div id="cookie-consent-banner" role="dialog" aria-modal="true" aria-labelledby="consent-title">
+        <div class="consent-container">
+            <div class="consent-header">
+                <div class="consent-text">
+                    <h3 id="consent-title">🍪 Cookie Preferences</h3>
+                    <p>We use cookies to improve your experience and show personalized ads. You can customize your preferences or accept all cookies. <a href="cookie.html">Learn more</a></p>
+                </div>
+                <div class="consent-buttons">
+                    <button id="consent-accept-all" class="consent-btn consent-btn-primary">Accept All</button>
+                    <button id="consent-customize" class="consent-btn consent-btn-outline">Customize</button>
+                    <button id="consent-reject" class="consent-btn consent-btn-secondary">Reject Non-Essential</button>
+                </div>
+            </div>
+            
+            <div id="consent-options" class="consent-options">
+                <div class="consent-option">
+                    <div class="consent-option-info">
+                        <h4>Essential Cookies</h4>
+                        <p>Required for the website to function. Cannot be disabled.</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" checked disabled aria-label="Essential cookies - always enabled">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <div class="consent-option">
+                    <div class="consent-option-info">
+                        <h4>Analytics Cookies</h4>
+                        <p>Help us understand how visitors use our website.</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="consent-analytics" aria-label="Analytics cookies">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <div class="consent-option">
+                    <div class="consent-option-info">
+                        <h4>Advertising Cookies</h4>
+                        <p>Used to show relevant ads based on your interests.</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="consent-advertising" aria-label="Advertising cookies">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+            
+            <div id="consent-save-container" class="consent-save-container">
+                <button id="consent-save" class="consent-btn consent-btn-primary">Save Preferences</button>
+            </div>
+        </div>
+    </div>
 
     <script src="js/script.js"></script> 
 </body>

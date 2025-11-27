@@ -1,18 +1,31 @@
-# eAG/A1C Calculator
+# eAG/A1C Diabetes Calculator
 
 A web-based calculator for converting between A1C and estimated Average Glucose (eAG) measurements for diabetes management.
 
 ## Features
 
-- Bidirectional conversion between A1C and eAG values
-- Support for both mg/dL and mmol/L units
-- Educational content about blood glucose measurements
-- Information about factors affecting blood sugar levels
-- Clean, responsive design for desktop and mobile devices
+- **Bidirectional conversion** between A1C and eAG values
+- **Support for both mg/dL and mmol/L units**
+- **Shareable calculations** - Generate a link to share your calculation with others, including the date/time it was made
+- **Calculation timestamp** - Each result shows when it was calculated
+- **Input validation** - Prevents unrealistic values (A1C: 4-20%, eAG: 70-600 mg/dL or 3.9-33.3 mmol/L)
+- **Educational resources** - Information about A1C, eAG, diabetes types, and blood glucose management
+- **Cookie consent** - GDPR-compliant consent banner with granular control (Google Consent Mode v2)
+- **Responsive design** - Mobile-friendly with hamburger menu navigation
+- **Clean, accessible UI** - Built with Tailwind CSS
 
 ## Live Demo
 
 The calculator is deployed and available at: [https://diabetescalculator.ai](https://diabetescalculator.ai)
+
+## Pages
+
+- **Home** (`index.html`) - Main calculator with conversion functionality
+- **Resources** (`resources.html`) - Educational content, A1C/eAG reference table, diabetes information
+- **About** (`about.html`) - Information about the calculator and its creator
+- **Privacy Policy** (`privacy.html`) - Privacy practices and data handling
+- **Terms & Conditions** (`terms.html`) - Terms of use
+- **Cookie Policy** (`cookie.html`) - Cookie usage and management
 
 ## Deployment to Azure Static Web App
 
@@ -35,35 +48,52 @@ To deploy this application to Azure Static Web App:
 ## Technical Details
 
 - Built with HTML5, CSS3, and vanilla JavaScript
-- Uses Tailwind CSS for styling
-- No server-side processing required
-- Implements the ADA formula: eAG (mg/dL) = 28.7 × A1C - 46.7
+- Uses Tailwind CSS 2.2.19 for styling
+- No server-side processing required - fully static site
+- Implements the ADA-approved ADAG study formula
+- Google Analytics and Ads integration with Consent Mode v2
+- Shareable links use URL-safe base64-encoded JSON
 
 ## File Structure
 
-- `index.html` - Main HTML file
-- `css/styles.css` - Custom CSS styles
-- `js/script.js` - JavaScript functionality
-- `requirements.md` - Project requirements
-- `design.md` - Design documentation
-- `todo.md` - Project task list
+```
+├── index.html          # Main calculator page
+├── about.html          # About page
+├── resources.html      # Educational resources
+├── privacy.html        # Privacy policy
+├── terms.html          # Terms and conditions
+├── cookie.html         # Cookie policy
+├── site.webmanifest    # PWA manifest
+├── css/
+│   └── styles.css      # Custom styles + consent banner
+├── js/
+│   └── script.js       # Calculator logic, consent management, sharing
+├── img/                # Images
+├── requirements.md     # Project requirements
+├── design.md           # Design documentation
+└── todo.md             # Project task list
+```
 
 ## Conversion Formulas
 
-- A1C to eAG (mg/dL): eAG = 28.7 × A1C - 46.7
-- A1C to eAG (mmol/L): eAG = (28.7 × A1C - 46.7) / 18
-- eAG (mg/dL) to A1C: A1C = (eAG + 46.7) / 28.7
-- eAG (mmol/L) to A1C: A1C = ((eAG × 18) + 46.7) / 28.7
+Based on the [ADAG Study](https://diabetesjournals.org/care/article/31/8/1473/28569/Translating-the-A1C-Assay-Into-Estimated-Average) published in Diabetes Care:
+
+| Conversion | Formula |
+|------------|---------|
+| A1C → eAG (mg/dL) | `eAG = 28.7 × A1C - 46.7` |
+| A1C → eAG (mmol/L) | `eAG = (28.7 × A1C - 46.7) / 18` |
+| eAG (mg/dL) → A1C | `A1C = (eAG + 46.7) / 28.7` |
+| eAG (mmol/L) → A1C | `A1C = ((eAG × 18) + 46.7) / 28.7` |
 
 ## References & Resources
 
 - [American Diabetes Association](https://diabetes.org/) - Official website with comprehensive resources on diabetes management
 - [Joslin Diabetes Center](https://joslin.org/) - World-renowned diabetes research and clinical care organization
 - [Mayo Clinic - Diabetes](https://www.mayoclinic.org/diseases-conditions/diabetes/symptoms-causes/syc-20371444) - Comprehensive guide to diabetes symptoms, causes, and treatments
-- [Diabetes on YouTube](https://www.youtube.com/results?search_query=diabetes) - Educational videos about diabetes management and care
+- [CDC Diabetes Resources](https://www.cdc.gov/diabetes/) - Statistics, prevention, and management information
 
 ## License
 
 This project is based on the [American Diabetes Association](https://diabetes.org/) conversion formulas.
 
-&copy; 2025 Richard Crane. All rights reserved.
+© 2025 Richard Crane. All rights reserved.

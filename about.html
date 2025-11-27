@@ -3,37 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About - eAG/A1C Conversion Calculator</title>
-    <meta name="description" content="About the eAG/A1C Conversion Calculator tool and its creator.">
+    <title>About - eAG/A1C Diabetes Calculator</title>
+    <meta name="description" content="About the eAG/A1C Diabetes Calculator tool and its creator.">
     <meta name="robots" content="index, follow">
+    
+    <!-- Favicon links -->
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="icon" href="favicon.ico">
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Google Consent Mode v2 - Default denied until user consents -->
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('consent', 'default', {
+            'analytics_storage': 'denied',
+            'ad_storage': 'denied',
+            'ad_user_data': 'denied',
+            'ad_personalization': 'denied',
+            'wait_for_update': 500
+        });
+    </script>
 </head>
 <body class="bg-gray-100 font-sans flex flex-col min-h-screen">
     <!-- Navigation Bar -->
     <nav class="bg-blue-600 text-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-4 py-3 max-w-5xl flex justify-between items-center">
-            <a href="index.html" class="text-xl font-bold hover:text-blue-200 transition duration-300">eAG/A1C Calc</a>
-            <div class="space-x-4">
+            <a href="index.html" class="text-xl font-bold hover:text-blue-200 transition duration-300">eAG/A1C Diabetes Calculator</a>
+            
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden p-2 rounded hover:bg-blue-700 transition duration-300" aria-label="Toggle navigation menu" aria-expanded="false">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path class="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    <path class="close-icon hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex space-x-4">
                 <a href="index.html" class="px-3 py-2 rounded hover:bg-blue-700 transition duration-300">Home</a>
                 <a href="resources.html" class="px-3 py-2 rounded hover:bg-blue-700 transition duration-300">Resources</a>
                 <a href="about.html" class="px-3 py-2 rounded hover:bg-blue-700 transition duration-300">About</a>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-blue-700">
+            <div class="container mx-auto px-4 py-2 max-w-5xl flex flex-col space-y-1">
+                <a href="index.html" class="px-3 py-2 rounded hover:bg-blue-800 transition duration-300">Home</a>
+                <a href="resources.html" class="px-3 py-2 rounded hover:bg-blue-800 transition duration-300">Resources</a>
+                <a href="about.html" class="px-3 py-2 rounded hover:bg-blue-800 transition duration-300">About</a>
             </div>
         </div>
     </nav>
     
     <div class="container mx-auto px-4 py-8 max-w-5xl">
         <main class="bg-white rounded-lg shadow-md p-6">
-            <h1 class="text-3xl md:text-4xl font-bold text-blue-600 mb-4">About DiabetesCalculator.ai</h1>
+            <h1 class="text-3xl md:text-4xl font-bold text-blue-600 mb-4">About eAG/A1C Diabetes Calculator</h1>
 
             <section class="mb-8">
                 <h2 class="text-2xl font-semibold text-gray-800 mb-4">Our Mission</h2>
                 <p class="text-gray-700 mb-4">
-                    This eAG/A1C Conversion Calculator was created to provide individuals managing diabetes, healthcare professionals, and caregivers with a simple, reliable tool for converting between A1C percentages and estimated Average Glucose (eAG) values.
+                    The eAG/A1C Diabetes Calculator was created to provide individuals managing diabetes, healthcare professionals, and caregivers with a simple, reliable tool for converting between A1C percentages and estimated Average Glucose (eAG) values.
                 </p>
                 <p class="text-gray-700">
                     Our goal is to help users better understand their blood glucose levels over time, facilitating more informed discussions with healthcare providers and supporting effective diabetes management strategies. We also aim to provide clear educational resources on these important health metrics.
@@ -72,7 +111,7 @@
             <section class="mb-8">
                 <h2 class="text-2xl font-semibold text-gray-800 mb-4">About the Tool</h2>
                 <p class="text-gray-700 mb-4">
-                    The eAG/A1C Conversion Calculator was developed to provide a straightforward way to convert between these two important diabetes metrics using the standard formulas recommended by organizations like the American Diabetes Association.
+                    The eAG/A1C Diabetes Calculator was developed to provide a straightforward way to convert between these two important diabetes metrics using the standard formulas recommended by organizations like the American Diabetes Association.
                 </p>
                 <p class="text-gray-700 mb-2">Key features include:</p>
                 <ul class="list-disc list-inside text-gray-700 mb-4 ml-4">
@@ -104,9 +143,65 @@
                 <a href="privacy.html" class="hover:text-white transition duration-300">Privacy Policy</a>
                 <span>|</span>
                 <a href="cookie.html" class="hover:text-white transition duration-300">Cookie Policy</a>
+                <span>|</span>
+                <a href="#" class="hover:text-white transition duration-300 manage-cookies-link">Manage Cookie Preferences</a>
             </div>
         </div>
     </footer>
+
+    <!-- Cookie Consent Banner -->
+    <div id="cookie-consent-banner" role="dialog" aria-modal="true" aria-labelledby="consent-title">
+        <div class="consent-container">
+            <div class="consent-header">
+                <div class="consent-text">
+                    <h3 id="consent-title">🍪 Cookie Preferences</h3>
+                    <p>We use cookies to improve your experience and show personalized ads. You can customize your preferences or accept all cookies. <a href="cookie.html">Learn more</a></p>
+                </div>
+                <div class="consent-buttons">
+                    <button id="consent-accept-all" class="consent-btn consent-btn-primary">Accept All</button>
+                    <button id="consent-customize" class="consent-btn consent-btn-outline">Customize</button>
+                    <button id="consent-reject" class="consent-btn consent-btn-secondary">Reject Non-Essential</button>
+                </div>
+            </div>
+            
+            <div id="consent-options" class="consent-options">
+                <div class="consent-option">
+                    <div class="consent-option-info">
+                        <h4>Essential Cookies</h4>
+                        <p>Required for the website to function. Cannot be disabled.</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" checked disabled aria-label="Essential cookies - always enabled">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <div class="consent-option">
+                    <div class="consent-option-info">
+                        <h4>Analytics Cookies</h4>
+                        <p>Help us understand how visitors use our website.</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="consent-analytics" aria-label="Analytics cookies">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <div class="consent-option">
+                    <div class="consent-option-info">
+                        <h4>Advertising Cookies</h4>
+                        <p>Used to show relevant ads based on your interests.</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="consent-advertising" aria-label="Advertising cookies">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+            
+            <div id="consent-save-container" class="consent-save-container">
+                <button id="consent-save" class="consent-btn consent-btn-primary">Save Preferences</button>
+            </div>
+        </div>
+    </div>
 
     <script src="js/script.js"></script> 
 </body>

@@ -1,4 +1,4 @@
-# eAG/A1C Calculator Requirements Analysis
+# eAG/A1C Diabetes Calculator Requirements Analysis
 
 ## Conversion Formulas
 
