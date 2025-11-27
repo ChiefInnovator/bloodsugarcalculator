@@ -359,7 +359,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 const calcDate = new Date();
                 if (resultExplanation) resultExplanation.textContent = `An A1C of ${a1cValue.toFixed(1)}% corresponds to an estimated average glucose of ${eagMgdl} mg/dL or ${eagMmoll} mmol/L.`;
                 if (resultTimestamp) resultTimestamp.textContent = `Calculated on ${formatTimestamp(calcDate)}`;
-                if (resultContainer) resultContainer.classList.remove("hidden");
+                if (resultContainer) {
+                    resultContainer.classList.remove("hidden");
+                    resultContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
                 
                 // Store calculation for sharing
                 currentCalculation = {
@@ -411,7 +414,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 const eagUnitText = eagUnits === "mgdl" ? "mg/dL" : "mmol/L";
                 if (resultExplanation) resultExplanation.textContent = `An estimated average glucose of ${eagValue} ${eagUnitText} corresponds to an A1C of approximately ${a1cValue.toFixed(1)}%.`;
                 if (resultTimestamp) resultTimestamp.textContent = `Calculated on ${formatTimestamp(calcDate)}`;
-                if (resultContainer) resultContainer.classList.remove("hidden");
+                if (resultContainer) {
+                    resultContainer.classList.remove("hidden");
+                    resultContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
                 
                 // Store calculation for sharing
                 currentCalculation = {
