@@ -1,5 +1,5 @@
-# **Blood Sugar Calculator**  
-*Your essential tool for diabetes management*  
+# **Blood Sugar Calculator**
+*Your essential tool for diabetes management*
 
 ## ✨ Features
 
@@ -66,8 +66,9 @@ We welcome contributions to enhance the Blood Sugar Calculator! If you have sugg
 
 ## 📜 License
 
-This project is based on the conversion formulas recommended by the American Diabetes Association.  
+This project is based on the conversion formulas recommended by the American Diabetes Association.
 © 2025 Richard Crane. All rights reserved.
+
 
 ---
 
