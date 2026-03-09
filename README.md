@@ -69,6 +69,22 @@ We welcome contributions to enhance the Blood Sugar Calculator! If you have sugg
 This project is based on the conversion formulas recommended by the American Diabetes Association.
 © 2025 Richard Crane. All rights reserved.
 
+---
+
+### About the Creator
+
+Created by [Richard Crane](https://inventingfirewith.ai), Founder, CTO, and CAIO of [MILL5](https://www.mill5.com).
+
+### Related Links
+
+- [MILL5](https://www.mill5.com) - An AI innovation company.
+- [Microsoft MVP](https://mvp.microsoft.com/en-US/MVP/profile/10ce0bc0-7536-43f6-b28c-e9601a4a0d0d) - Recognized for expertise in AI, Azure, Dev, and DevOps.
+- [Inventing Fire with AI](https://inventingfirewith.ai) - The website for the Inventing Fire with AI podcast.
+
+---
+
+<sub>Powered by [MILL5](https://www.mill5.com)</sub>
+
 
 ---
 
