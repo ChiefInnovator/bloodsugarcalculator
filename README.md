@@ -16,7 +16,7 @@
 - **Responsive design** - Enjoy a mobile-friendly interface with intuitive navigation
 - **Clean, accessible UI** - Designed with Tailwind CSS for a smooth user experience
 
-## 🚀 Quick Start
+## 🚀 Getting Started
 
 Start using the Blood Sugar Calculator today by visiting our live demo:
 
@@ -26,15 +26,39 @@ For additional information, you can also visit our GitHub Pages site:
 
 [View on GitHub Pages](https://chiefinnovator.github.io/bloodsugarcalculator/)
 
-## 📄 Pages
+### Prerequisites
 
-- **Home** - The main calculator page with conversion functionality and sharing options
-- **Top Tips** - Practical diabetes management strategies
-- **Resources** - Educational content and A1C/eAG reference materials
-- **About** - Information about the tool and its creator
-- **Privacy Policy** - Details on our privacy practices
-- **Terms & Conditions** - Terms of use and service
-- **Cookie Policy** - Information on our cookie usage
+- A modern web browser (Chrome, Firefox, Safari, etc.)
+- Internet connection for online resources
+
+### Installation
+
+To run the Blood Sugar Calculator locally, follow these steps:
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/ChiefInnovator/bloodsugarcalculator.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd bloodsugarcalculator
+   ```
+
+3. Open `index.html` in your preferred web browser to view the application.
+
+## 🏗️ Architecture
+
+The Blood Sugar Calculator is built using:
+
+- **HTML** - Structure of the web application
+- **CSS** - Styling, utilizing Tailwind CSS for a responsive design
+- **JavaScript** - Functionality, enabling conversions and user interactions
+
+### Key Design Decisions
+
+- **Client-side calculations** ensure user privacy, as no data is sent to servers.
+- **Responsive design** allows for an optimal experience on both desktop and mobile devices.
+- **Input validation** enhances user experience by preventing unrealistic data entry.
 
 ## 🤝 Contributing
 
