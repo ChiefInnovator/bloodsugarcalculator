@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>eAG/A1C Diabetes Calculator | Convert Between Blood Glucose Measurements</title>
-    <meta name="description" content="Free online calculator to convert between A1C and estimated Average Glucose (eAG) values for diabetes management. Includes educational resources and conversion formulas.">
-    <meta name="keywords" content="eAG, A1C, blood glucose, diabetes calculator, glucose conversion, HbA1c, diabetes management">
+    <title>A1C to eAG Calculator | Free Diabetes Blood Glucose Converter</title>
+    <meta name="description" content="Free A1C to eAG calculator. Convert HbA1c to estimated Average Glucose in mg/dL or mmol/L using the ADA-approved formula. Instant, accurate diabetes conversions.">
+    <meta name="keywords" content="A1C to eAG calculator, eAG to A1C, HbA1c converter, estimated average glucose, blood glucose calculator, diabetes calculator, mg/dL to mmol/L, ADA formula">
     <meta name="author" content="Richard Crane">
-    <meta name="robots" content="index, follow">
-    
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <link rel="canonical" href="https://diabetescalculator.ai/">
+    <meta name="theme-color" content="#2563eb">
+
     <!-- Favicon links -->
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -17,18 +19,150 @@
     <link rel="icon" href="favicon.ico">
 
     <!-- Open Graph / Social Media Meta Tags -->
-    <meta property="og:title" content="eAG/A1C Diabetes Calculator">
-    <meta property="og:description" content="Convert between A1C and estimated Average Glucose (eAG) values for diabetes management.">
+    <meta property="og:title" content="A1C to eAG Calculator | Free Diabetes Blood Glucose Converter">
+    <meta property="og:description" content="Convert HbA1c to estimated Average Glucose (eAG) in mg/dL or mmol/L using the ADA-approved formula. Free, instant, and accurate.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://diabetescalculator.ai">
-    <meta property="og:image" content="https://diabetescalculator.ai/img/og-image.png">
-    
+    <meta property="og:url" content="https://diabetescalculator.ai/">
+    <meta property="og:site_name" content="Diabetes Calculator">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://diabetescalculator.ai/og-image.png">
+    <meta property="og:image:secure_url" content="https://diabetescalculator.ai/og-image.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="953">
+    <meta property="og:image:height" content="600">
+    <meta property="og:image:alt" content="eAG/A1C Diabetes Calculator — convert between A1C and estimated Average Glucose">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="A1C to eAG Calculator | Free Diabetes Blood Glucose Converter">
+    <meta name="twitter:description" content="Convert HbA1c to estimated Average Glucose (eAG) in mg/dL or mmol/L. ADA-approved formula.">
+    <meta name="twitter:image" content="https://diabetescalculator.ai/og-image.png">
+    <meta name="twitter:image:alt" content="eAG/A1C Diabetes Calculator preview">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     
+    <!-- Structured Data for SEO / AEO / GEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://diabetescalculator.ai/#website",
+          "url": "https://diabetescalculator.ai/",
+          "name": "Diabetes Calculator",
+          "description": "Free A1C to eAG blood glucose converter using the ADA-approved formula.",
+          "inLanguage": "en-US",
+          "publisher": { "@id": "https://diabetescalculator.ai/#person" }
+        },
+        {
+          "@type": "Person",
+          "@id": "https://diabetescalculator.ai/#person",
+          "name": "Richard Crane",
+          "url": "https://diabetescalculator.ai/about.html"
+        },
+        {
+          "@type": "WebApplication",
+          "@id": "https://diabetescalculator.ai/#app",
+          "name": "eAG/A1C Diabetes Calculator",
+          "url": "https://diabetescalculator.ai/",
+          "applicationCategory": "HealthApplication",
+          "operatingSystem": "Any (web browser)",
+          "browserRequirements": "Requires JavaScript",
+          "description": "Converts HbA1c to estimated Average Glucose (eAG) in mg/dL or mmol/L using the ADA formula eAG (mg/dL) = 28.7 × A1C − 46.7.",
+          "inLanguage": "en-US",
+          "isAccessibleForFree": true,
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+          "featureList": [
+            "A1C to eAG conversion",
+            "eAG to A1C conversion",
+            "mg/dL and mmol/L units",
+            "ADA-approved formula",
+            "Shareable results"
+          ],
+          "author": { "@id": "https://diabetescalculator.ai/#person" },
+          "publisher": { "@id": "https://diabetescalculator.ai/#person" }
+        },
+        {
+          "@type": "HowTo",
+          "name": "How to convert A1C to estimated Average Glucose (eAG)",
+          "description": "Use the ADA formula to convert an HbA1c percentage into estimated Average Glucose.",
+          "totalTime": "PT1M",
+          "tool": [{ "@type": "HowToTool", "name": "eAG/A1C Diabetes Calculator" }],
+          "step": [
+            { "@type": "HowToStep", "position": 1, "name": "Choose conversion direction", "text": "Select 'A1C to eAG' or 'eAG to A1C'." },
+            { "@type": "HowToStep", "position": 2, "name": "Enter your value", "text": "Type your A1C percentage, or your eAG reading in mg/dL or mmol/L." },
+            { "@type": "HowToStep", "position": 3, "name": "Calculate", "text": "Click Calculate to see your converted value using the ADA formula eAG (mg/dL) = 28.7 × A1C − 46.7." },
+            { "@type": "HowToStep", "position": 4, "name": "Review and share", "text": "Review the result and share via link, email, or social." }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is the formula to convert A1C to eAG?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The American Diabetes Association formula is eAG (mg/dL) = 28.7 × A1C − 46.7. To get mmol/L, divide the mg/dL result by 18."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is A1C?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A1C (HbA1c) is a blood test that reflects average blood sugar over the past 2–3 months. Normal is under 5.7%, prediabetes is 5.7–6.4%, and diabetes is 6.5% or higher."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is estimated Average Glucose (eAG)?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "eAG is your A1C expressed in the same units as a home glucose meter (mg/dL or mmol/L), making it easier to compare A1C results to daily readings."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What eAG matches an A1C of 7%?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "An A1C of 7% equals an eAG of about 154 mg/dL (8.6 mmol/L) using the ADA formula."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is this calculator free?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. The eAG/A1C Diabetes Calculator is completely free, runs in your browser, and requires no sign-up."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Should I use this instead of medical advice?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. This tool is for educational purposes only. Always follow guidance from your healthcare provider for medical decisions."
+              }
+            }
+          ]
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://diabetescalculator.ai/" }
+          ]
+        }
+      ]
+    }
+    </script>
+
     <!-- Google Consent Mode v2 - Default denied until user consents -->
     <script>
         window.dataLayer = window.dataLayer || [];
