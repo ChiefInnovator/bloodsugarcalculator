@@ -88,4 +88,4 @@ Created by [Richard Crane](https://inventingfirewith.ai), Founder, CTO, and CAIO
 
 ---
 
-<sub>Powered by [RepoBeacon](https://repobeacon.com)</sub>
+<sub>Powered by [RepoSpotlight](https://repospotlight.ai)</sub>
