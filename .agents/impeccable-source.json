@@ -1,0 +1,17 @@
+{
+  "source": "official impeccable npm installer (npx impeccable@latest install -y --providers=codex --scope=project --no-hooks)",
+  "skillVersion": "4.8.0",
+  "engineVersion": "0.1.18",
+  "installed": "2026-11-02",
+  "hooksInstalled": false,
+  "skillSha256": "fab04b31f946573b00a8559db1fc070f8ea5825254d491c2b13156e5661a86d7",
+  "engineChecksumManifestSha256": "b12f404acfc099b1300c93dc6ffb5ea0d74880d09095ead0b810bce749aab0aa",
+  "binaryPolicy": "Explicit IMPECCABLE_BIN and sibling binaries are trusted local development overrides; downloaded and version-pinned cached engines are checked against the manifest on every cache load.",
+  "localPatches": [
+    {
+      "date": "2026-11-02",
+      "findings": "G1, G6",
+      "description": "Shell and Windows launchers no longer trust verification stamps; manifest comments identify upstream-only release tools. Pinned engine digests and SKILL.md are unchanged."
+    }
+  ]
+}

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
     <title>Terms and Conditions | eAG/A1C Diabetes Calculator</title>
     <meta name="description" content="Terms and Conditions for using the eAG/A1C Diabetes Calculator website.">
     <meta name="robots" content="noindex, follow">
@@ -47,21 +48,22 @@
     </script>
 </head>
 <body class="bg-gray-100 font-sans flex flex-col min-h-screen">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     <!-- Navigation Bar -->
     <nav class="bg-blue-600 text-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-4 py-3 max-w-5xl flex justify-between items-center">
             <a href="index.html" class="text-xl font-bold hover:text-blue-200 transition duration-300">eAG/A1C Diabetes Calculator</a>
             
             <!-- Mobile Menu Button -->
-            <button id="mobile-menu-btn" class="md:hidden p-2 rounded hover:bg-blue-700 transition duration-300" aria-label="Toggle navigation menu" aria-expanded="false">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <button type="button" id="mobile-menu-btn" aria-controls="mobile-menu" class="md:hidden p-2 rounded hover:bg-blue-700 transition duration-300" aria-label="Toggle navigation menu" aria-expanded="false">
+                <svg aria-hidden="true" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path class="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    <path class="close-icon hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    <path class="close-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
             </button>
             
             <!-- Desktop Navigation -->
-            <div class="hidden md:flex space-x-4">
+            <div class="desktop-navigation space-x-4">
                 <a href="index.html" class="px-3 py-2 rounded hover:bg-blue-700 transition duration-300">Home</a>
                 <a href="tips.html" class="px-3 py-2 rounded hover:bg-blue-700 transition duration-300">Top Tips</a>
                 <a href="resources.html" class="px-3 py-2 rounded hover:bg-blue-700 transition duration-300">Resources</a>
@@ -81,7 +83,7 @@
     </nav>
     
     <div class="container mx-auto px-4 py-8 max-w-5xl">
-        <main class="bg-white rounded-lg shadow-md p-6">
+        <main id="main-content" tabindex="-1" class="reading-content bg-white rounded-lg shadow-md p-6">
             <h1 class="text-3xl md:text-4xl font-bold text-blue-600 mb-6">Terms and Conditions</h1>
             
             <p class="text-gray-700 mb-4">Welcome to the eAG/A1C Diabetes Calculator website. If you continue to browse and use this website, you are agreeing to comply with and be bound by the following terms and conditions of use, which together with our privacy policy govern our relationship with you in relation to this website. If you disagree with any part of these terms and conditions, please do not use our website.</p>
@@ -128,55 +130,52 @@
     </footer>
 
     <!-- Cookie Consent Banner -->
-    <div id="cookie-consent-banner" role="dialog" aria-modal="true" aria-labelledby="consent-title">
+    <div id="cookie-consent-banner" role="region" aria-labelledby="consent-title" tabindex="-1" hidden>
         <div class="consent-container">
             <div class="consent-header">
                 <div class="consent-text">
-                    <h3 id="consent-title">🍪 Cookie Preferences</h3>
-                    <p>We use cookies to improve your experience and show personalized ads. You can customize your preferences or accept all cookies. <a href="cookie.html">Learn more</a></p>
+                    <h3 id="consent-title">Privacy preferences</h3>
+                    <p>Save your analytics and advertising consent preferences on this device. No analytics or advertising tracker is currently configured; external styles and fonts still make network requests. <a href="cookie.html">Learn more</a></p>
                 </div>
                 <div class="consent-buttons">
-                    <button id="consent-accept-all" class="consent-btn consent-btn-primary">Accept All</button>
-                    <button id="consent-customize" class="consent-btn consent-btn-outline">Customize</button>
-                    <button id="consent-reject" class="consent-btn consent-btn-secondary">Reject Non-Essential</button>
+                    <button type="button" id="consent-accept-all" class="consent-btn consent-btn-primary">Accept All</button>
+                    <button type="button" id="consent-customize" class="consent-btn consent-btn-outline">Customize</button>
+                    <button type="button" id="consent-reject" class="consent-btn consent-btn-secondary">Reject Non-Essential</button>
                 </div>
             </div>
             
-            <div id="consent-options" class="consent-options">
+            <div id="consent-options" class="consent-options" hidden>
                 <div class="consent-option">
                     <div class="consent-option-info">
-                        <h4>Essential Cookies</h4>
-                        <p>Required for the website to function. Cannot be disabled.</p>
+                        <h4>Essential storage</h4>
+                        <p>Stores privacy preferences on this device. The calculator still works if storage is unavailable.</p>
+                    </div>
+                    <span class="consent-storage-state">Local only</span>
+                </div>
+                <div class="consent-option">
+                    <div class="consent-option-info">
+                        <h4>Analytics consent</h4>
+                        <p>Saves your analytics consent signal. No analytics tracker is currently configured.</p>
                     </div>
                     <label class="toggle-switch">
-                        <input type="checkbox" checked disabled aria-label="Essential cookies - always enabled">
+                        <input type="checkbox" id="consent-analytics" aria-label="Analytics consent">
                         <span class="toggle-slider"></span>
                     </label>
                 </div>
                 <div class="consent-option">
                     <div class="consent-option-info">
-                        <h4>Analytics Cookies</h4>
-                        <p>Help us understand how visitors use our website.</p>
+                        <h4>Advertising consent</h4>
+                        <p>Saves your advertising consent signal. No advertising tracker is currently configured.</p>
                     </div>
                     <label class="toggle-switch">
-                        <input type="checkbox" id="consent-analytics" aria-label="Analytics cookies">
-                        <span class="toggle-slider"></span>
-                    </label>
-                </div>
-                <div class="consent-option">
-                    <div class="consent-option-info">
-                        <h4>Advertising Cookies</h4>
-                        <p>Used to show relevant ads based on your interests.</p>
-                    </div>
-                    <label class="toggle-switch">
-                        <input type="checkbox" id="consent-advertising" aria-label="Advertising cookies">
+                        <input type="checkbox" id="consent-advertising" aria-label="Advertising consent">
                         <span class="toggle-slider"></span>
                     </label>
                 </div>
             </div>
             
-            <div id="consent-save-container" class="consent-save-container">
-                <button id="consent-save" class="consent-btn consent-btn-primary">Save Preferences</button>
+            <div id="consent-save-container" class="consent-save-container" hidden>
+                <button type="button" id="consent-save" class="consent-btn consent-btn-primary">Save Preferences</button>
             </div>
         </div>
     </div>

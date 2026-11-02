@@ -11,13 +11,13 @@ must first be brought into a local feature branch by the maintainer.
   `branch-policy/develop` status validates
   source metadata using trusted base-branch workflow code without checking out
   the proposed code or accessing deployment secrets.
-- Rulesets have no bypass actors. Ordinary application PRs need zero human
-  approvals. Workflow and CODEOWNERS changes require code-owner approval;
-  Copilot comments are not human approvals. This independent approval blocks
-  merging workflow changes without approval.
-  Because authors cannot approve their own PRs, owner-authored workflow
-  maintenance requires another authorized owner or an explicit admin policy
-  change. Ordinary application development does not have that restriction.
+- Rulesets have no bypass actors and require zero general human approvals for
+  this solo repository. CODEOWNERS names workflow ownership and the code-owner
+  flag is enabled. However, GitHub reported owner-authored PR #6 as mergeable
+  after its checks passed and review threads were resolved, despite workflow
+  changes and no independent approval. This configuration therefore does not
+  establish an independent workflow-approval barrier. Copilot comments are not
+  human approvals. A stronger approval policy is a separate owner decision.
 - Automatic GitHub Copilot review is scoped to pull requests targeting
   `develop`, including subsequent real code pushes. Reviews depend on the
   author's Copilot eligibility and available credits. Never request a review
