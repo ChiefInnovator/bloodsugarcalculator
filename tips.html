@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
     <title>Top Tips for Managing Diabetes | eAG/A1C Diabetes Calculator</title>
     <meta name="description" content="Practical, evidence-based tips for managing diabetes: diet, exercise, glucose monitoring, medication adherence, stress, and sleep. Learn how to lower A1C safely.">
     <meta name="keywords" content="diabetes tips, lower A1C, blood sugar management, diabetes diet, diabetes exercise, glucose monitoring, diabetes medication">
@@ -74,21 +75,22 @@
     </script>
 </head>
 <body class="bg-gray-100 font-sans flex flex-col min-h-screen">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     <!-- Navigation Bar -->
     <nav class="bg-blue-600 text-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-4 py-3 max-w-5xl flex justify-between items-center">
             <a href="index.html" class="text-xl font-bold hover:text-blue-200 transition duration-300">eAG/A1C Diabetes Calculator</a>
             
             <!-- Mobile Menu Button -->
-            <button id="mobile-menu-btn" class="md:hidden p-2 rounded hover:bg-blue-700 transition duration-300" aria-label="Toggle navigation menu" aria-expanded="false">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <button type="button" id="mobile-menu-btn" aria-controls="mobile-menu" class="md:hidden p-2 rounded hover:bg-blue-700 transition duration-300" aria-label="Toggle navigation menu" aria-expanded="false">
+                <svg aria-hidden="true" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path class="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    <path class="close-icon hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    <path class="close-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
             </button>
             
             <!-- Desktop Navigation -->
-            <div class="hidden md:flex space-x-4">
+            <div class="desktop-navigation space-x-4">
                 <a href="index.html" class="px-3 py-2 rounded hover:bg-blue-700 transition duration-300">Home</a>
                 <a href="tips.html" class="px-3 py-2 rounded hover:bg-blue-700 transition duration-300">Top Tips</a>
                 <a href="resources.html" class="px-3 py-2 rounded hover:bg-blue-700 transition duration-300">Resources</a>
@@ -107,7 +109,7 @@
         </div>
     </nav>
     
-    <div class="container mx-auto px-4 py-8 max-w-5xl flex-grow">
+    <div id="main-content" role="main" tabindex="-1" class="reading-content container mx-auto px-4 py-8 max-w-5xl flex-grow">
         <!-- Header Section -->
         <header class="text-center mb-8">
             <h1 class="text-3xl md:text-4xl font-bold text-blue-600 mb-4">Top Tips for Managing Diabetes</h1>
@@ -120,7 +122,7 @@
             <div class="bg-white rounded-lg shadow-md p-6">
                 <div class="flex items-start">
                     <div class="flex-shrink-0 w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mr-4 border border-blue-200">
-                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg aria-hidden="true" class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                         </svg>
                     </div>
@@ -135,7 +137,7 @@
             <div class="bg-white rounded-lg shadow-md p-6">
                 <div class="flex items-start">
                     <div class="flex-shrink-0 w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mr-4 border border-blue-200">
-                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg aria-hidden="true" class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
                         </svg>
                     </div>
@@ -150,7 +152,7 @@
             <div class="bg-white rounded-lg shadow-md p-6">
                 <div class="flex items-start">
                     <div class="flex-shrink-0 w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mr-4 border border-blue-200">
-                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg aria-hidden="true" class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
                         </svg>
                     </div>
@@ -165,7 +167,7 @@
             <div class="bg-white rounded-lg shadow-md p-6">
                 <div class="flex items-start">
                     <div class="flex-shrink-0 w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mr-4 border border-blue-200">
-                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg aria-hidden="true" class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                         </svg>
                     </div>
@@ -203,55 +205,52 @@
     </footer>
 
     <!-- Cookie Consent Banner -->
-    <div id="cookie-consent-banner" role="dialog" aria-modal="true" aria-labelledby="consent-title">
+    <div id="cookie-consent-banner" role="region" aria-labelledby="consent-title" tabindex="-1" hidden>
         <div class="consent-container">
             <div class="consent-header">
                 <div class="consent-text">
-                    <h3 id="consent-title">🍪 Cookie Preferences</h3>
-                    <p>We use cookies to improve your experience and show personalized ads. You can customize your preferences or accept all cookies. <a href="cookie.html">Learn more</a></p>
+                    <h3 id="consent-title">Privacy preferences</h3>
+                    <p>Save your analytics and advertising consent preferences on this device. No analytics or advertising tracker is currently configured; external styles and fonts still make network requests. <a href="cookie.html">Learn more</a></p>
                 </div>
                 <div class="consent-buttons">
-                    <button id="consent-accept-all" class="consent-btn consent-btn-primary">Accept All</button>
-                    <button id="consent-customize" class="consent-btn consent-btn-outline">Customize</button>
-                    <button id="consent-reject" class="consent-btn consent-btn-secondary">Reject Non-Essential</button>
+                    <button type="button" id="consent-accept-all" class="consent-btn consent-btn-primary">Accept All</button>
+                    <button type="button" id="consent-customize" class="consent-btn consent-btn-outline">Customize</button>
+                    <button type="button" id="consent-reject" class="consent-btn consent-btn-secondary">Reject Non-Essential</button>
                 </div>
             </div>
             
-            <div id="consent-options" class="consent-options">
+            <div id="consent-options" class="consent-options" hidden>
                 <div class="consent-option">
                     <div class="consent-option-info">
-                        <h4>Essential Cookies</h4>
-                        <p>Required for the website to function. Cannot be disabled.</p>
+                        <h4>Essential storage</h4>
+                        <p>Stores privacy preferences on this device. The calculator still works if storage is unavailable.</p>
+                    </div>
+                    <span class="consent-storage-state">Local only</span>
+                </div>
+                <div class="consent-option">
+                    <div class="consent-option-info">
+                        <h4>Analytics consent</h4>
+                        <p>Saves your analytics consent signal. No analytics tracker is currently configured.</p>
                     </div>
                     <label class="toggle-switch">
-                        <input type="checkbox" checked disabled aria-label="Essential cookies - always enabled">
+                        <input type="checkbox" id="consent-analytics" aria-label="Analytics consent">
                         <span class="toggle-slider"></span>
                     </label>
                 </div>
                 <div class="consent-option">
                     <div class="consent-option-info">
-                        <h4>Analytics Cookies</h4>
-                        <p>Help us understand how visitors use our website.</p>
+                        <h4>Advertising consent</h4>
+                        <p>Saves your advertising consent signal. No advertising tracker is currently configured.</p>
                     </div>
                     <label class="toggle-switch">
-                        <input type="checkbox" id="consent-analytics" aria-label="Analytics cookies">
-                        <span class="toggle-slider"></span>
-                    </label>
-                </div>
-                <div class="consent-option">
-                    <div class="consent-option-info">
-                        <h4>Advertising Cookies</h4>
-                        <p>Used to show relevant ads based on your interests.</p>
-                    </div>
-                    <label class="toggle-switch">
-                        <input type="checkbox" id="consent-advertising" aria-label="Advertising cookies">
+                        <input type="checkbox" id="consent-advertising" aria-label="Advertising consent">
                         <span class="toggle-slider"></span>
                     </label>
                 </div>
             </div>
             
-            <div id="consent-save-container" class="consent-save-container">
-                <button id="consent-save" class="consent-btn consent-btn-primary">Save Preferences</button>
+            <div id="consent-save-container" class="consent-save-container" hidden>
+                <button type="button" id="consent-save" class="consent-btn consent-btn-primary">Save Preferences</button>
             </div>
         </div>
     </div>

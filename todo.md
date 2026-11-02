@@ -1,5 +1,8 @@
 # eAG/A1C Calculator Project Todo List
 
+Historical checklist: these checkmarks are not retained test evidence. Current
+verification is recorded in [review disposition](docs/designs/goldfish_review_report.md).
+
 ## Research and Analysis
 - [x] Research original calculator on ADA website
 - [x] Document conversion formulas

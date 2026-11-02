@@ -1,707 +1,330 @@
-document.addEventListener("DOMContentLoaded", function() {
-    // ===================================
-    // Mobile Navigation Toggle
-    // ===================================
-    
-    initMobileMenu();
-    
-    function initMobileMenu() {
-        const mobileMenuBtn = document.getElementById("mobile-menu-btn");
-        const mobileMenu = document.getElementById("mobile-menu");
-        
-        if (!mobileMenuBtn || !mobileMenu) return;
-        
-        mobileMenuBtn.addEventListener("click", function() {
-            const isExpanded = mobileMenuBtn.getAttribute("aria-expanded") === "true";
-            
-            // Toggle menu visibility
-            mobileMenu.classList.toggle("show");
-            mobileMenu.classList.toggle("hidden");
-            
-            // Toggle button state
-            mobileMenuBtn.classList.toggle("active");
-            mobileMenuBtn.setAttribute("aria-expanded", !isExpanded);
+document.addEventListener("DOMContentLoaded", function () {
+    "use strict";
+    const byId = id => document.getElementById(id);
+    function visible(element, show) {
+        if (!element) return;
+        element.hidden = !show;
+        element.classList.toggle("hidden", !show);
+    }
+    const menuButton = byId("mobile-menu-btn"), menu = byId("mobile-menu");
+    function closeMenu() {
+        if (!menuButton || !menu) return;
+        menu.classList.remove("show");
+        menu.classList.add("hidden");
+        menuButton.classList.remove("active");
+        menuButton.setAttribute("aria-expanded", "false");
+    }
+    if (menuButton && menu) {
+        menuButton.setAttribute("aria-controls", "mobile-menu");
+        menuButton.setAttribute("aria-expanded", "false");
+        menuButton.addEventListener("click", () => {
+            const open = menuButton.getAttribute("aria-expanded") !== "true";
+            menu.classList.toggle("hidden", !open);
+            menu.classList.toggle("show", open);
+            menuButton.classList.toggle("active", open);
+            menuButton.setAttribute("aria-expanded", String(open));
         });
-        
-        // Close menu when clicking outside
-        document.addEventListener("click", function(e) {
-            if (!mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
-                mobileMenu.classList.remove("show");
-                mobileMenu.classList.add("hidden");
-                mobileMenuBtn.classList.remove("active");
-                mobileMenuBtn.setAttribute("aria-expanded", "false");
-            }
+        document.addEventListener("click", event => {
+            if (!menuButton.contains(event.target) && !menu.contains(event.target)) closeMenu();
         });
-        
-        // Close menu on window resize (if switching to desktop)
-        window.addEventListener("resize", function() {
-            if (window.innerWidth >= 768) {
-                mobileMenu.classList.remove("show");
-                mobileMenu.classList.add("hidden");
-                mobileMenuBtn.classList.remove("active");
-                mobileMenuBtn.setAttribute("aria-expanded", "false");
-            }
+        document.addEventListener("keydown", event => {
+            if (event.key !== "Escape") return;
+            const returnFocus = menuButton.getAttribute("aria-expanded") === "true" && menu.contains(document.activeElement);
+            closeMenu();
+            if (returnFocus) menuButton.focus();
         });
+        window.addEventListener("resize", () => { if (window.innerWidth >= 768) closeMenu(); });
     }
-    
-    // ===================================
-    // Cookie Consent Management
-    // ===================================
-    
-    const CONSENT_VERSION = "1.0";
-    const CONSENT_DURATION_MONTHS = 12;
-    const CONSENT_KEY = "cookieConsent";
-    
-    // Initialize consent banner
-    initConsentBanner();
-    
-    function initConsentBanner() {
-        const banner = document.getElementById("cookie-consent-banner");
-        if (!banner) return;
-        
-        const consent = loadConsent();
-        
-        if (!consent || isConsentExpired(consent)) {
-            // Show banner after a short delay for better UX
-            setTimeout(() => {
-                banner.classList.add("show");
-            }, 500);
-        } else {
-            // Apply saved consent
-            updateGoogleConsent(consent);
-        }
-        
-        // Set up event listeners
-        setupConsentListeners();
-    }
-    
-    function setupConsentListeners() {
-        // Accept All button
-        const acceptAllBtn = document.getElementById("consent-accept-all");
-        if (acceptAllBtn) {
-            acceptAllBtn.addEventListener("click", handleAcceptAll);
-        }
-        
-        // Reject Non-Essential button
-        const rejectBtn = document.getElementById("consent-reject");
-        if (rejectBtn) {
-            rejectBtn.addEventListener("click", handleRejectNonEssential);
-        }
-        
-        // Customize button
-        const customizeBtn = document.getElementById("consent-customize");
-        if (customizeBtn) {
-            customizeBtn.addEventListener("click", handleCustomize);
-        }
-        
-        // Save Preferences button
-        const saveBtn = document.getElementById("consent-save");
-        if (saveBtn) {
-            saveBtn.addEventListener("click", handleSavePreferences);
-        }
-        
-        // Manage Cookies button (on cookie policy page and footer)
-        const manageBtns = document.querySelectorAll("#manage-cookies-btn, .manage-cookies-link");
-        manageBtns.forEach(btn => {
-            btn.addEventListener("click", reopenConsentBanner);
-        });
-    }
-    
-    function handleAcceptAll() {
-        const preferences = {
-            analytics: true,
-            advertising: true
-        };
-        saveConsent(preferences);
-        updateGoogleConsent(preferences);
-        hideBanner();
-    }
-    
-    function handleRejectNonEssential() {
-        const preferences = {
-            analytics: false,
-            advertising: false
-        };
-        saveConsent(preferences);
-        updateGoogleConsent(preferences);
-        hideBanner();
-    }
-    
-    function handleCustomize() {
-        const options = document.getElementById("consent-options");
-        const saveContainer = document.getElementById("consent-save-container");
-        
-        if (options) {
-            options.classList.toggle("show");
-        }
-        if (saveContainer) {
-            saveContainer.classList.toggle("show");
-        }
-    }
-    
-    function handleSavePreferences() {
-        const analyticsToggle = document.getElementById("consent-analytics");
-        const advertisingToggle = document.getElementById("consent-advertising");
-        
-        const preferences = {
-            analytics: analyticsToggle ? analyticsToggle.checked : false,
-            advertising: advertisingToggle ? advertisingToggle.checked : false
-        };
-        
-        saveConsent(preferences);
-        updateGoogleConsent(preferences);
-        hideBanner();
-    }
-    
-    function reopenConsentBanner(e) {
-        if (e) e.preventDefault();
-        
-        const banner = document.getElementById("cookie-consent-banner");
-        const options = document.getElementById("consent-options");
-        const saveContainer = document.getElementById("consent-save-container");
-        
-        // Load current preferences into toggles
-        const consent = loadConsent();
-        if (consent) {
-            const analyticsToggle = document.getElementById("consent-analytics");
-            const advertisingToggle = document.getElementById("consent-advertising");
-            
-            if (analyticsToggle) analyticsToggle.checked = consent.analytics;
-            if (advertisingToggle) advertisingToggle.checked = consent.advertising;
-        }
-        
-        // Show options expanded
-        if (options) options.classList.add("show");
-        if (saveContainer) saveContainer.classList.add("show");
-        
-        // Show banner
-        if (banner) {
-            banner.classList.remove("hide");
-            banner.classList.add("show");
-        }
-    }
-    
-    function hideBanner() {
-        const banner = document.getElementById("cookie-consent-banner");
-        if (banner) {
-            banner.classList.remove("show");
-            banner.classList.add("hide");
-        }
-    }
-    
-    function saveConsent(preferences) {
-        const consentData = {
-            analytics: preferences.analytics,
-            advertising: preferences.advertising,
-            timestamp: new Date().toISOString(),
-            version: CONSENT_VERSION
-        };
-        
-        try {
-            localStorage.setItem(CONSENT_KEY, JSON.stringify(consentData));
-        } catch (e) {
-            console.warn("Could not save consent to localStorage:", e);
-        }
-    }
-    
-    function loadConsent() {
-        try {
-            const data = localStorage.getItem(CONSENT_KEY);
-            if (data) {
-                return JSON.parse(data);
-            }
-        } catch (e) {
-            console.warn("Could not load consent from localStorage:", e);
-        }
-        return null;
-    }
-    
-    function isConsentExpired(consent) {
-        if (!consent || !consent.timestamp) return true;
-        
-        const consentDate = new Date(consent.timestamp);
-        const expiryDate = new Date(consentDate);
-        expiryDate.setMonth(expiryDate.getMonth() + CONSENT_DURATION_MONTHS);
-        
-        return new Date() > expiryDate;
-    }
-    
-    function updateGoogleConsent(preferences) {
-        // Update Google Consent Mode v2
-        if (typeof gtag === "function") {
-            gtag("consent", "update", {
-                "analytics_storage": preferences.analytics ? "granted" : "denied",
-                "ad_storage": preferences.advertising ? "granted" : "denied",
-                "ad_user_data": preferences.advertising ? "granted" : "denied",
-                "ad_personalization": preferences.advertising ? "granted" : "denied"
-            });
-        }
-    }
-    
-    // Expose reopenConsentBanner globally for inline onclick handlers
-    window.reopenConsentBanner = reopenConsentBanner;
-
-    // Get DOM elements for calculator (check if they exist)
-    const conversionDirectionRadios = document.querySelectorAll("input[name=\"conversion-direction\"]");
-    const a1cInputContainer = document.getElementById("a1c-input-container");
-    const eagInputContainer = document.getElementById("eag-input-container");
-    const a1cInput = document.getElementById("a1c-input");
-    const eagInput = document.getElementById("eag-input");
-    const eagUnitsRadios = document.querySelectorAll("input[name=\"eag-units\"]");
-    const calculateBtn = document.getElementById("calculate-btn");
-    const resultContainer = document.getElementById("result-container");
-    const resultValue = document.getElementById("result-value");
-    const resultExplanation = document.getElementById("result-explanation");
-    const resultTimestamp = document.getElementById("result-timestamp");
-    const errorContainer = document.getElementById("error-container");
-    const errorMessage = document.getElementById("error-message");
-    const shareBtn = document.getElementById("share-btn");
-    const shareFacebook = document.getElementById("share-facebook");
-    const shareTwitter = document.getElementById("share-twitter");
-    const shareEmail = document.getElementById("share-email");
-    const askChatGpt = document.getElementById("ask-chatgpt");
-    
-    // Toast notification function
-    function showToast(message, type = "success") {
-        const container = document.getElementById("toast-container");
-        if (!container) return;
-        
-        const toast = document.createElement("div");
-        toast.className = `toast toast-${type}`;
-        toast.textContent = message;
-        
-        container.appendChild(toast);
-        
-        // Auto-remove after animation completes
-        setTimeout(() => {
-            toast.classList.add("fade-out");
-            setTimeout(() => {
-                if (toast.parentNode) {
-                    toast.parentNode.removeChild(toast);
-                }
-            }, 300);
-        }, 2700);
-    }
-    
-    // Store current calculation for sharing
-    let currentCalculation = null;
-    let currentShareUrl = null;
-
-    // --- Calculator Logic (only run if calculator elements exist) ---
-    if (calculateBtn) { 
-        // Set initial display state based on default selected radio button
-        const initialConversionDirectionRadio = document.querySelector("input[name=\"conversion-direction\"]:checked");
-        if (initialConversionDirectionRadio) {
-            const initialConversionDirection = initialConversionDirectionRadio.value;
-            if (initialConversionDirection === "a1c-to-eag") {
-                if (a1cInputContainer) a1cInputContainer.classList.remove("hidden");
-                if (eagInputContainer) eagInputContainer.classList.add("hidden");
-            } else {
-                if (a1cInputContainer) a1cInputContainer.classList.add("hidden");
-                if (eagInputContainer) eagInputContainer.classList.remove("hidden");
-            }
-        }
-
-        // Set up conversion direction change handler
-        conversionDirectionRadios.forEach(radio => {
-            radio.addEventListener("change", function() {
-                if (this.value === "a1c-to-eag") {
-                    if (a1cInputContainer) a1cInputContainer.classList.remove("hidden");
-                    if (eagInputContainer) eagInputContainer.classList.add("hidden");
-                } else {
-                    if (a1cInputContainer) a1cInputContainer.classList.add("hidden");
-                    if (eagInputContainer) eagInputContainer.classList.remove("hidden");
-                }
-                
-                // Clear previous results and errors
-                if (resultContainer) resultContainer.classList.add("hidden");
-                if (errorContainer) errorContainer.classList.add("hidden");
-            });
-        });
-        
-        // Set up calculate button click handler
-        calculateBtn.addEventListener("click", function() {
-            // Clear previous results and errors
-            if (resultContainer) resultContainer.classList.add("hidden");
-            if (errorContainer) errorContainer.classList.add("hidden");
-            
-            // Get selected conversion direction
-            const conversionDirectionRadio = document.querySelector("input[name=\"conversion-direction\"]:checked");
-            if (!conversionDirectionRadio) return; // Should not happen with radio buttons
-            const conversionDirection = conversionDirectionRadio.value;
-            
-            if (conversionDirection === "a1c-to-eag") {
-                // A1C to eAG conversion
-                const a1cValue = parseFloat(a1cInput.value);
-                
-                // Validate input
-                if (isNaN(a1cValue)) {
-                    showError("Please enter a valid A1C value.");
-                    return;
-                }
-                
-                // ADA recommendation is generally up to 14%, but input allows 20. Let's keep validation aligned with input for now.
-                if (a1cValue < 4.0 || a1cValue > 20.0) { 
-                    showError("Please enter an A1C value between 4.0 and 20.0.");
-                    return;
-                }
-                
-                // Calculate eAG in mg/dL
-                const eagMgdl = calculateEagFromA1c(a1cValue);
-                
-                // Calculate eAG in mmol/L
-                const eagMmoll = (eagMgdl / 18).toFixed(1);
-                
-                // Display result
-                if (resultValue) resultValue.innerHTML = `
-                    <div>eAG: ${eagMgdl} mg/dL</div>
-                    <div>eAG: ${eagMmoll} mmol/L</div>
-                `;
-                
-                const calcDate = new Date();
-                if (resultExplanation) resultExplanation.textContent = `An A1C of ${a1cValue.toFixed(1)}% corresponds to an estimated average glucose of ${eagMgdl} mg/dL or ${eagMmoll} mmol/L.`;
-                if (resultTimestamp) resultTimestamp.textContent = `Calculated on ${formatTimestamp(calcDate)}`;
-                if (resultContainer) {
-                    resultContainer.classList.remove("hidden");
-                    resultContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                }
-                
-                // Store calculation for sharing
-                currentCalculation = {
-                    type: 'a1c-to-eag',
-                    input: a1cValue,
-                    resultMgdl: eagMgdl,
-                    resultMmoll: eagMmoll,
-                    date: calcDate.toISOString()
-                };
-                
-            } else {
-                // eAG to A1C conversion
-                const eagValue = parseFloat(eagInput.value);
-                const eagUnitsRadio = document.querySelector("input[name=\"eag-units\"]:checked");
-                if (!eagUnitsRadio) return; // Should not happen
-                const eagUnits = eagUnitsRadio.value;
-                
-                // Validate input
-                if (isNaN(eagValue)) {
-                    showError("Please enter a valid eAG value.");
-                    return;
-                }
-                
-                // Validate range based on units
-                if (eagUnits === "mgdl") {
-                    if (eagValue < 70 || eagValue > 600) {
-                        showError("Please enter an eAG value between 70 and 600 mg/dL.");
-                        return;
-                    }
-                } else {
-                    if (eagValue < 3.9 || eagValue > 33.3) {
-                        showError("Please enter an eAG value between 3.9 and 33.3 mmol/L.");
-                        return;
-                    }
-                }
-                
-                // Calculate A1C
-                let a1cValue;
-                if (eagUnits === "mgdl") {
-                    a1cValue = calculateA1cFromEagMgdl(eagValue);
-                } else {
-                    a1cValue = calculateA1cFromEagMmoll(eagValue);
-                }
-                
-                // Display result
-                if (resultValue) resultValue.innerHTML = `A1C: ${a1cValue.toFixed(1)}%`;
-                
-                const calcDate = new Date();
-                const eagUnitText = eagUnits === "mgdl" ? "mg/dL" : "mmol/L";
-                if (resultExplanation) resultExplanation.textContent = `An estimated average glucose of ${eagValue} ${eagUnitText} corresponds to an A1C of approximately ${a1cValue.toFixed(1)}%.`;
-                if (resultTimestamp) resultTimestamp.textContent = `Calculated on ${formatTimestamp(calcDate)}`;
-                if (resultContainer) {
-                    resultContainer.classList.remove("hidden");
-                    resultContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                }
-                
-                // Store calculation for sharing
-                currentCalculation = {
-                    type: 'eag-to-a1c',
-                    input: eagValue,
-                    units: eagUnits,
-                    result: a1cValue.toFixed(1),
-                    date: calcDate.toISOString()
-                };
-            }
-        });
-
-        // Helper function to calculate eAG from A1C
-        function calculateEagFromA1c(a1c) {
-            return Math.round(28.7 * a1c - 46.7);
-        }
-        
-        // Helper function to calculate A1C from eAG (mg/dL)
-        function calculateA1cFromEagMgdl(eag) {
-            return (eag + 46.7) / 28.7;
-        }
-        
-        // Helper function to format timestamp
-        function formatTimestamp(date) {
-            const options = {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                hour: 'numeric',
-                minute: '2-digit',
-                hour12: true
-            };
-            return date.toLocaleDateString('en-US', options);
-        }
-        
-        // Helper function to calculate A1C from eAG (mmol/L)
-        function calculateA1cFromEagMmoll(eag) {
-            // Convert mmol/L to mg/dL first
-            const eagMgdl = eag * 18;
-            return calculateA1cFromEagMgdl(eagMgdl);
-        }
-        
-        // Helper function to show error message
-        function showError(message) {
-            if (errorMessage) errorMessage.textContent = message;
-            if (errorContainer) errorContainer.classList.remove("hidden");
-        }
-        
-        // --- Share Button Logic ---
-        
-        // Helper to generate share URL
-        function generateShareUrl() {
-            if (!currentCalculation) return null;
-            const shareData = encodeCalculation(currentCalculation);
-            return `${window.location.origin}${window.location.pathname}?c=${shareData}`;
-        }
-        
-        // Helper to get share text
-        function getShareText() {
-            if (!currentCalculation) return "";
-            if (currentCalculation.type === 'a1c-to-eag') {
-                return `My A1C of ${currentCalculation.input}% equals an eAG of ${currentCalculation.resultMgdl} mg/dL. Check your levels with this free diabetes calculator!`;
-            } else {
-                const unitText = currentCalculation.units === 'mgdl' ? 'mg/dL' : 'mmol/L';
-                return `My eAG of ${currentCalculation.input} ${unitText} equals an A1C of ${currentCalculation.result}%. Check your levels with this free diabetes calculator!`;
-            }
-        }
-        
-        if (shareBtn) {
-            shareBtn.addEventListener("click", function() {
-                const shareUrl = generateShareUrl();
-                if (!shareUrl) return;
-                
-                // Copy to clipboard
-                navigator.clipboard.writeText(shareUrl).then(() => {
-                    showToast("Link copied!", "success");
-                }).catch(err => {
-                    console.error("Could not copy link:", err);
-                    showToast("Could not copy link", "error");
-                    // Fallback: show the URL in a prompt
-                    prompt("Copy this link to share:", shareUrl);
-                });
-            });
-        }
-        
-        // Share to Facebook
-        if (shareFacebook) {
-            shareFacebook.addEventListener("click", function() {
-                const shareUrl = generateShareUrl();
-                if (!shareUrl) return;
-                
-                const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
-                window.open(facebookUrl, '_blank', 'width=600,height=400,menubar=no,toolbar=no');
-            });
-        }
-        
-        // Share to X (Twitter)
-        if (shareTwitter) {
-            shareTwitter.addEventListener("click", function() {
-                const shareUrl = generateShareUrl();
-                if (!shareUrl) return;
-                
-                const text = getShareText();
-                const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(shareUrl)}`;
-                window.open(twitterUrl, '_blank', 'width=600,height=400,menubar=no,toolbar=no');
-            });
-        }
-        
-        // Share via Email
-        if (shareEmail) {
-            shareEmail.addEventListener("click", function() {
-                const shareUrl = generateShareUrl();
-                if (!shareUrl) return;
-                
-                const text = getShareText();
-                const subject = "eAG/A1C Calculation Result";
-                const body = `${text}\n\nView the calculation: ${shareUrl}`;
-                const mailtoUrl = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-                window.location.href = mailtoUrl;
-            });
-        }
-        
-        // Ask ChatGPT
-        if (askChatGpt) {
-            askChatGpt.addEventListener("click", function() {
-                if (!currentCalculation) return;
-                
-                // Get A1C and eAG values from the calculation
-                let a1cValue, eagValue;
-                if (currentCalculation.type === 'a1c-to-eag') {
-                    a1cValue = currentCalculation.input;
-                    eagValue = currentCalculation.resultMgdl;
-                } else {
-                    a1cValue = currentCalculation.result;
-                    // Convert to mg/dL if needed
-                    if (currentCalculation.units === 'mmoll') {
-                        eagValue = Math.round(currentCalculation.input * 18);
-                    } else {
-                        eagValue = currentCalculation.input;
-                    }
-                }
-                
-                // Construct the prompt
-                const prompt = `Evaluate an A1C of ${a1cValue} percent and an average glucose of ${eagValue} mg/dL. Assess where this falls on the spectrum of optimal metabolic control for fat-loss, longevity, and diabetes prevention. Provide a strategic plan with specific daily actions for nutrition, strength training, cardio, fasting, supplementation, stress reduction, and sleep to drive A1C toward the 4.8 to 5.2 percent range without sacrificing energy or muscle retention.`;
-                
-                // URL encode the prompt and open ChatGPT
-                const chatGptUrl = `https://chat.openai.com/?q=${encodeURIComponent(prompt)}`;
-                window.open(chatGptUrl, '_blank');
-            });
-        }
-        
-        // Encode calculation to URL-safe base64 JSON
-        function encodeCalculation(calc) {
-            const json = JSON.stringify(calc);
-            // Use btoa for base64, then make URL-safe
-            const base64 = btoa(unescape(encodeURIComponent(json)));
-            return base64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-        }
-        
-        // Decode calculation from URL-safe base64 JSON
-        function decodeCalculation(encoded) {
-            try {
-                // Restore base64 padding and characters
-                let base64 = encoded.replace(/-/g, '+').replace(/_/g, '/');
-                while (base64.length % 4) {
-                    base64 += '=';
-                }
-                const json = decodeURIComponent(escape(atob(base64)));
-                return JSON.parse(json);
-            } catch (e) {
-                console.warn("Could not decode calculation:", e);
-                return null;
-            }
-        }
-        
-        // --- Load from URL Parameters ---
-        loadFromUrlParams();
-        
-        function loadFromUrlParams() {
-            const params = new URLSearchParams(window.location.search);
-            const encoded = params.get('c');
-            
-            if (!encoded) return;
-            
-            const calc = decodeCalculation(encoded);
-            if (!calc || !calc.type || !calc.date) return;
-            
-            try {
-                const calcDate = new Date(calc.date);
-                
-                if (calc.type === 'a1c-to-eag') {
-                    const a1cValue = parseFloat(calc.input);
-                    const resultMgdl = calc.resultMgdl;
-                    const resultMmoll = calc.resultMmoll;
-                    
-                    if (isNaN(a1cValue) || !resultMgdl || !resultMmoll) return;
-                    
-                    // Set the conversion direction
-                    const a1cToEagRadio = document.querySelector("input[name=\"conversion-direction\"][value=\"a1c-to-eag\"]");
-                    if (a1cToEagRadio) {
-                        a1cToEagRadio.checked = true;
-                        if (a1cInputContainer) a1cInputContainer.classList.remove("hidden");
-                        if (eagInputContainer) eagInputContainer.classList.add("hidden");
-                    }
-                    
-                    // Set input value
-                    if (a1cInput) a1cInput.value = a1cValue;
-                    
-                    // Display result
-                    if (resultValue) resultValue.innerHTML = `
-                        <div>eAG: ${resultMgdl} mg/dL</div>
-                        <div>eAG: ${resultMmoll} mmol/L</div>
-                    `;
-                    if (resultExplanation) resultExplanation.textContent = `An A1C of ${a1cValue.toFixed(1)}% corresponds to an estimated average glucose of ${resultMgdl} mg/dL or ${resultMmoll} mmol/L.`;
-                    if (resultTimestamp) resultTimestamp.textContent = `Calculated on ${formatTimestamp(calcDate)}`;
-                    if (resultContainer) resultContainer.classList.remove("hidden");
-                    
-                    // Store for re-sharing
-                    currentCalculation = calc;
-                    
-                } else if (calc.type === 'eag-to-a1c') {
-                    const eagValue = parseFloat(calc.input);
-                    const units = calc.units || 'mgdl';
-                    const result = calc.result;
-                    
-                    if (isNaN(eagValue) || !result) return;
-                    
-                    // Set the conversion direction
-                    const eagToA1cRadio = document.querySelector("input[name=\"conversion-direction\"][value=\"eag-to-a1c\"]");
-                    if (eagToA1cRadio) {
-                        eagToA1cRadio.checked = true;
-                        if (a1cInputContainer) a1cInputContainer.classList.add("hidden");
-                        if (eagInputContainer) eagInputContainer.classList.remove("hidden");
-                    }
-                    
-                    // Set input value and units
-                    if (eagInput) eagInput.value = eagValue;
-                    const unitsRadio = document.querySelector(`input[name=\"eag-units\"][value=\"${units}\"]`);
-                    if (unitsRadio) unitsRadio.checked = true;
-                    
-                    // Display result
-                    const eagUnitText = units === "mgdl" ? "mg/dL" : "mmol/L";
-                    if (resultValue) resultValue.innerHTML = `A1C: ${result}%`;
-                    if (resultExplanation) resultExplanation.textContent = `An estimated average glucose of ${eagValue} ${eagUnitText} corresponds to an A1C of approximately ${result}%.`;
-                    if (resultTimestamp) resultTimestamp.textContent = `Calculated on ${formatTimestamp(calcDate)}`;
-                    if (resultContainer) resultContainer.classList.remove("hidden");
-                    
-                    // Store for re-sharing
-                    currentCalculation = calc;
-                }
-                
-                // Scroll to result
-                if (resultContainer) {
-                    resultContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
-                
-            } catch (e) {
-                console.warn("Could not load calculation from URL:", e);
-            }
-        }
-        
-    } // End of calculator logic check
-
-    // --- Accordion Logic (runs on all pages) ---
-    const accordionBtns = document.querySelectorAll(".accordion-btn");
-    accordionBtns.forEach(btn => {
-        btn.addEventListener("click", function() {
-            const content = this.nextElementSibling;
-            const icon = this.querySelector("svg");
-            
-            // Toggle content visibility
-            if (content && content.classList.contains("accordion-content")) {
-                if (content.classList.contains("hidden")) {
-                    content.classList.remove("hidden");
-                    if (icon) icon.classList.add("rotate-180");
-                } else {
-                    content.classList.add("hidden");
-                    if (icon) icon.classList.remove("rotate-180");
-                }
-            }
+    document.querySelectorAll(".accordion-btn").forEach((button, index) => {
+        const content = button.nextElementSibling;
+        if (!content || !content.classList.contains("accordion-content")) return;
+        if (!content.id) content.id = `accordion-content-${index + 1}`;
+        button.setAttribute("aria-controls", content.id);
+        button.setAttribute("aria-expanded", String(!content.classList.contains("hidden") && !content.hidden));
+        button.addEventListener("click", () => {
+            const open = button.getAttribute("aria-expanded") !== "true";
+            visible(content, open);
+            button.setAttribute("aria-expanded", String(open));
+            const icon = button.querySelector("svg");
+            if (icon) icon.classList.toggle("rotate-180", open);
         });
     });
 
-});
+    const consentVersion = "1.0", consentKey = "cookieConsent";
+    const banner = byId("cookie-consent-banner");
+    let consentOpener = document.activeElement;
+    function canReturnConsentFocus(element) {
+        if (!element || !element.isConnected || element.disabled || element === document.body || element === document.documentElement || banner?.contains(element) || element.getClientRects().length === 0) return false;
+        const style = window.getComputedStyle(element);
+        return style.visibility !== "hidden" && style.visibility !== "collapse";
+    }
+    function loadConsent() {
+        try {
+            const consent = JSON.parse(localStorage.getItem(consentKey));
+            if (!consent || consent.version !== consentVersion || typeof consent.analytics !== "boolean" || typeof consent.advertising !== "boolean" || typeof consent.timestamp !== "string" || !Number.isFinite(Date.parse(consent.timestamp))) return null;
+            const expiry = new Date(consent.timestamp);
+            expiry.setMonth(expiry.getMonth() + 12);
+            return Date.now() >= expiry.getTime() ? null : consent;
+        } catch (_) { return null; }
+    }
+    function applyConsent(preferences) {
+        if (typeof window.gtag === "function") window.gtag("consent", "update", {
+            analytics_storage: preferences.analytics ? "granted" : "denied",
+            ad_storage: preferences.advertising ? "granted" : "denied",
+            ad_user_data: preferences.advertising ? "granted" : "denied",
+            ad_personalization: preferences.advertising ? "granted" : "denied"
+        });
+    }
+    function showBanner(options, focus) {
+        if (!banner) return;
+        visible(banner, true);
+        banner.classList.remove("hide");
+        banner.classList.add("show");
+        ["consent-options", "consent-save-container"].forEach(id => {
+            const element = byId(id);
+            visible(element, options);
+            if (element) element.classList.toggle("show", options);
+        });
+        if (focus) {
+            const heading = byId("consent-title");
+            if (heading) { heading.tabIndex = -1; heading.focus(); }
+        }
+    }
+    function saveConsent(analytics, advertising) {
+        const preferences = { analytics, advertising, timestamp: new Date().toISOString(), version: consentVersion };
+        try { localStorage.setItem(consentKey, JSON.stringify(preferences)); } catch (_) { /* Storage is optional. */ }
+        applyConsent(preferences);
+        visible(banner, false);
+        if (banner) banner.classList.remove("show");
+        const destination = canReturnConsentFocus(consentOpener) ? consentOpener : byId("main-content") || document.querySelector("main");
+        if (canReturnConsentFocus(destination)) {
+            if (destination === byId("main-content") || destination.tagName === "MAIN") destination.tabIndex = -1;
+            destination.focus();
+        }
+        consentOpener = null;
+    }
+    function reopenConsentBanner(event) {
+        if (event) event.preventDefault();
+        const opener = event?.currentTarget || document.activeElement;
+        if (canReturnConsentFocus(opener)) consentOpener = opener;
+        const consent = loadConsent();
+        ["analytics", "advertising"].forEach(key => {
+            const toggle = byId(`consent-${key}`);
+            if (toggle) toggle.checked = consent ? consent[key] : false;
+        });
+        showBanner(true, true);
+    }
+    window.reopenConsentBanner = reopenConsentBanner;
+    if (banner) {
+        const consent = loadConsent();
+        if (consent) { visible(banner, false); applyConsent(consent); }
+        else showBanner(false, false);
+        const listen = (id, fn) => { if (byId(id)) byId(id).addEventListener("click", fn); };
+        listen("consent-accept-all", () => saveConsent(true, true));
+        listen("consent-reject", () => saveConsent(false, false));
+        listen("consent-customize", () => showBanner(byId("consent-options").hidden, false));
+        listen("consent-save", () => saveConsent(Boolean(byId("consent-analytics")?.checked), Boolean(byId("consent-advertising")?.checked)));
+        document.querySelectorAll("#manage-cookies-btn, .manage-cookies-link").forEach(button => button.addEventListener("click", reopenConsentBanner));
+    }
 
+    const form = byId("calculator-form"), calculator = window.BloodSugarCalculator;
+    if (!form || !calculator) return;
+    const a1cInput = byId("a1c-input"), eagInput = byId("eag-input");
+    const result = byId("result-container"), status = byId("result-status");
+    const dialog = byId("external-action-dialog"), confirm = byId("external-action-confirm");
+    const shareIds = ["share-btn", "share-facebook", "share-twitter", "share-email", "ask-chatgpt"];
+    let current = null, pending = null, invokingButton = null;
+    const checked = name => document.querySelector(`input[name="${name}"]:checked`)?.value;
+    const direction = () => checked("conversion-direction");
+    const units = () => checked("eag-units");
+    function closePreview() {
+        pending = null;
+        if (dialog?.open) dialog.close();
+    }
+    if (dialog) dialog.addEventListener("close", () => {
+        pending = null;
+        if (invokingButton?.isConnected) invokingButton.focus();
+    });
+    byId("external-action-cancel")?.addEventListener("click", closePreview);
+    function clearError() {
+        visible(byId("error-container"), false);
+        [a1cInput, eagInput].forEach(input => input.removeAttribute("aria-invalid"));
+    }
+    function invalidate() {
+        current = null;
+        closePreview();
+        visible(result, false);
+        shareIds.forEach(id => { if (byId(id)) byId(id).disabled = true; });
+        if (status) status.textContent = "";
+        if (byId("share-feedback")) byId("share-feedback").textContent = "";
+        clearError();
+    }
+    function showError(message, input) {
+        byId("error-message").textContent = message;
+        visible(byId("error-container"), true);
+        if (input) { input.setAttribute("aria-invalid", "true"); input.focus(); }
+    }
+    function updateInputs() {
+        const forward = direction() === "a1c-to-eag";
+        visible(byId("a1c-input-container"), forward);
+        visible(byId("eag-input-container"), !forward);
+        a1cInput.disabled = !forward;
+        eagInput.disabled = forward;
+        const mgdl = units() === "mgdl";
+        eagInput.min = mgdl ? "70" : "3.9";
+        eagInput.max = mgdl ? "600" : "33.3";
+        eagInput.step = "any";
+        a1cInput.step = "any";
+        const label = document.querySelector('label[for="eag-input"]');
+        if (label) label.textContent = `Enter eAG value (${mgdl ? "mg/dL" : "mmol/L"}):`;
+        if (byId("eag-hint")) byId("eag-hint").textContent = mgdl ? "Enter 70–600 mg/dL." : "Enter 3.9–33.3 mmol/L.";
+    }
+    document.querySelectorAll('input[name="conversion-direction"]').forEach(radio => radio.addEventListener("change", () => { invalidate(); updateInputs(); }));
+    document.querySelectorAll('input[name="eag-units"]').forEach(radio => radio.addEventListener("change", () => { invalidate(); eagInput.value = ""; updateInputs(); }));
+    [a1cInput, eagInput].forEach(input => input.addEventListener("input", invalidate));
+    function roundedMgdl(calc) {
+        // Accepted inputs are positive and bounded (3.9–600), so their canonical
+        // decimal strings have no exponent. Round the exact decimal conversion,
+        // rather than moving binary floats across legitimate half boundaries.
+        const [whole, fraction = ""] = String(calc.input).split(".");
+        const scale = 10n ** BigInt(fraction.length);
+        let numerator = BigInt(whole + fraction), denominator = scale;
+        if (calc.type === "a1c-to-eag") {
+            numerator = numerator * 287n - 467n * scale;
+            denominator *= 10n;
+        } else if (calc.units === "mmoll") numerator *= 18n;
+        return Number((2n * numerator + denominator) / (2n * denominator));
+    }
+    function summary(calc) {
+        return `A1C: ${calc.a1c.toFixed(1)}%; estimated average glucose: ${roundedMgdl(calc)} mg/dL (${calc.eagMmoll.toFixed(1)} mmol/L).`;
+    }
+    function render(calc, imported, inputText = String(calc.input)) {
+        current = calc;
+        const output = byId("result-value");
+        output.replaceChildren();
+        const lines = calc.type === "a1c-to-eag" ? [`eAG: ${roundedMgdl(calc)} mg/dL`, `eAG: ${calc.eagMmoll.toFixed(1)} mmol/L`] : [`A1C: ${calc.a1c.toFixed(1)}%`];
+        lines.forEach(text => { const line = document.createElement("div"); line.textContent = text; output.appendChild(line); });
+        byId("result-explanation").textContent = calc.type === "a1c-to-eag"
+            ? `An A1C of ${inputText}% corresponds to an estimated average glucose of ${roundedMgdl(calc)} mg/dL or ${calc.eagMmoll.toFixed(1)} mmol/L.`
+            : `An estimated average glucose of ${inputText} ${calc.units === "mgdl" ? "mg/dL" : "mmol/L"} corresponds to an A1C of approximately ${calc.a1c.toFixed(1)}%.`;
+        byId("result-timestamp").textContent = `${imported ? "Link-supplied time (not verified)" : "Calculated on"}: ${new Date(calc.date).toLocaleString("en-US")}`;
+        visible(result, true);
+        shareIds.forEach(id => { if (byId(id)) byId(id).disabled = false; });
+        if (status) status.textContent = `Calculation complete. ${summary(calc)}`;
+    }
+    form.addEventListener("submit", event => {
+        event.preventDefault();
+        invalidate();
+        const input = direction() === "a1c-to-eag" ? a1cInput : eagInput;
+        const text = input.value.trim();
+        if (!/^(?:\d+(?:\.\d*)?|\.\d+)$/.test(text) || !Number.isFinite(Number(text))) {
+            showError("Enter a decimal number without signs, exponents, or units.", input);
+            return;
+        }
+        try {
+            render(calculator.createCalculation({ type: direction(), input: Number(text), ...(direction() === "eag-to-a1c" ? { units: units() } : {}), date: new Date().toISOString() }), false, text);
+        } catch (_) {
+            showError(direction() === "a1c-to-eag" ? "Enter an A1C value between 4 and 20%." : units() === "mgdl" ? "Enter an eAG value between 70 and 600 mg/dL." : "Enter an eAG value between 3.9 and 33.3 mmol/L.", input);
+        }
+    });
+    function fallback(action, message) {
+        if (byId("external-action-description")) byId("external-action-description").textContent = message;
+        visible(byId("external-action-fallback"), true);
+        const output = byId("shared-link-output"), link = byId("external-action-link");
+        visible(output, action.kind === "copy");
+        visible(link, action.kind !== "copy");
+        if (action.kind === "copy" && output) { output.value = action.payload; output.focus(); output.select(); }
+        if (action.kind !== "copy" && link) {
+            link.href = action.destination;
+            link.target = "_blank";
+            link.rel = "noopener noreferrer";
+            link.textContent = "Open the confirmed destination";
+            link.focus();
+        }
+    }
+    async function transfer() {
+        const action = pending;
+        if (!action || action.calculation !== current) return;
+        confirm.disabled = true;
+        if (action.kind === "copy") {
+            try {
+                if (!navigator.clipboard?.writeText) throw new Error("Clipboard unavailable");
+                await navigator.clipboard.writeText(action.payload);
+                if (pending !== action) return;
+                closePreview();
+                if (status) status.textContent = "Calculation link copied.";
+                if (byId("share-feedback")) byId("share-feedback").textContent = "Calculation link copied.";
+            } catch (_) {
+                if (pending === action) fallback(action, "Copy the confirmed link below. Anyone with this link can read its health values.");
+            }
+        } else if (action.kind === "email") {
+            try { window.location.assign(action.destination); } catch (_) { /* Keep the confirmed link available. */ }
+            fallback(action, "If your email application did not open, use the confirmed message link below.");
+        } else {
+            // With noopener a successful window.open may return null; retain the explicit link in either case.
+            try { window.open(action.destination, "_blank", "noopener,noreferrer"); } catch (_) { /* Offer the same confirmed link. */ }
+            fallback(action, "If the destination did not open, use the confirmed link below.");
+        }
+    }
+    confirm?.addEventListener("click", transfer);
+    shareIds.forEach(id => byId(id)?.addEventListener("click", event => {
+        if (!current || !dialog || typeof dialog.showModal !== "function") {
+            if (current && status) status.textContent = "Sharing requires a browser that supports confirmation dialogs.";
+            return;
+        }
+        if (byId("share-feedback")) byId("share-feedback").textContent = "";
+        const shareUrl = calculator.generateShareUrl(window.location.href, current);
+        const text = summary(current);
+        let kind = "external", name, payload, destination;
+        if (id === "share-btn") { kind = "copy"; name = "Clipboard"; payload = shareUrl; destination = "Your device clipboard"; }
+        else if (id === "share-facebook") {
+            name = "Facebook"; payload = shareUrl; destination = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+        } else if (id === "share-twitter") {
+            name = "X"; payload = `${text}\n${shareUrl}`; destination = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(shareUrl)}`;
+        } else if (id === "share-email") {
+            kind = "email"; name = "Email application";
+            payload = `Subject: eAG/A1C Calculation Result\n\n${text}\n\nView the calculation: ${shareUrl}`;
+            destination = `mailto:?subject=${encodeURIComponent("eAG/A1C Calculation Result")}&body=${encodeURIComponent(`${text}\n\nView the calculation: ${shareUrl}`)}`;
+        } else {
+            name = "ChatGPT";
+            payload = `Explain this educational estimate: ${text} The input was ${current.input} ${current.type === "a1c-to-eag" ? "% A1C" : current.units === "mgdl" ? "mg/dL eAG" : "mmol/L eAG"}; calculation timestamp: ${current.date}. Explain the limits of this estimate and suggest questions to ask a healthcare professional. Do not diagnose or recommend individualized treatment or targets.`;
+            destination = `https://chat.openai.com/?q=${encodeURIComponent(payload)}`;
+        }
+        pending = { kind, payload, destination, calculation: current };
+        invokingButton = event.currentTarget;
+        byId("external-action-title").textContent = `Share with ${name}`;
+        byId("external-action-description").textContent = "Confirm before sharing these health values. Anyone with the link can decode them; encoding is not encryption. External services may process the full submitted content.";
+        const destinationIdentity = kind === "copy" ? "Your device clipboard" : kind === "email" ? "Email application" : `${name} (${new URL(destination).origin})`;
+        byId("external-action-preview").textContent = `Destination: ${destinationIdentity}\n\nCalculation: ${text}\nTimestamp: ${current.date}\n\nExact payload:\n${payload}`;
+        if (byId("external-action-address")) byId("external-action-address").textContent = destination;
+        if (byId("external-action-address-details")) byId("external-action-address-details").open = false;
+        visible(byId("external-action-fallback"), false);
+        confirm.disabled = false;
+        dialog.showModal();
+    }));
+    invalidate();
+    updateInputs();
+    function importCalculationUrl() {
+        try {
+            const imported = calculator.readCalculationUrl(window.location.href);
+            if (!imported) return;
+            invalidate();
+            const calc = imported.calculation;
+            document.querySelectorAll('input[name="conversion-direction"]').forEach(radio => { radio.checked = radio.value === calc.type; });
+            if (calc.units) document.querySelectorAll('input[name="eag-units"]').forEach(radio => { radio.checked = radio.value === calc.units; });
+            updateInputs();
+            (calc.type === "a1c-to-eag" ? a1cInput : eagInput).value = String(calc.input);
+            render(calc, true);
+            if (imported.source === "query") history.replaceState(null, "", calculator.generateShareUrl(window.location.href, calc));
+        } catch (_) {
+            invalidate();
+            showError("This shared calculation is invalid or unsupported. Enter a value to calculate again.", direction() === "a1c-to-eag" ? a1cInput : eagInput);
+        }
+    }
+    importCalculationUrl();
+    window.addEventListener("hashchange", () => {
+        // In-page anchors (including the skip link) must not replace a current calculation.
+        const fragment = new URLSearchParams(new URL(window.location.href).hash.slice(1));
+        if (fragment.has("c")) importCalculationUrl();
+    });
+});

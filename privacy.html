@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
     <title>Privacy Policy | eAG/A1C Diabetes Calculator</title>
     <meta name="description" content="Privacy Policy for the eAG/A1C Diabetes Calculator website.">
     <meta name="robots" content="noindex, follow">
@@ -47,21 +48,22 @@
     </script>
 </head>
 <body class="bg-gray-100 font-sans flex flex-col min-h-screen">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     <!-- Navigation Bar -->
     <nav class="bg-blue-600 text-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-4 py-3 max-w-5xl flex justify-between items-center">
             <a href="index.html" class="text-xl font-bold hover:text-blue-200 transition duration-300">eAG/A1C Diabetes Calculator</a>
             
             <!-- Mobile Menu Button -->
-            <button id="mobile-menu-btn" class="md:hidden p-2 rounded hover:bg-blue-700 transition duration-300" aria-label="Toggle navigation menu" aria-expanded="false">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <button type="button" id="mobile-menu-btn" aria-controls="mobile-menu" class="md:hidden p-2 rounded hover:bg-blue-700 transition duration-300" aria-label="Toggle navigation menu" aria-expanded="false">
+                <svg aria-hidden="true" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path class="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    <path class="close-icon hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    <path class="close-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
             </button>
             
             <!-- Desktop Navigation -->
-            <div class="hidden md:flex space-x-4">
+            <div class="desktop-navigation space-x-4">
                 <a href="index.html" class="px-3 py-2 rounded hover:bg-blue-700 transition duration-300">Home</a>
                 <a href="tips.html" class="px-3 py-2 rounded hover:bg-blue-700 transition duration-300">Top Tips</a>
                 <a href="resources.html" class="px-3 py-2 rounded hover:bg-blue-700 transition duration-300">Resources</a>
@@ -81,27 +83,27 @@
     </nav>
     
     <div class="container mx-auto px-4 py-8 max-w-5xl">
-        <main class="bg-white rounded-lg shadow-md p-6">
+        <main id="main-content" tabindex="-1" class="reading-content bg-white rounded-lg shadow-md p-6">
             <h1 class="text-3xl md:text-4xl font-bold text-blue-600 mb-6">Privacy Policy</h1>
             
             <p class="text-gray-700 mb-4">Your privacy is important to us. It is our policy to respect your privacy regarding any information we may collect from you across our website, https://diabetescalculator.ai, and other sites we own and operate.</p>
 
             <h2 class="text-2xl font-semibold text-gray-800 mb-4 mt-6">Information We Collect</h2>
-            <p class="text-gray-700 mb-4">We only ask for personal information when we truly need it to provide a service to you. We collect it by fair and lawful means, with your knowledge and consent. We also let you know why we're collecting it and how it will be used.</p>
-            <p class="text-gray-700 mb-4">We may collect log data about your visit to our website. This log data may include information such as your computers Internet Protocol (IP) address, browser type, browser version, the pages of our website that you visit, the time and date of your visit, the time spent on those pages, and other statistics.</p>
+            <p class="text-gray-700 mb-4">You can calculate without creating an account. Conversion runs in your browser, and this application does not deliberately save health measurements in localStorage. It saves only consent preferences there.</p>
+            <p class="text-gray-700 mb-4">We may collect log data about your visit to our website. This log data may include information such as your computer’s Internet Protocol (IP) address, browser type, browser version, the pages of our website that you visit, the time and date of your visit, the time spent on those pages, and other statistics.</p>
 
 <h2 class="text-2xl font-semibold text-gray-800 mb-4 mt-6">Use of Information</h2>
-            <p class="text-gray-700 mb-4">We only retain collected information for as long as necessary to provide you with your requested service. What data we store, we'll protect within commercially acceptable means to prevent loss and theft, as well as unauthorized access, disclosure, copying, use or modification.</p>
-            <p class="text-gray-700 mb-4">We don't share any personally identifying information publicly or with third-parties, except when required to by law.</p>
+            <p class="text-gray-700 mb-4">New calculation links use a URL fragment, which browsers do not send in the initial HTTP request. The fragment remains readable in browser history and by scripts on the page. Following a legacy query link sends its query to hosting before the application removes it from the current address; this cannot undo that request or delete existing logs. Hosting and receiving services may retain request information under their own policies.</p>
+            <p class="text-gray-700 mb-4">Sharing is optional. Before copying a calculation link or opening a social, email or ChatGPT destination, the calculator previews the destination and exact values or prompt. Confirming can send those values, a timestamp, and the link to the selected service or recipient. Anyone receiving the link can decode it; base64 encoding is not encryption.</p>
 
             <h2 class="text-2xl font-semibold text-gray-800 mb-4 mt-6">Cookies</h2>
-            <p class="text-gray-700 mb-4">Our website may use cookies to enhance user experience. Cookies are small files stored on your device. You have the option to either accept or refuse these cookies, and know when a cookie is being sent to your device. If you choose to refuse our cookies, you may not be able to use some portions of our service. Please see our Cookie Policy page for more details.</p>
+            <p class="text-gray-700 mb-4">Consent preferences use localStorage, not a cookie, for up to 12 months. No analytics or advertising tracker is currently configured. Rejecting optional consent does not disable conversion. Tailwind CSS and Google Fonts still make external requests, including network information such as your IP address. See the Cookie Policy page for details.</p>
 
             <h2 class="text-2xl font-semibold text-gray-800 mb-4 mt-6">Security</h2>
             <p class="text-gray-700 mb-4">The security of your personal information is important to us, but remember that no method of transmission over the Internet, or method of electronic storage, is 100% secure. While we strive to use commercially acceptable means to protect your personal information, we cannot guarantee its absolute security.</p>
 
             <h2 class="text-2xl font-semibold text-gray-800 mb-4 mt-6">Links to Other Sites</h2>
-            <p class="text-gray-700 mb-4">Our website may contain links to other sites that are not operated by us. If you click on a third-party link, you will be directed to that third partys site. We strongly advise you to review the Privacy Policy of every site you visit. We have no control over, and assume no responsibility for the content, privacy policies or practices of any third-party sites or services.</p>
+            <p class="text-gray-700 mb-4">Our website may contain links to other sites that are not operated by us. If you click on a third-party link, you will be directed to that third party’s site. We strongly advise you to review the Privacy Policy of every site you visit. We have no control over, and assume no responsibility for the content, privacy policies or practices of any third-party sites or services.</p>
 
             <h2 class="text-2xl font-semibold text-gray-800 mb-4 mt-6">Changes to This Privacy Policy</h2>
             <p class="text-gray-700 mb-4">We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
@@ -109,7 +111,7 @@
             <h2 class="text-2xl font-semibold text-gray-800 mb-4 mt-6">Contact Us</h2>
             <p class="text-gray-700 mb-4">If you have any questions about this Privacy Policy, please contact us at <a href="mailto:support@richcrane.ai" class="text-blue-600 hover:underline">support@richcrane.ai</a>.</p>
 
-            <p class="text-gray-600 text-sm mt-8">Last updated: November 27, 2025</p>
+            <p class="text-gray-600 text-sm mt-8">Last updated: November 2, 2026</p>
         </main>
     </div>
 
@@ -130,55 +132,52 @@
     </footer>
 
     <!-- Cookie Consent Banner -->
-    <div id="cookie-consent-banner" role="dialog" aria-modal="true" aria-labelledby="consent-title">
+    <div id="cookie-consent-banner" role="region" aria-labelledby="consent-title" tabindex="-1" hidden>
         <div class="consent-container">
             <div class="consent-header">
                 <div class="consent-text">
-                    <h3 id="consent-title">🍪 Cookie Preferences</h3>
-                    <p>We use cookies to improve your experience and show personalized ads. You can customize your preferences or accept all cookies. <a href="cookie.html">Learn more</a></p>
+                    <h3 id="consent-title">Privacy preferences</h3>
+                    <p>Save your analytics and advertising consent preferences on this device. No analytics or advertising tracker is currently configured; external styles and fonts still make network requests. <a href="cookie.html">Learn more</a></p>
                 </div>
                 <div class="consent-buttons">
-                    <button id="consent-accept-all" class="consent-btn consent-btn-primary">Accept All</button>
-                    <button id="consent-customize" class="consent-btn consent-btn-outline">Customize</button>
-                    <button id="consent-reject" class="consent-btn consent-btn-secondary">Reject Non-Essential</button>
+                    <button type="button" id="consent-accept-all" class="consent-btn consent-btn-primary">Accept All</button>
+                    <button type="button" id="consent-customize" class="consent-btn consent-btn-outline">Customize</button>
+                    <button type="button" id="consent-reject" class="consent-btn consent-btn-secondary">Reject Non-Essential</button>
                 </div>
             </div>
             
-            <div id="consent-options" class="consent-options">
+            <div id="consent-options" class="consent-options" hidden>
                 <div class="consent-option">
                     <div class="consent-option-info">
-                        <h4>Essential Cookies</h4>
-                        <p>Required for the website to function. Cannot be disabled.</p>
+                        <h4>Essential storage</h4>
+                        <p>Stores privacy preferences on this device. The calculator still works if storage is unavailable.</p>
+                    </div>
+                    <span class="consent-storage-state">Local only</span>
+                </div>
+                <div class="consent-option">
+                    <div class="consent-option-info">
+                        <h4>Analytics consent</h4>
+                        <p>Saves your analytics consent signal. No analytics tracker is currently configured.</p>
                     </div>
                     <label class="toggle-switch">
-                        <input type="checkbox" checked disabled aria-label="Essential cookies - always enabled">
+                        <input type="checkbox" id="consent-analytics" aria-label="Analytics consent">
                         <span class="toggle-slider"></span>
                     </label>
                 </div>
                 <div class="consent-option">
                     <div class="consent-option-info">
-                        <h4>Analytics Cookies</h4>
-                        <p>Help us understand how visitors use our website.</p>
+                        <h4>Advertising consent</h4>
+                        <p>Saves your advertising consent signal. No advertising tracker is currently configured.</p>
                     </div>
                     <label class="toggle-switch">
-                        <input type="checkbox" id="consent-analytics" aria-label="Analytics cookies">
-                        <span class="toggle-slider"></span>
-                    </label>
-                </div>
-                <div class="consent-option">
-                    <div class="consent-option-info">
-                        <h4>Advertising Cookies</h4>
-                        <p>Used to show relevant ads based on your interests.</p>
-                    </div>
-                    <label class="toggle-switch">
-                        <input type="checkbox" id="consent-advertising" aria-label="Advertising cookies">
+                        <input type="checkbox" id="consent-advertising" aria-label="Advertising consent">
                         <span class="toggle-slider"></span>
                     </label>
                 </div>
             </div>
             
-            <div id="consent-save-container" class="consent-save-container">
-                <button id="consent-save" class="consent-btn consent-btn-primary">Save Preferences</button>
+            <div id="consent-save-container" class="consent-save-container" hidden>
+                <button type="button" id="consent-save" class="consent-btn consent-btn-primary">Save Preferences</button>
             </div>
         </div>
     </div>
