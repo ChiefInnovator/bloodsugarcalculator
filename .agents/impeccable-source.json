@@ -1,0 +1,10 @@
+{
+  "source": "official impeccable npm installer (npx impeccable@latest install -y --providers=codex --scope=project --no-hooks)",
+  "skillVersion": "4.8.0",
+  "engineVersion": "0.1.18",
+  "installed": "2026-11-02",
+  "hooksInstalled": false,
+  "skillSha256": "fab04b31f946573b00a8559db1fc070f8ea5825254d491c2b13156e5661a86d7",
+  "engineChecksumManifestSha256": "2f0235179cbc515d7c7ec71a9a08283d0cb88a5238d35ffa5a5f42122e78fe35",
+  "binaryPolicy": "Local platform binary is ignored; launcher supports pinned checksum-verified download."
+}
