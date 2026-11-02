@@ -1,0 +1,47 @@
+name: Branch policy
+
+on:
+  pull_request_target:
+    branches: [main, develop]
+    types: [opened, synchronize, reopened, edited, ready_for_review]
+
+permissions:
+  contents: read
+
+jobs:
+  branch-policy:
+    name: branch-policy
+    runs-on: ubuntu-latest
+    steps:
+      # Read trusted event metadata only. Never check out or execute PR code here.
+      - name: Validate source branch
+        env:
+          BASE_REF: ${{ github.event.pull_request.base.ref }}
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
+          HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
+          BASE_REPO: ${{ github.repository }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "$HEAD_REPO" != "$BASE_REPO" ]]; then
+            echo "::error::Protected branches only accept branches from this repository."
+            exit 1
+          fi
+          case "$BASE_REF" in
+            main)
+              [[ "$HEAD_REF" == develop ]] || {
+                echo "::error::main only accepts pull requests from develop."
+                exit 1
+              }
+              ;;
+            develop)
+              [[ "$HEAD_REF" == feature/* && "$HEAD_REF" != feature/ ]] || {
+                echo "::error::develop only accepts pull requests from feature/<topic>."
+                exit 1
+              }
+              ;;
+            *)
+              echo "::error::Unsupported target branch."
+              exit 1
+              ;;
+          esac
