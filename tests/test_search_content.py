@@ -59,7 +59,7 @@ class SearchContentTests(unittest.TestCase):
     def test_faq_schema_matches_every_visible_answer_and_anchor(self):
         faq = next(n for n in self.graph if n['@type'] == 'FAQPage')
         articles = self.doc.find('section', id='faq')[0].find('article')
-        self.assertGreaterEqual(len(articles), 8)
+        self.assertEqual(len(articles), 10)
         self.assertEqual(len(articles), len(faq['mainEntity']))
         for question, article in zip(faq['mainEntity'], articles):
             self.assertEqual(question['@id'], 'https://diabetescalculator.ai/#' + article.attrs['id'])
@@ -70,7 +70,9 @@ class SearchContentTests(unittest.TestCase):
 
     def test_chart_examples_match_calculator_equation_and_display_rounding(self):
         table = self.doc.find('table')[0]
-        for row in table.find('tbody')[0].find('tr'):
+        rows = table.find('tbody')[0].find('tr')
+        self.assertEqual(len(rows), 6)
+        for row in rows:
             a1c = Decimal(row.find('th')[0].text().rstrip('%'))
             cells = row.find('td')
             mgdl = Decimal('28.7') * a1c - Decimal('46.7')

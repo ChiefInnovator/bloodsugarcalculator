@@ -363,4 +363,17 @@ test("half-value glucose rounding agrees across result, explanation, status and 
     assert.match(f.get("external-action-preview").textContent, /126 mg\/dL/);
     await calculate(f, "5.9999");
     assert.equal(f.get("result-value").children[0].textContent, "eAG: 125 mg/dL");
+    await calculate(f, "4.013937282229965");
+    assert.equal(f.get("result-value").children[0].textContent, "eAG: 68 mg/dL");
+    assert.match(f.get("result-status").textContent, /68 mg\/dL/);
+    f.groups["conversion-direction"].forEach(radio => { radio.checked = radio.value === "eag-to-a1c"; });
+    f.groups["eag-units"].forEach(radio => { radio.checked = radio.value === "mmoll"; });
+    await f.get("eag-to-a1c").fire("change");
+    f.get("eag-input").value = "7.75";
+    await f.get("calculator-form").fire("submit");
+    assert.match(f.get("result-status").textContent, /140 mg\/dL/);
+    f.groups["eag-units"].forEach(radio => { radio.checked = radio.value === "mgdl"; });
+    f.get("eag-input").value = "139.49999999999997";
+    await f.get("calculator-form").fire("submit");
+    assert.match(f.get("result-status").textContent, /139 mg\/dL/);
 });

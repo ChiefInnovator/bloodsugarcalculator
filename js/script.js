@@ -183,8 +183,17 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll('input[name="eag-units"]').forEach(radio => radio.addEventListener("change", () => { invalidate(); eagInput.value = ""; updateInputs(); }));
     [a1cInput, eagInput].forEach(input => input.addEventListener("input", invalidate));
     function roundedMgdl(calc) {
-        // Correct one-ULP arithmetic noise at half values (6% produces 125.49999999999999).
-        return Math.round(calc.eagMgdl + Number.EPSILON * Math.abs(calc.eagMgdl));
+        // Accepted inputs are positive and bounded (3.9–600), so their canonical
+        // decimal strings have no exponent. Round the exact decimal conversion,
+        // rather than moving binary floats across legitimate half boundaries.
+        const [whole, fraction = ""] = String(calc.input).split(".");
+        const scale = 10n ** BigInt(fraction.length);
+        let numerator = BigInt(whole + fraction), denominator = scale;
+        if (calc.type === "a1c-to-eag") {
+            numerator = numerator * 287n - 467n * scale;
+            denominator *= 10n;
+        } else if (calc.units === "mmoll") numerator *= 18n;
+        return Number((2n * numerator + denominator) / (2n * denominator));
     }
     function summary(calc) {
         return `A1C: ${calc.a1c.toFixed(1)}%; estimated average glucose: ${roundedMgdl(calc)} mg/dL (${calc.eagMmoll.toFixed(1)} mmol/L).`;
