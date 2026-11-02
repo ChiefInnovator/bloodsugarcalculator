@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-02T00:00:00Z",
+  "generatedAt": "2026-11-02T11:51:12Z",
   "title": "Design System: Blood Sugar Calculator",
   "extensions": {
     "shadows": [
@@ -37,11 +37,6 @@
         "purpose": "Result and error appearance"
       },
       {
-        "name": "navigation",
-        "value": "300ms ease-out",
-        "purpose": "Mobile navigation maximum height"
-      },
-      {
         "name": "consent-action",
         "value": "200ms ease",
         "purpose": "Preference button feedback"
@@ -50,6 +45,11 @@
         "name": "reduced-motion",
         "value": "none",
         "purpose": "All animations and transitions disabled; scroll-behavior auto under prefers-reduced-motion: reduce"
+      },
+      {
+        "name": "navigation-icon",
+        "value": "200ms ease",
+        "purpose": "Declared opacity feedback for mobile navigation SVG paths; menu visibility uses display/hidden without a height transition"
       }
     ],
     "breakpoints": [
@@ -134,7 +134,7 @@
   ],
   "narrative": {
     "northStar": "The Clear Conversion Desk",
-    "overview": "the incumbent\nblue navigation, pale page, white calculator and familiar controls. The owner\napproved refinement of this existing system, not a replacement visual world.\nThe useful distinction is between input, calculated estimate, and deliberate\nsharing; decoration must not compete with those states.",
+    "overview": "Preserve the incumbent blue navigation, pale page, white calculator and familiar controls. The owner approved refinement of this existing system, not a replacement visual world. The useful distinction is between input, calculated estimate, and deliberate sharing; decoration must not compete with those states.",
     "keyCharacteristics": [
       "Familiar controls",
       "Explicit units",

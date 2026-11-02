@@ -228,16 +228,6 @@ button:focus {
    Mobile Navigation Styles
    =================================== */
 
-#mobile-menu {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease-out;
-}
-
-#mobile-menu.show {
-    max-height: 200px;
-}
-
 #mobile-menu-btn .menu-icon,
 #mobile-menu-btn .close-icon {
     transition: opacity 0.2s ease;

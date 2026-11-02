@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "roboto",
+        "files": [
+          "css/styles.css"
+        ],
+        "createdAt": "2026-11-02T11:50:50.187Z",
+        "reason": "Agent: DESIGN.md Typography and independent Impeccable assessments preserve the incumbent Operate/Read font stack; changing it would exceed the approved refinement."
+      }
+    ]
+  }
+}
