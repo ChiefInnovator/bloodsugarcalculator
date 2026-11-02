@@ -351,3 +351,16 @@ test("Escape does not steal focus from content outside an open mobile menu", asy
     assert.equal(f.get("mobile-menu-btn").getAttribute("aria-expanded"), "false");
     assert.equal(f.document.activeElement, f.get("main-content"));
 });
+
+
+test("half-value glucose rounding agrees across result, explanation, status and sharing", async () => {
+    const f = fixture();
+    await calculate(f, "6");
+    assert.equal(f.get("result-value").children[0].textContent, "eAG: 126 mg/dL");
+    assert.match(f.get("result-explanation").textContent, /126 mg\/dL/);
+    assert.match(f.get("result-status").textContent, /126 mg\/dL/);
+    await f.get("share-email").fire("click");
+    assert.match(f.get("external-action-preview").textContent, /126 mg\/dL/);
+    await calculate(f, "5.9999");
+    assert.equal(f.get("result-value").children[0].textContent, "eAG: 125 mg/dL");
+});

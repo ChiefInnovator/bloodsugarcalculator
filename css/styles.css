@@ -562,3 +562,11 @@ button:focus {
 #cookie-consent-banner .consent-btn-primary:hover { background-color: #1d4ed8; }
 
 .consent-storage-state { white-space: nowrap; font-size: 0.875rem; color: #d1d5db; }
+
+/* Readable, crawlable reference content beside the calculator. */
+.conversion-table-wrap { overflow-x: auto; }
+.conversion-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.conversion-table caption { text-align: left; margin-bottom: 1rem; }
+.conversion-table th, .conversion-table td { padding: 0.75rem 0.5rem; text-align: left; border-bottom: 1px solid #d1d5db; }
+#faq article { scroll-margin-top: 6rem; }
+#conversion-formulas, #a1c-chart, #faq { scroll-margin-top: 6rem; }

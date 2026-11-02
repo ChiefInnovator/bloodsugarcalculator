@@ -182,17 +182,21 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll('input[name="conversion-direction"]').forEach(radio => radio.addEventListener("change", () => { invalidate(); updateInputs(); }));
     document.querySelectorAll('input[name="eag-units"]').forEach(radio => radio.addEventListener("change", () => { invalidate(); eagInput.value = ""; updateInputs(); }));
     [a1cInput, eagInput].forEach(input => input.addEventListener("input", invalidate));
+    function roundedMgdl(calc) {
+        // Correct one-ULP arithmetic noise at half values (6% produces 125.49999999999999).
+        return Math.round(calc.eagMgdl + Number.EPSILON * Math.abs(calc.eagMgdl));
+    }
     function summary(calc) {
-        return `A1C: ${calc.a1c.toFixed(1)}%; estimated average glucose: ${Math.round(calc.eagMgdl)} mg/dL (${calc.eagMmoll.toFixed(1)} mmol/L).`;
+        return `A1C: ${calc.a1c.toFixed(1)}%; estimated average glucose: ${roundedMgdl(calc)} mg/dL (${calc.eagMmoll.toFixed(1)} mmol/L).`;
     }
     function render(calc, imported, inputText = String(calc.input)) {
         current = calc;
         const output = byId("result-value");
         output.replaceChildren();
-        const lines = calc.type === "a1c-to-eag" ? [`eAG: ${Math.round(calc.eagMgdl)} mg/dL`, `eAG: ${calc.eagMmoll.toFixed(1)} mmol/L`] : [`A1C: ${calc.a1c.toFixed(1)}%`];
+        const lines = calc.type === "a1c-to-eag" ? [`eAG: ${roundedMgdl(calc)} mg/dL`, `eAG: ${calc.eagMmoll.toFixed(1)} mmol/L`] : [`A1C: ${calc.a1c.toFixed(1)}%`];
         lines.forEach(text => { const line = document.createElement("div"); line.textContent = text; output.appendChild(line); });
         byId("result-explanation").textContent = calc.type === "a1c-to-eag"
-            ? `An A1C of ${inputText}% corresponds to an estimated average glucose of ${Math.round(calc.eagMgdl)} mg/dL or ${calc.eagMmoll.toFixed(1)} mmol/L.`
+            ? `An A1C of ${inputText}% corresponds to an estimated average glucose of ${roundedMgdl(calc)} mg/dL or ${calc.eagMmoll.toFixed(1)} mmol/L.`
             : `An estimated average glucose of ${inputText} ${calc.units === "mgdl" ? "mg/dL" : "mmol/L"} corresponds to an A1C of approximately ${calc.a1c.toFixed(1)}%.`;
         byId("result-timestamp").textContent = `${imported ? "Link-supplied time (not verified)" : "Calculated on"}: ${new Date(calc.date).toLocaleString("en-US")}`;
         visible(result, true);
