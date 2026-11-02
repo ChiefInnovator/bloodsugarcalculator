@@ -40,7 +40,7 @@ def build(root):
         if not source.is_file():
             raise ValueError(f"Missing required asset: {relative}")
     output_parent.mkdir(exist_ok=True)
-    # Stage all copies before discarding the prior successful publication.
+    # Stage all copies before moving the prior successful publication.
     with tempfile.TemporaryDirectory(prefix=".publish-", dir=output_parent) as temporary:
         staged = Path(temporary) / "public"
         staged.mkdir()
@@ -48,9 +48,32 @@ def build(root):
             target = staged / relative
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(root / relative, target)
+        backup_directory = None
         if output.exists():
-            shutil.rmtree(output)
-        staged.rename(output)
+            # Keep the previous output outside TemporaryDirectory: if rollback
+            # fails, automatic staging cleanup must never delete recovery data.
+            backup_directory = Path(tempfile.mkdtemp(prefix=".previous-public-", dir=output_parent))
+            backup = backup_directory / "public"
+            try:
+                output.rename(backup)
+            except OSError:
+                backup_directory.rmdir()
+                raise
+        try:
+            staged.rename(output)
+        except OSError as promotion_error:
+            if backup_directory is not None:
+                try:
+                    backup.rename(output)
+                except OSError as rollback_error:
+                    raise OSError(
+                        f"Publication failed ({promotion_error}); rollback failed "
+                        f"({rollback_error}). Previous output preserved at {backup}"
+                    ) from rollback_error
+                backup_directory.rmdir()
+            raise
+        if backup_directory is not None:
+            shutil.rmtree(backup_directory)
     return output
 
 

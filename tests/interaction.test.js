@@ -25,13 +25,13 @@ class Element {
     showModal() { this.open = true; }
     close() { this.open = false; void this.fire("close"); }
 }
-function fixture({ url = "https://example.test/", clipboard, consent, calculatorPage = true } = {}) {
-    const nodes = new Map(), groups = {};
+function fixture({ url = "https://example.test/", clipboard, consent, calculatorPage = true, mailHandlerError = false, mobileNavigation = false } = {}) {
+    const nodes = new Map(), groups = {}, documentEvents = {};
     const document = {
         activeElement: null,
         getElementById: id => nodes.get(id) || null,
         createElement: () => new Element("", document),
-        addEventListener: (name, fn) => { if (name === "DOMContentLoaded") document.start = fn; },
+        addEventListener: (name, fn) => { if (name === "DOMContentLoaded") document.start = fn; else (documentEvents[name] ||= []).push(fn); },
         querySelectorAll: selector => {
             if (selector === "#manage-cookies-btn, .manage-cookies-link") return [nodes.get("manage-cookies-btn")];
             const match = /input\[name="(.+?)"\]/.exec(selector);
@@ -44,16 +44,19 @@ function fixture({ url = "https://example.test/", clipboard, consent, calculator
     };
     const add = id => { const element = new Element(id, document); nodes.set(id, element); return element; };
     ["main-content", "manage-cookies-btn", "cookie-consent-banner", "consent-title", "consent-options", "consent-save-container", "consent-accept-all", "consent-reject", "consent-customize", "consent-save", "consent-analytics", "consent-advertising"].forEach(add);
+    if (mobileNavigation) ["mobile-menu-btn", "mobile-menu"].forEach(add);
     if (calculatorPage) {
         ["calculator-form", "a1c-input", "eag-input", "a1c-input-container", "eag-input-container", "result-container", "result-status", "share-feedback", "result-value", "result-explanation", "result-timestamp", "error-container", "error-message", "share-btn", "share-facebook", "share-twitter", "share-email", "ask-chatgpt", "external-action-dialog", "external-action-title", "external-action-description", "external-action-preview", "external-action-address", "external-action-address-details", "external-action-confirm", "external-action-cancel", "external-action-fallback", "shared-link-output", "external-action-link", "eag-hint", "eag-label"].forEach(add);
         for (const [name, values] of [["conversion-direction", ["a1c-to-eag", "eag-to-a1c"]], ["eag-units", ["mgdl", "mmoll"]]]) groups[name] = values.map((value, index) => { const radio = add(value); radio.value = value; radio.checked = index === 0; return radio; });
     }
-    const opens = [], replacements = [], stored = [], windowEvents = {};
-    const window = { BloodSugarCalculator: calculatorPage ? calculator : undefined, location: { href: url }, getComputedStyle: () => ({ visibility: "visible" }), addEventListener(name, fn) { (windowEvents[name] ||= []).push(fn); }, open: (...args) => { opens.push(args); return null; } };
+    const opens = [], replacements = [], stored = [], navigations = [], windowEvents = {};
+    const window = { BloodSugarCalculator: calculatorPage ? calculator : undefined, location: { href: url, assign: destination => { navigations.push(destination); if (mailHandlerError) throw new Error("Mail handler unavailable"); } }, getComputedStyle: () => ({ visibility: "visible" }), addEventListener(name, fn) { (windowEvents[name] ||= []).push(fn); }, open: (...args) => { opens.push(args); return null; } };
     const context = { window, document, navigator: { clipboard }, localStorage: { getItem: () => consent === undefined ? null : JSON.stringify(consent), setItem: (...args) => stored.push(args) }, history: { replaceState: (...args) => replacements.push(args) }, console, Date, URL, URLSearchParams };
     vm.runInNewContext(fs.readFileSync(require.resolve("../js/script.js"), "utf8"), context);
     document.start();
-    return { nodes, groups, document, opens, replacements, stored, get: id => nodes.get(id), hashChange(hash) {
+    return { nodes, groups, document, opens, replacements, stored, navigations, get: id => nodes.get(id), keyDown(key) {
+        for (const listener of documentEvents.keydown || []) listener({ key });
+    }, hashChange(hash) {
         window.location.href = new URL(hash, window.location.href).href;
         for (const listener of windowEvents.hashchange || []) listener();
     } };
@@ -112,8 +115,10 @@ test("external actions require confirmation; cancel sends nothing and timestamp 
     for (const id of ["share-facebook", "share-twitter", "share-email", "ask-chatgpt"]) {
         await f.get(id).fire("click");
         assert.equal(f.opens.length, 0);
+        assert.equal(f.navigations.length, 0);
         assert.match(f.get("external-action-preview").textContent, /Destination:.*\n\nCalculation:.*\nTimestamp:.*\n\nExact payload:/);
         await f.get("external-action-cancel").fire("click");
+        assert.equal(f.navigations.length, 0);
     }
     await f.get("share-facebook").fire("click");
     await f.get("external-action-confirm").fire("click");
@@ -294,4 +299,55 @@ test("unrelated anchors and removed calculation fragments preserve the active ca
         assert.equal(f.get("result-explanation").textContent, output);
         assert.equal(f.get("result-timestamp").textContent, timestamp);
     }
+});
+
+
+test("email confirmation launches only the exact previewed destination and retains its fallback", async () => {
+    const f = fixture();
+    await calculate(f);
+    await f.get("share-email").fire("click");
+    const destination = f.get("external-action-address").textContent;
+    assert.equal(f.navigations.length, 0);
+    await f.get("external-action-cancel").fire("click");
+    assert.equal(f.navigations.length, 0);
+    await f.get("share-email").fire("click");
+    await f.get("external-action-confirm").fire("click");
+    assert.deepEqual(f.navigations, [destination]);
+    assert.equal(f.get("external-action-link").href, destination);
+    assert.equal(f.get("external-action-fallback").hidden, false);
+    assert.equal(f.get("external-action-dialog").open, true);
+});
+
+test("an unavailable email handler keeps the explicit confirmed-message fallback", async () => {
+    const f = fixture({ mailHandlerError: true });
+    await calculate(f);
+    await f.get("share-email").fire("click");
+    const destination = f.get("external-action-address").textContent;
+    await f.get("external-action-confirm").fire("click");
+    assert.deepEqual(f.navigations, [destination]);
+    assert.equal(f.get("external-action-link").href, destination);
+    assert.equal(f.get("external-action-fallback").hidden, false);
+    assert.match(f.get("external-action-description").textContent, /did not open/);
+});
+
+
+test("Escape from a mobile navigation link closes the menu and restores toggle focus", async () => {
+    const f = fixture({ mobileNavigation: true });
+    const link = new Element("navigation-link", f.document);
+    f.get("mobile-menu").appendChild(link);
+    await f.get("mobile-menu-btn").fire("click");
+    link.focus();
+    f.keyDown("Escape");
+    assert.equal(f.get("mobile-menu-btn").getAttribute("aria-expanded"), "false");
+    assert.equal(f.get("mobile-menu").classList.contains("hidden"), true);
+    assert.equal(f.document.activeElement, f.get("mobile-menu-btn"));
+});
+
+test("Escape does not steal focus from content outside an open mobile menu", async () => {
+    const f = fixture({ mobileNavigation: true });
+    f.get("main-content").focus();
+    await f.get("mobile-menu-btn").fire("click");
+    f.keyDown("Escape");
+    assert.equal(f.get("mobile-menu-btn").getAttribute("aria-expanded"), "false");
+    assert.equal(f.document.activeElement, f.get("main-content"));
 });

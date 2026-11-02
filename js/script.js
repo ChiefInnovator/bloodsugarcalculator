@@ -27,7 +27,12 @@ document.addEventListener("DOMContentLoaded", function () {
         document.addEventListener("click", event => {
             if (!menuButton.contains(event.target) && !menu.contains(event.target)) closeMenu();
         });
-        document.addEventListener("keydown", event => { if (event.key === "Escape") closeMenu(); });
+        document.addEventListener("keydown", event => {
+            if (event.key !== "Escape") return;
+            const returnFocus = menuButton.getAttribute("aria-expanded") === "true" && menu.contains(document.activeElement);
+            closeMenu();
+            if (returnFocus) menuButton.focus();
+        });
         window.addEventListener("resize", () => { if (window.innerWidth >= 768) closeMenu(); });
     }
     document.querySelectorAll(".accordion-btn").forEach((button, index) => {
@@ -240,8 +245,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (pending === action) fallback(action, "Copy the confirmed link below. Anyone with this link can read its health values.");
             }
         } else if (action.kind === "email") {
-            // The explicit link also works when a mail handler is unavailable.
-            fallback(action, "Open your email application with the confirmed message using this link.");
+            try { window.location.assign(action.destination); } catch (_) { /* Keep the confirmed link available. */ }
+            fallback(action, "If your email application did not open, use the confirmed message link below.");
         } else {
             // With noopener a successful window.open may return null; retain the explicit link in either case.
             try { window.open(action.destination, "_blank", "noopener,noreferrer"); } catch (_) { /* Offer the same confirmed link. */ }

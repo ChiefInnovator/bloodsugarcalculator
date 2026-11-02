@@ -27,10 +27,10 @@ grammar; exact publisher lifecycle; safe form boundaries; stable phase exits.
   explicit types, and the calculator module loads before DOM wiring. Seven-page
   static checks and interaction tests verify the boundary and action behavior.
 - R1: `scripts/build_static.py` publishes exactly 23 paths, replaces old output,
-  rejects symlinks/missing assets and excludes unlisted files. Six Python
+  rejects symlinks/missing assets and excludes unlisted files. Nine Python
   publisher regressions cover positive and negative cases.
 - R2: module, DOM, publication and tooling checks ran incrementally. Final code
-  suite has 27 Node regressions and seven Python regressions. The seventh Python
+  suite has 31 Node regressions and ten Python regressions. One Python
   regression prevents a stale verification stamp from trusting a replaced engine.
 - C1–C3: concrete cloud findings, installed workflow references, source links and
   artifact paths are in the approved plan and durable review documents.
@@ -60,3 +60,15 @@ approvals, this owner-authored PR has no enforced independent owner gate; the
 branch workflow documents that observed limitation. No protection was bypassed.
 This branch has not been released to main or accepted in production.
 Cloud-review G1–G6: [source findings](cloud-review-findings.md).
+
+## Slam Review Follow-up
+
+Automatic review identified publication-promotion failure safety, mobile target
+width, and the confirmed email handoff. Previous output is now restored if
+promotion fails, or retained at a reported recovery path if rollback also fails.
+Three injected-failure regressions cover copy, promotion and rollback failure.
+Email confirmation attempts the exact previewed mailto destination while keeping
+a fallback; cancellation never navigates. Escape from a mobile navigation link
+returns focus to its toggle, and that toggle measures 44×44px at 390px viewport.
+These fixes pass 31 Node and ten Python tests, with actual browser checks for
+menu states, Escape focus and target size.

@@ -3,6 +3,7 @@ import importlib.util
 from pathlib import Path
 import tempfile
 import unittest
+from unittest import mock
 
 SPEC = importlib.util.spec_from_file_location("build_static", Path(__file__).resolve().parents[1] / "scripts/build_static.py")
 publisher = importlib.util.module_from_spec(SPEC)
@@ -52,6 +53,54 @@ class StaticPublisherTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "Missing required asset"):
             publisher.build(self.root)
         self.assertEqual(sentinel.read_text(), "last successful build")
+
+    def test_copy_failure_leaves_previous_output_untouched(self):
+        output = publisher.build(self.root)
+        sentinel = output / "previous.txt"
+        sentinel.write_text("last successful build")
+        with mock.patch.object(publisher.shutil, "copyfile", side_effect=OSError("copy failed")):
+            with self.assertRaisesRegex(OSError, "copy failed"):
+                publisher.build(self.root)
+        self.assertEqual(sentinel.read_text(), "last successful build")
+        self.assertEqual([], list(output.parent.glob(".previous-public-*")))
+
+    def test_promotion_failure_restores_previous_output(self):
+        output = publisher.build(self.root)
+        sentinel = output / "previous.txt"
+        sentinel.write_text("last successful build")
+        previous_files = {str(p.relative_to(output)): p.read_bytes() for p in output.rglob("*") if p.is_file()}
+        rename = Path.rename
+
+        def fail_promotion(source, target):
+            if source.parent.name.startswith(".publish-"):
+                raise OSError("promotion failed")
+            return rename(source, target)
+
+        with mock.patch.object(Path, "rename", fail_promotion):
+            with self.assertRaisesRegex(OSError, "promotion failed"):
+                publisher.build(self.root)
+        self.assertEqual(previous_files, {str(p.relative_to(output)): p.read_bytes() for p in output.rglob("*") if p.is_file()})
+        self.assertEqual([], list(output.parent.glob(".previous-public-*")))
+        self.assertEqual([], list(output.parent.glob(".publish-*")))
+
+    def test_rollback_failure_preserves_and_reports_backup(self):
+        output = publisher.build(self.root)
+        (output / "previous.txt").write_text("last successful build")
+        rename = Path.rename
+
+        def fail_promotion_and_rollback(source, target):
+            if source.parent.name.startswith((".publish-", ".previous-public-")):
+                raise OSError("injected rename failure")
+            return rename(source, target)
+
+        with mock.patch.object(Path, "rename", fail_promotion_and_rollback):
+            with self.assertRaisesRegex(OSError, "Previous output preserved at") as raised:
+                publisher.build(self.root)
+        backups = list(output.parent.glob(".previous-public-*/public"))
+        self.assertEqual(1, len(backups))
+        self.assertEqual("last successful build", (backups[0] / "previous.txt").read_text())
+        self.assertIn(str(backups[0]), str(raised.exception))
+        self.assertEqual([], list(output.parent.glob(".publish-*")))
 
     def test_selected_source_file_symlink_refused(self):
         source = self.root / "index.html"

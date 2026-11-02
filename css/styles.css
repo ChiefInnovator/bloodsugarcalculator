@@ -18,6 +18,7 @@ input::placeholder { color: #6b7280; opacity: 1; }
 input { caret-color: #1d4ed8; }
 ::selection { background: #bfdbfe; color: #111827; }
 button, .support-link { min-height: 44px; }
+#mobile-menu-btn { min-width: 44px; }
 label:has(input[type="radio"]) { min-height: 44px; }
 fieldset { min-width: 0; }
 .result-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
