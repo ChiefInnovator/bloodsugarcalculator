@@ -69,4 +69,11 @@ Based on the American Diabetes Association calculator, the following formulas ar
 
 3. **Compatibility**:
    - The application should work on all modern browsers
-   - No dependencies on external services that might become unavailable
+   - Core arithmetic and functional hidden/navigation states work without external services once local assets load. Remote Tailwind CSS and Google Fonts remain appearance dependencies, disclosed in the privacy policy.
+
+## Current implementation contract
+
+The approved [reliability design](docs/designs/design_draft.md) defines validation,
+precision, legacy import behavior, sharing consent and acceptance checks.
+Calculate using full precision and round only for presentation. Input ranges
+are interface limits, not diagnostic thresholds or guaranteed inverse ranges.

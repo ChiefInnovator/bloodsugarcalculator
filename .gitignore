@@ -1,3 +1,8 @@
 .DS_Store
 .agents/skills/impeccable/scripts/bin/
 .impeccable/cache/
+.output/
+__pycache__/
+.playwright-cli/
+.impeccable/hook.cache.json
+output/playwright/b-*.png

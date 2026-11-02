@@ -12,10 +12,11 @@ rem   delayed expansion eating ! characters in user arguments.
 rem - The unversioned user binary and the PATH candidate are validated with
 rem   the engine-probe handshake (see :probe) so the retired 3.x npm CLI,
 rem   whose bin is also named impeccable, is never exec'd. IMPECCABLE_BIN,
-rem   the sibling binary, and the version-pinned cache stay trusted.
+rem   and sibling binaries are trusted local development overrides outside the
+rem   download integrity guarantee.
 rem - Downloads and the version-pinned cache are verified via certutil
 rem   against engine-checksums.txt next to this file, and fail closed; a
-rem   .verified stamp lets later runs skip hashing the cache. On ARM64 the
+rem   .verified stamp is informational; cache bytes are hashed every load. On ARM64 the
 rem   arm64 asset is tried first and the x64 asset is the fallback (Windows on
 rem   ARM runs x64 binaries), each only when the manifest has a line for it.
 if not defined IMPECCABLE_SKILL_DIR set "IMPECCABLE_SKILL_DIR=%~dp0.."
@@ -52,7 +53,6 @@ set "asset=impeccable-windows-%arch%.exe"
 set "manifest=%~dp0engine-checksums.txt"
 if not defined version goto no_cache
 if not exist "%cached%" goto no_cache
-if exist "%cached%.verified" goto cache_trusted
 call :read_expected
 call :sha256 "%cached%" "%TEMP%\impeccable-hash-%RANDOM%%RANDOM%.txt"
 if not defined actual goto cache_unverified
@@ -63,7 +63,6 @@ echo impeccable: cannot verify the cached engine "%cached%" against "%manifest%"
 goto no_cache
 :cache_verified
 (>"%cached%.verified" echo %actual%) 2>nul
-:cache_trusted
 set "run=%cached%"
 goto run
 :no_cache
@@ -150,8 +149,7 @@ exit /b 127
 
 :read_expected
 rem Sets expected (and, on ARM64, expected_x64: Windows on ARM runs x64
-rem binaries) from engine-checksums.txt. Only called off the stamped path:
-rem hooks run this launcher on every edit.
+rem binaries) from engine-checksums.txt on every cache load or download.
 call :manifest_digest "%asset%" expected
 set "expected_x64="
 if "%arch%"=="arm64" call :manifest_digest impeccable-windows-x64.exe expected_x64

@@ -7,11 +7,10 @@
 # engine-probe handshake first: the retired 3.x npm CLI also installed a bin
 # named `impeccable`, and exec'ing it would fail every verb with
 # "Unknown command". Trusted candidates (IMPECCABLE_BIN, the sibling binary,
-# the version-pinned cache) are exec'd without a probe: hooks run them on
-# every edit and must stay fast. The version-pinned cache and the download are
-# verified against engine-checksums.txt (next to this script), never against
-# anything published beside the binary; a <binary>.verified stamp records that
-# a cached binary passed, so only the first run hashes it.
+# the version-pinned cache) are exec'd without a probe. IMPECCABLE_BIN and
+# sibling binaries are trusted local development overrides, outside the download
+# integrity guarantee. Cache bytes are hashed on every load against the pinned
+# engine-checksums.txt, never against a stamp or data beside the binary.
 set -eu
 
 # True when the candidate answers the engine handshake (prints
@@ -45,8 +44,7 @@ manifest_digest() {
   return 0
 }
 # Sets $expected (and, on Windows on ARM, which runs x64 binaries,
-# $expected_x64) from engine-checksums.txt. Only called off the stamped fast
-# path: hooks run this launcher on every edit.
+# $expected_x64) from engine-checksums.txt on every cache load or download.
 read_expected() {
   expected=$(manifest_digest "$version" "$asset")
   expected_x64=""
@@ -120,9 +118,6 @@ cached="$cache_root/bin/$version/impeccable$exe"
 asset="impeccable-$os-$arch"
 [ "$os" = windows ] && asset="$asset.exe"
 if [ -n "$version" ] && [ -x "$cached" ]; then
-  if [ -f "$cached.verified" ]; then
-    exec "$cached" "$@"
-  fi
   read_expected
   hash_file "$cached"
   if [ -n "$actual" ] && { [ "$actual" = "$expected" ] || [ "$actual" = "$expected_x64" ]; }; then

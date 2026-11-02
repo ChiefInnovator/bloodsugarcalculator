@@ -34,7 +34,8 @@ artwork; do not normalize individual bounding boxes or stroke widths.
   Its `brand_color` matches the icon's base color. Host rendering is controlled
   by the host; metadata validation does not verify its picker UI.
 - Both runtime bundles include the canonical files through the existing
-  [package builder](../../scripts/pack_plugin.py). Regenerate
+  [upstream package builder](https://github.com/google/elephant-goldfish-model/blob/403d8881d62022490637d740657b33f01e321ea8/scripts/pack_plugin.py). Rebuilding
+  packages requires a complete checkout of that pinned upstream source. Regenerate
   `distributions/claude`; do not edit its copies independently. Claude's
   reviewer color keywords and the plugin-level logo stay unchanged.
 - The root README references the canonical paths directly. These relative

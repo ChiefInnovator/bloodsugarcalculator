@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-02T00:00:00Z",
+  "title": "Design System: Blood Sugar Calculator",
+  "extensions": {
+    "shadows": [
+      {
+        "name": "panel",
+        "value": "0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06)",
+        "purpose": "Existing calculator and reading panels"
+      },
+      {
+        "name": "dialog",
+        "value": "0 12px 32px rgba(0,0,0,0.2)",
+        "purpose": "External-action preview in the native top layer"
+      },
+      {
+        "name": "preferences",
+        "value": "0 -4px 20px rgba(0,0,0,0.3)",
+        "purpose": "Dark preferences region in document flow"
+      },
+      {
+        "name": "focus-glow",
+        "value": "0 0 0 3px rgba(66, 153, 225, 0.5)",
+        "purpose": "Existing input and button focus glow; keyboard focus also has a 3px outline offset by 3px"
+      }
+    ],
+    "motion": [
+      {
+        "name": "radio-transform",
+        "value": "200ms ease-in-out",
+        "purpose": "Radio and transform transitions"
+      },
+      {
+        "name": "result-fade",
+        "value": "300ms ease-in-out",
+        "purpose": "Result and error appearance"
+      },
+      {
+        "name": "navigation",
+        "value": "300ms ease-out",
+        "purpose": "Mobile navigation maximum height"
+      },
+      {
+        "name": "consent-action",
+        "value": "200ms ease",
+        "purpose": "Preference button feedback"
+      },
+      {
+        "name": "reduced-motion",
+        "value": "none",
+        "purpose": "All animations and transitions disabled; scroll-behavior auto under prefers-reduced-motion: reduce"
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "navigation",
+        "value": "768px"
+      },
+      {
+        "name": "columns",
+        "value": "1024px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Calculate",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Full-width form submission.",
+      "html": "<button class=\"ds-calculate\">Calculate</button>",
+      "css": ".ds-calculate{width:100%;min-height:44px;padding:12px 16px;background:#2563eb;color:#fff;border:0;border-radius:6px;font-family:ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif;font-size:1rem;font-weight:500;line-height:1.5;transition:background-color 300ms}.ds-calculate:hover{background:#1d4ed8}.ds-calculate:focus-visible{outline:3px solid #1d4ed8;outline-offset:3px}@media(prefers-reduced-motion:reduce){.ds-calculate{transition:none}}"
+    },
+    {
+      "name": "Number field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Labeled editable value with persistent range hint.",
+      "html": "<label class=\"ds-field-label\" for=\"ds-number\">Enter A1C value (%):</label><input class=\"ds-field\" id=\"ds-number\" type=\"number\" placeholder=\"e.g., 7.0\" aria-describedby=\"ds-hint\"><p class=\"ds-hint\" id=\"ds-hint\">Input range: 4.0\u201320.0%. This is not a treatment target.</p>",
+      "css": ".ds-field-label{display:block;font-weight:500;color:#374151;margin-bottom:8px}.ds-field{width:100%;padding:8px 16px;border:1px solid #d1d5db;border-radius:6px;background:#fff;color:#333;font:inherit;caret-color:#1d4ed8}.ds-field::placeholder{color:#6b7280;opacity:1}.ds-field:focus{box-shadow:0 0 0 3px rgba(66,153,225,.5)}.ds-field:focus-visible{outline:3px solid #1d4ed8;outline-offset:3px}.ds-hint{margin:4px 0 0;font-size:.875rem;color:#6b7280}.ds-field-label,.ds-field,.ds-hint{font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,sans-serif;line-height:1.5}.ds-field{font-size:1rem}"
+    },
+    {
+      "name": "Reading panel",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "White container for readable educational content.",
+      "html": "<section class=\"ds-card\"><h2>About A1C</h2><p>A1C shows your average blood sugar over the past 2\u20133 months.</p></section>",
+      "css": ".ds-card{padding:24px;border-radius:8px;background:#fff;color:#333;box-shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -1px rgba(0,0,0,.06);font-family:ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif;line-height:1.5}.ds-card h2{font-size:1.25rem;line-height:1.4;font-weight:600;color:#1f2937;margin:0 0 12px}.ds-card p{max-width:70ch;margin:0}"
+    },
+    {
+      "name": "Primary navigation",
+      "kind": "nav",
+      "description": "White labels on the incumbent blue navigation bar.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Example navigation\"><a href=\"index.html\">Home</a><a href=\"resources.html\">Resources</a></nav>",
+      "css": ".ds-nav{display:flex;flex-wrap:wrap;gap:24px;padding:12px 16px;background:#2563eb;color:#fff;font-family:ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif}.ds-nav a{padding:8px 12px;border-radius:4px;color:inherit;text-decoration:none}.ds-nav a:hover{background:#1d4ed8}.ds-nav a:focus-visible{outline:3px solid #1d4ed8;outline-offset:3px}"
+    },
+    {
+      "name": "More sharing",
+      "kind": "custom",
+      "description": "Native disclosure keeps additional actions in normal flow.",
+      "html": "<details class=\"ds-sharing\"><summary>More sharing</summary><div class=\"ds-share-actions\"><button>Email</button><button>X</button></div></details>",
+      "css": ".ds-sharing{font-family:ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif;color:#374151}.ds-sharing summary{min-height:44px;padding:8px 12px;border:1px solid #d1d5db;border-radius:6px;cursor:pointer}.ds-share-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}.ds-share-actions button{min-height:44px;padding:8px 12px;background:transparent;color:#374151;border:1px solid #d1d5db;border-radius:4px;font:inherit}.ds-share-actions button:hover{background:#dbeafe}.ds-sharing summary:focus-visible{outline:3px solid #1d4ed8;outline-offset:3px}.ds-share-actions button:focus-visible{outline:3px solid #1d4ed8;outline-offset:3px}"
+    },
+    {
+      "name": "Result panel",
+      "kind": "custom",
+      "refersTo": "result-panel",
+      "description": "Estimate values separated from the editable form.",
+      "html": "<section class=\"ds-result\"><h3>Your estimate</h3><div class=\"ds-value\">7.0% A1C</div><p>Educational estimate. Discuss your results with a healthcare professional.</p></section>",
+      "css": ".ds-result{padding:16px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:6px;font-family:ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif;line-height:1.5}.ds-result h3{font-size:1.125rem;font-weight:600;color:#1f2937;margin:0 0 8px}.ds-value{font-size:1.5rem;font-weight:700;color:#2563eb;font-variant-numeric:tabular-nums}.ds-result p{margin:16px 0 0;font-size:.875rem;color:#4b5563}"
+    },
+    {
+      "name": "Preference primary",
+      "kind": "button",
+      "description": "Preference action on the dark nonmodal region.",
+      "html": "<div class=\"ds-preference-surface\"><button class=\"ds-preference-primary\">Accept All</button></div>",
+      "css": ".ds-preference-surface{padding:16px;background:rgba(17,24,39,.98)}.ds-preference-primary{min-height:44px;padding:10px 20px;border:0;border-radius:6px;font-size:.875rem;font-weight:500;cursor:pointer;transition:all .2s ease;background:#2563eb;color:#fff}.ds-preference-primary:hover{background:#1d4ed8}.ds-preference-primary:focus-visible{outline:3px solid #1d4ed8;outline-offset:3px}@media(prefers-reduced-motion:reduce){.ds-preference-primary{transition:none}}.ds-preference-surface{font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,sans-serif;line-height:1.5}.ds-preference-surface button{font-family:inherit;line-height:1.5}"
+    },
+    {
+      "name": "Preference secondary",
+      "kind": "button",
+      "description": "Preference action on the dark nonmodal region.",
+      "html": "<div class=\"ds-preference-surface\"><button class=\"ds-preference-secondary\">Reject Non-Essential</button></div>",
+      "css": ".ds-preference-surface{padding:16px;background:rgba(17,24,39,.98)}.ds-preference-secondary{min-height:44px;padding:10px 20px;border:0;border-radius:6px;font-size:.875rem;font-weight:500;cursor:pointer;transition:all .2s ease;background:#4b5563;color:#fff}.ds-preference-secondary:hover{background:#6b7280}.ds-preference-secondary:focus-visible{outline:3px solid #1d4ed8;outline-offset:3px}@media(prefers-reduced-motion:reduce){.ds-preference-secondary{transition:none}}.ds-preference-surface{font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,sans-serif;line-height:1.5}.ds-preference-surface button{font-family:inherit;line-height:1.5}"
+    },
+    {
+      "name": "Preference outline",
+      "kind": "button",
+      "description": "Preference action on the dark nonmodal region.",
+      "html": "<div class=\"ds-preference-surface\"><button class=\"ds-preference-outline\">Customize</button></div>",
+      "css": ".ds-preference-surface{padding:16px;background:rgba(17,24,39,.98)}.ds-preference-outline{min-height:44px;padding:10px 20px;border:0;border-radius:6px;font-size:.875rem;font-weight:500;cursor:pointer;transition:all .2s ease;background:transparent;color:#d1d5db;border:1px solid #6b7280}.ds-preference-outline:hover{background:#374151;color:#fff}.ds-preference-outline:focus-visible{outline:3px solid #1d4ed8;outline-offset:3px}@media(prefers-reduced-motion:reduce){.ds-preference-outline{transition:none}}.ds-preference-surface{font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,sans-serif;line-height:1.5}.ds-preference-surface button{font-family:inherit;line-height:1.5}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Clear Conversion Desk",
+    "overview": "the incumbent\nblue navigation, pale page, white calculator and familiar controls. The owner\napproved refinement of this existing system, not a replacement visual world.\nThe useful distinction is between input, calculated estimate, and deliberate\nsharing; decoration must not compete with those states.",
+    "keyCharacteristics": [
+      "Familiar controls",
+      "Explicit units",
+      "Current state",
+      "Deliberate sharing"
+    ],
+    "rules": [
+      {
+        "name": "The State Clarity Rule",
+        "body": "Distinguish input, estimate and error with labels and structure as well as color.",
+        "section": "colors"
+      }
+    ],
+    "dos": [
+      "Do preserve the incumbent composition and use explicit labels and units.",
+      "Do keep input hints synchronized with the selected units.",
+      "Do expose errors/status to assistive technology without reading a toolbar."
+    ],
+    "donts": [
+      "Don't overlap result text with sharing controls or leave stale results visible.",
+      "Don't imply that estimates diagnose illness or establish treatment targets.",
+      "Don't describe base64 as encryption, or intentions as compliance evidence."
+    ]
+  }
+}

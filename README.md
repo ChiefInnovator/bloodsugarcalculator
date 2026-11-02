@@ -7,12 +7,12 @@
 - **Supports both mg/dL and mmol/L units** for flexible measurement options
 - **Shareable calculations** - Generate links to easily share your results, including the date and time they were made
 - **Social sharing** - Share your results on Facebook, X (Twitter), or via email with a single click
-- **Personalized health advice** - Get tailored optimization tips through our integrated ChatGPT feature based on your A1C/eAG results
+- **Optional ChatGPT explanation** - Preview the values, educational prompt and external destination before choosing to share
 - **Timestamped results** - Each calculation displays when it was performed for easy tracking
 - **Input validation** - Ensures realistic values are entered (A1C: 4-20%, eAG: 70-600 mg/dL or 3.9-33.3 mmol/L)
 - **Top Tips** - Access practical strategies for diabetes management including diet, exercise, and medication
 - **Educational resources** - Learn about A1C, eAG, diabetes types, and effective blood glucose management techniques
-- **Cookie consent** - Features a GDPR-compliant consent banner with customizable options
+- **Privacy preferences** - Save optional consent signals in localStorage; no tracking loader is currently configured
 - **Responsive design** - Enjoy a mobile-friendly interface with intuitive navigation
 - **Clean, accessible UI** - Designed with Tailwind CSS for a smooth user experience
 
@@ -56,7 +56,7 @@ The Blood Sugar Calculator is built using:
 
 ### Key Design Decisions
 
-- **Client-side calculations** ensure user privacy, as no data is sent to servers.
+- **Client-side calculations** run locally. New shared links use fragments; legacy query links reach hosting before migration. Optional social/email/ChatGPT sharing transfers values after a preview, while external CSS/fonts make network requests.
 - **Responsive design** allows for an optimal experience on both desktop and mobile devices.
 - **Input validation** enhances user experience by preventing unrealistic data entry.
 
@@ -89,3 +89,18 @@ Created by [Richard Crane](https://inventingfirewith.ai), Founder, CTO, and CAIO
 ---
 
 <sub>Powered by [RepoSpotlight](https://repospotlight.ai)</sub>
+
+## Development and review
+
+Run `node --test tests/*.test.js`, `python3 -m unittest discover -s tests`, and
+`python3 scripts/build_static.py`. The publisher writes only the explicit
+application allowlist to `.output/public`; it excludes tooling, tests and docs.
+For local browser testing use `python3 -m http.server 8876 --bind 127.0.0.1`.
+Production remains on main. See [branch workflow](docs/branch-workflow.md),
+[approved design](docs/designs/design_draft.md), and
+[review disposition](docs/designs/goldfish_review_report.md).
+
+Sharing links are readable by their recipients and may remain in browser history;
+base64 is not encryption. The calculator is an educational estimate, not medical
+advice. The [ADA converter](https://professional.diabetes.org/glucose_calc)
+describes the equation; it does not establish approval of this application.

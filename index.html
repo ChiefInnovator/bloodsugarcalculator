@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
     <title>A1C to eAG Calculator | Free Diabetes Blood Glucose Converter</title>
-    <meta name="description" content="Free A1C to eAG calculator. Convert HbA1c to estimated Average Glucose in mg/dL or mmol/L using the ADA-approved formula. Instant, accurate diabetes conversions.">
+    <meta name="description" content="Free A1C to eAG calculator. Convert HbA1c to estimated Average Glucose in mg/dL or mmol/L using the A1C/eAG conversion formula. Instant, accurate diabetes conversions.">
     <meta name="keywords" content="A1C to eAG calculator, eAG to A1C, HbA1c converter, estimated average glucose, blood glucose calculator, diabetes calculator, mg/dL to mmol/L, ADA formula">
     <meta name="author" content="Richard Crane">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
@@ -20,7 +21,7 @@
 
     <!-- Open Graph / Social Media Meta Tags -->
     <meta property="og:title" content="A1C to eAG Calculator | Free Diabetes Blood Glucose Converter">
-    <meta property="og:description" content="Convert HbA1c to estimated Average Glucose (eAG) in mg/dL or mmol/L using the ADA-approved formula. Free, instant, and accurate.">
+    <meta property="og:description" content="Convert HbA1c to estimated Average Glucose (eAG) in mg/dL or mmol/L using the A1C/eAG conversion formula. Free, instant, and accurate.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://diabetescalculator.ai/">
     <meta property="og:site_name" content="Diabetes Calculator">
@@ -35,7 +36,7 @@
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="A1C to eAG Calculator | Free Diabetes Blood Glucose Converter">
-    <meta name="twitter:description" content="Convert HbA1c to estimated Average Glucose (eAG) in mg/dL or mmol/L. ADA-approved formula.">
+    <meta name="twitter:description" content="Convert HbA1c to estimated Average Glucose (eAG) in mg/dL or mmol/L. A1C/eAG conversion formula.">
     <meta name="twitter:image" content="https://diabetescalculator.ai/og-image.png">
     <meta name="twitter:image:alt" content="eAG/A1C Diabetes Calculator preview">
 
@@ -55,7 +56,7 @@
           "@id": "https://diabetescalculator.ai/#website",
           "url": "https://diabetescalculator.ai/",
           "name": "Diabetes Calculator",
-          "description": "Free A1C to eAG blood glucose converter using the ADA-approved formula.",
+          "description": "Free A1C to eAG blood glucose converter using the A1C/eAG conversion formula.",
           "inLanguage": "en-US",
           "publisher": { "@id": "https://diabetescalculator.ai/#person" }
         },
@@ -81,7 +82,7 @@
             "A1C to eAG conversion",
             "eAG to A1C conversion",
             "mg/dL and mmol/L units",
-            "ADA-approved formula",
+            "A1C/eAG conversion formula",
             "Shareable results"
           ],
           "author": { "@id": "https://diabetescalculator.ai/#person" },
@@ -177,21 +178,22 @@
     </script>
 </head>
 <body class="bg-gray-100 font-sans flex flex-col min-h-screen">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     <!-- Navigation Bar -->
     <nav class="bg-blue-600 text-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-4 py-3 max-w-5xl flex justify-between items-center">
             <a href="index.html" class="text-xl font-bold hover:text-blue-200 transition duration-300">eAG/A1C Diabetes Calculator</a>
             
             <!-- Mobile Menu Button -->
-            <button id="mobile-menu-btn" class="md:hidden p-2 rounded hover:bg-blue-700 transition duration-300" aria-label="Toggle navigation menu" aria-expanded="false">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <button type="button" id="mobile-menu-btn" aria-controls="mobile-menu" class="md:hidden p-2 rounded hover:bg-blue-700 transition duration-300" aria-label="Toggle navigation menu" aria-expanded="false">
+                <svg aria-hidden="true" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path class="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                     <path class="close-icon hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
             </button>
             
             <!-- Desktop Navigation -->
-            <div class="hidden md:flex space-x-4">
+            <div class="desktop-navigation space-x-4">
                 <a href="index.html" class="px-3 py-2 rounded hover:bg-blue-700 transition duration-300">Home</a>
                 <a href="tips.html" class="px-3 py-2 rounded hover:bg-blue-700 transition duration-300">Top Tips</a>
                 <a href="resources.html" class="px-3 py-2 rounded hover:bg-blue-700 transition duration-300">Resources</a>
@@ -224,14 +226,15 @@
         <div class="flex flex-col lg:flex-row gap-6">
             <!-- Left Column (2/3 width) - Calculator, How to Use, Important Note -->
             <div class="w-full lg:w-2/3">
-                <main class="bg-white rounded-lg shadow-md p-6">
+                <main id="main-content" tabindex="-1" class="bg-white rounded-lg shadow-md p-6">
                     <!-- Calculator Section -->
                     <section>
                         <h2 class="text-2xl font-semibold text-gray-800 mb-6">Calculator</h2>
                 
+                <form id="calculator-form" novalidate>
                 <!-- Conversion Direction Selection -->
-                <div class="mb-6">
-                    <p class="text-gray-700 mb-2 font-medium">Choose conversion:</p>
+                <fieldset class="mb-6">
+                    <legend class="text-gray-700 mb-2 font-medium">Choose conversion:</legend>
                     <div class="flex flex-wrap gap-4">
                         <label class="flex items-center cursor-pointer">
                             <input type="radio" name="conversion-direction" value="eag-to-a1c" class="form-radio h-5 w-5 text-blue-600" checked>
@@ -242,23 +245,23 @@
                             <span class="ml-2 text-gray-700">A1C to eAG</span>
                         </label>
                     </div>
-                </div>
+                </fieldset>
                 
                 <!-- Input Section -->
                 <div class="mb-6">
-                    <div id="a1c-input-container">
+                    <div id="a1c-input-container" hidden>
                         <label for="a1c-input" class="block text-gray-700 mb-2 font-medium">Enter A1C value (%):</label>
-                        <input type="number" id="a1c-input" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="e.g., 7.0" step="0.1" min="4.0" max="20.0">
-                        <p class="text-sm text-gray-500 mt-1">Enter a value between 4.0 and 20.0</p>
+                        <input type="number" id="a1c-input" aria-describedby="a1c-hint error-message" inputmode="decimal" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="e.g., 7.0" step="any" min="4.0" max="20.0">
+                        <p id="a1c-hint" class="text-sm text-gray-500 mt-1">Input range: 4.0–20.0%. This is not a treatment target.</p>
                     </div>
                     
-                    <div id="eag-input-container" class="hidden">
+                    <div id="eag-input-container">
                         <label for="eag-input" class="block text-gray-700 mb-2 font-medium">Enter eAG value:</label>
-                        <input type="number" id="eag-input" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="e.g., 154" step="1" min="70" max="600">
+                        <input type="number" id="eag-input" aria-describedby="eag-hint error-message" inputmode="decimal" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="e.g., 154" step="1" min="70" max="600">
                         <p id="eag-hint" class="text-sm text-gray-500 mt-1">(70–600 mg/dL)</p>
                         
-                        <div class="mt-3">
-                            <p class="text-gray-700 mb-2 font-medium">Units:</p>
+                        <fieldset class="mt-3">
+                            <legend class="text-gray-700 mb-2 font-medium">Units:</legend>
                             <div class="flex gap-4">
                                 <label class="flex items-center cursor-pointer">
                                     <input type="radio" name="eag-units" value="mgdl" class="form-radio h-5 w-5 text-blue-600" checked>
@@ -269,54 +272,61 @@
                                     <span class="ml-2 text-gray-700">mmol/L</span>
                                 </label>
                             </div>
-                        </div>
+                        </fieldset>
                     </div>
                 </div>
                 
                 <!-- Calculate Button -->
-                <button id="calculate-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-md transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                <button type="submit" id="calculate-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-md transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
                     Calculate
                 </button>
                 
+                </form>
+                <p id="result-status" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
                 <!-- Results Display -->
-                <div id="result-container" class="mt-6 p-4 bg-blue-50 rounded-md border border-blue-200 hidden fade-in relative">
-                    <!-- Share Icons - Top Right -->
-                    <div class="absolute top-3 right-3 flex gap-1">
-                        <button id="share-btn" class="w-8 h-8 flex items-center justify-center text-gray-500 hover:text-gray-700 border border-gray-300 hover:bg-blue-100 rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500" aria-label="Copy link">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div id="result-container" role="region" aria-labelledby="result-heading" hidden class="mt-6 p-4 bg-blue-50 rounded-md border border-blue-200 hidden fade-in relative">
+                    <h3 id="result-heading" class="text-lg font-semibold text-gray-800 mb-2">Your estimate</h3>
+                    <div id="result-value" class="text-2xl font-bold text-blue-600"></div>
+                    <p id="result-explanation" class="mt-2 text-gray-600"></p>
+                    <p id="result-timestamp" class="mt-3 text-sm text-gray-500"></p>
+                    <p id="share-feedback" class="share-feedback"></p>
+                    <p class="result-limit">Educational estimate. Discuss your results with a healthcare professional.</p>
+                    <p class="share-disclosure">Sharing reveals your values and timestamp to anyone receiving the link. Review the destination before continuing.</p>
+                    <!-- Deliberate sharing actions -->
+                    <div class="result-actions">
+                        <button type="button" id="share-btn" class="w-8 h-8 flex items-center justify-center text-gray-500 hover:text-gray-700 border border-gray-300 hover:bg-blue-100 rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500" aria-label="Copy link">
+                            <svg aria-hidden="true" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
                             </svg>
-                        </button>
-                        <button id="share-facebook" class="w-8 h-8 flex items-center justify-center text-[#1877F2] border border-gray-300 hover:bg-blue-100 rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500" aria-label="Share to Facebook">
-                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                            </svg>
-                        </button>
-                        <button id="share-twitter" class="w-8 h-8 flex items-center justify-center text-black border border-gray-300 hover:bg-blue-100 rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-gray-500" aria-label="Share to X">
-                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                            </svg>
-                        </button>
-                        <button id="share-email" class="w-8 h-8 flex items-center justify-center text-gray-600 border border-gray-300 hover:bg-blue-100 rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500" aria-label="Share via Email">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                            </svg>
-                        </button>
-                        <button id="ask-chatgpt" class="w-8 h-8 flex items-center justify-center text-[#10a37f] border border-gray-300 hover:bg-green-100 rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-green-500" aria-label="Ask ChatGPT">
-                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                        <span>Copy link</span></button>
+                        <button type="button" id="ask-chatgpt" class="w-8 h-8 flex items-center justify-center text-[#10a37f] border border-gray-300 hover:bg-green-100 rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-green-500" aria-label="Explain with ChatGPT">
+                            <svg aria-hidden="true" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M22.282 9.821a5.985 5.985 0 0 0-.516-4.91 6.046 6.046 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.18a5.985 5.985 0 0 0-3.998 2.9 6.046 6.046 0 0 0 .743 7.097 5.98 5.98 0 0 0 .51 4.911 6.051 6.051 0 0 0 6.515 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.772-4.206 5.99 5.99 0 0 0 3.997-2.9 6.056 6.056 0 0 0-.747-7.073zM13.26 22.43a4.476 4.476 0 0 1-2.876-1.04l.141-.081 4.779-2.758a.795.795 0 0 0 .392-.681v-6.737l2.02 1.168a.071.071 0 0 1 .038.052v5.583a4.504 4.504 0 0 1-4.494 4.494zM3.6 18.304a4.47 4.47 0 0 1-.535-3.014l.142.085 4.783 2.759a.771.771 0 0 0 .78 0l5.843-3.369v2.332a.08.08 0 0 1-.033.062L9.74 19.95a4.5 4.5 0 0 1-6.14-1.646zM2.34 7.896a4.485 4.485 0 0 1 2.366-1.973V11.6a.766.766 0 0 0 .388.676l5.815 3.355-2.02 1.168a.076.076 0 0 1-.071 0l-4.83-2.786A4.504 4.504 0 0 1 2.34 7.872zm16.597 3.855l-5.833-3.387L15.119 7.2a.076.076 0 0 1 .071 0l4.83 2.791a4.494 4.494 0 0 1-.676 8.105v-5.678a.79.79 0 0 0-.407-.667zm2.01-3.023l-.141-.085-4.774-2.782a.776.776 0 0 0-.785 0L9.409 9.23V6.897a.066.066 0 0 1 .028-.061l4.83-2.787a4.5 4.5 0 0 1 6.68 4.66zm-12.64 4.135l-2.02-1.164a.08.08 0 0 1-.038-.057V6.075a4.5 4.5 0 0 1 7.375-3.453l-.142.08L8.704 5.46a.795.795 0 0 0-.393.681zm1.097-2.365l2.602-1.5 2.607 1.5v2.999l-2.597 1.5-2.607-1.5z"/>
                             </svg>
-                        </button>
+                        <span>Explain with ChatGPT</span></button>
+                    <details class="more-sharing">
+                            <summary>More sharing</summary>
+                            <div class="social-actions"><button type="button" id="share-facebook" class="w-8 h-8 flex items-center justify-center text-[#1877F2] border border-gray-300 hover:bg-blue-100 rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500" aria-label="Share to Facebook">
+                            <svg aria-hidden="true" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        <span>Facebook</span></button><button type="button" id="share-twitter" class="w-8 h-8 flex items-center justify-center text-black border border-gray-300 hover:bg-blue-100 rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-gray-500" aria-label="Share to X">
+                            <svg aria-hidden="true" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                            </svg>
+                        <span>X</span></button><button type="button" id="share-email" class="w-8 h-8 flex items-center justify-center text-gray-600 border border-gray-300 hover:bg-blue-100 rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500" aria-label="Share via Email">
+                            <svg aria-hidden="true" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                            </svg>
+                        <span>Email</span></button></div>
+                        </details>
                     </div>
                     
-                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Result:</h3>
-                    <div id="result-value" class="text-2xl font-bold text-blue-600"></div>
-                    <p id="result-explanation" class="mt-2 text-gray-600 pr-24"></p>
-                    <p id="result-timestamp" class="mt-3 text-xs text-gray-400"></p>
+
                 </div>
                 
                 <!-- Error Display -->
-                <div id="error-container" class="mt-6 p-4 bg-red-50 rounded-md border border-red-200 hidden fade-in">
+                <div id="error-container" role="alert" hidden class="mt-6 p-4 bg-red-50 rounded-md border border-red-200 hidden fade-in">
                     <h3 class="text-lg font-semibold text-red-800 mb-2">Error:</h3>
                     <p id="error-message" class="text-red-600"></p>
                 </div>
@@ -324,15 +334,15 @@
         </main>
 
         <!-- How to Use Section -->
-        <div class="bg-blue-50 rounded-lg p-4 mt-6 border border-blue-200">
-            <h2 class="text-lg font-semibold text-blue-800 mb-2">📋 How to Use</h2>
+        <div class="how-to-use bg-blue-50 rounded-lg p-4 mt-6 border border-blue-200">
+            <h2 class="text-lg font-semibold text-blue-800 mb-2">How to Use</h2>
             <ol class="list-decimal list-inside text-gray-700 space-y-1 text-sm">
                 <li><strong>Select conversion:</strong> Choose whether to convert from eAG to A1C or A1C to eAG</li>
                 <li><strong>Enter your value:</strong> Input your A1C percentage or eAG reading (select mg/dL or mmol/L)</li>
                 <li><strong>Click Calculate:</strong> View your converted result with an explanation</li>
                 <li><strong>Share:</strong> Send via link, email, or social media</li>
             </ol>
-            <p class="text-xs text-gray-500 mt-2">This calculator uses the ADA-approved formula. Results are for informational purposes only—consult your healthcare provider for medical advice.</p>
+            <p class="text-xs text-gray-500 mt-2">This calculator uses the <a href="https://professional.diabetes.org/glucose_calc" class="underline">equation published by the ADA</a>. Estimates do not replace measured glucose or clinical advice. Results are for informational purposes only—consult your healthcare provider for medical advice.</p>
         </div>
             </div>
 
@@ -341,13 +351,13 @@
                 <!-- About A1C Section -->
                 <div class="bg-white rounded-lg shadow-md p-6">
                     <h2 class="text-xl font-semibold text-gray-800 mb-3 flex items-center">
-                        <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg aria-hidden="true" class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
                         About A1C
                     </h2>
                     <p class="text-gray-700 mb-3">A1C shows your average blood sugar over the past 2–3 months.</p>
-                    <p class="font-medium text-gray-800 mb-2">Targets:</p>
+                    <p class="font-medium text-gray-800 mb-2">A1C reference ranges:</p>
                     <ul class="list-disc list-inside text-gray-700 space-y-1 text-sm">
                         <li>Normal: &lt;5.7%</li>
                         <li>Prediabetes: 5.7–6.4%</li>
@@ -358,7 +368,7 @@
                 <!-- About eAG Section -->
                 <div class="bg-white rounded-lg shadow-md p-6">
                     <h2 class="text-xl font-semibold text-gray-800 mb-3 flex items-center">
-                        <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg aria-hidden="true" class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
                         </svg>
                         About eAG
@@ -376,7 +386,7 @@
 
         <!-- Support Section -->
         <div class="flex justify-center mt-8">
-            <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="richcrane" data-color="#5F7FFF" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#ffffff" data-coffee-color="#FFDD00" ></script>
+            <a class="support-link" href="https://www.buymeacoffee.com/richcrane" target="_blank" rel="noopener noreferrer">Support this calculator</a>
         </div>
 
         <!-- Educational Content Section Removed - Moved to resources.html -->
@@ -400,55 +410,52 @@
     </footer>
 
     <!-- Cookie Consent Banner -->
-    <div id="cookie-consent-banner" role="dialog" aria-modal="true" aria-labelledby="consent-title">
+    <div id="cookie-consent-banner" role="region" aria-labelledby="consent-title" tabindex="-1" hidden>
         <div class="consent-container">
             <div class="consent-header">
                 <div class="consent-text">
-                    <h3 id="consent-title">🍪 Cookie Preferences</h3>
-                    <p>We use cookies to improve your experience and show personalized ads. You can customize your preferences or accept all cookies. <a href="cookie.html">Learn more</a></p>
+                    <h3 id="consent-title">Privacy preferences</h3>
+                    <p>Save your analytics and advertising consent preferences on this device. No analytics or advertising tracker is currently configured; external styles and fonts still make network requests. <a href="cookie.html">Learn more</a></p>
                 </div>
                 <div class="consent-buttons">
-                    <button id="consent-accept-all" class="consent-btn consent-btn-primary">Accept All</button>
-                    <button id="consent-customize" class="consent-btn consent-btn-outline">Customize</button>
-                    <button id="consent-reject" class="consent-btn consent-btn-secondary">Reject Non-Essential</button>
+                    <button type="button" id="consent-accept-all" class="consent-btn consent-btn-primary">Accept All</button>
+                    <button type="button" id="consent-customize" class="consent-btn consent-btn-outline">Customize</button>
+                    <button type="button" id="consent-reject" class="consent-btn consent-btn-secondary">Reject Non-Essential</button>
                 </div>
             </div>
             
-            <div id="consent-options" class="consent-options">
+            <div id="consent-options" class="consent-options" hidden>
                 <div class="consent-option">
                     <div class="consent-option-info">
-                        <h4>Essential Cookies</h4>
-                        <p>Required for the website to function. Cannot be disabled.</p>
+                        <h4>Essential storage</h4>
+                        <p>Stores privacy preferences on this device. The calculator still works if storage is unavailable.</p>
+                    </div>
+                    <span class="consent-storage-state">Local only</span>
+                </div>
+                <div class="consent-option">
+                    <div class="consent-option-info">
+                        <h4>Analytics consent</h4>
+                        <p>Saves your analytics consent signal. No analytics tracker is currently configured.</p>
                     </div>
                     <label class="toggle-switch">
-                        <input type="checkbox" checked disabled aria-label="Essential cookies - always enabled">
+                        <input type="checkbox" id="consent-analytics" aria-label="Analytics consent">
                         <span class="toggle-slider"></span>
                     </label>
                 </div>
                 <div class="consent-option">
                     <div class="consent-option-info">
-                        <h4>Analytics Cookies</h4>
-                        <p>Help us understand how visitors use our website.</p>
+                        <h4>Advertising consent</h4>
+                        <p>Saves your advertising consent signal. No advertising tracker is currently configured.</p>
                     </div>
                     <label class="toggle-switch">
-                        <input type="checkbox" id="consent-analytics" aria-label="Analytics cookies">
-                        <span class="toggle-slider"></span>
-                    </label>
-                </div>
-                <div class="consent-option">
-                    <div class="consent-option-info">
-                        <h4>Advertising Cookies</h4>
-                        <p>Used to show relevant ads based on your interests.</p>
-                    </div>
-                    <label class="toggle-switch">
-                        <input type="checkbox" id="consent-advertising" aria-label="Advertising cookies">
+                        <input type="checkbox" id="consent-advertising" aria-label="Advertising consent">
                         <span class="toggle-slider"></span>
                     </label>
                 </div>
             </div>
             
-            <div id="consent-save-container" class="consent-save-container">
-                <button id="consent-save" class="consent-btn consent-btn-primary">Save Preferences</button>
+            <div id="consent-save-container" class="consent-save-container" hidden>
+                <button type="button" id="consent-save" class="consent-btn consent-btn-primary">Save Preferences</button>
             </div>
         </div>
     </div>
@@ -456,6 +463,25 @@
     <!-- Toast Notification Container -->
     <div id="toast-container" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 pointer-events-none"></div>
 
+    <dialog id="external-action-dialog" aria-labelledby="external-action-title" aria-describedby="external-action-description">
+        <h2 id="external-action-title">Review sharing</h2>
+        <p id="external-action-description"></p>
+        <pre id="external-action-preview"></pre>
+        <details id="external-action-address-details">
+            <summary>Full destination address</summary>
+            <pre id="external-action-address"></pre>
+        </details>
+        <div id="external-action-fallback" hidden>
+            <label for="shared-link-output">Select and copy this link</label>
+            <textarea id="shared-link-output" readonly rows="4"></textarea>
+            <a id="external-action-link" href="#" target="_blank" rel="noopener noreferrer" hidden>Open destination</a>
+        </div>
+        <div class="dialog-actions">
+            <button type="button" id="external-action-cancel">Cancel</button>
+            <button type="button" id="external-action-confirm">Continue</button>
+        </div>
+    </dialog>
+    <script src="js/calculator.js"></script>
     <script src="js/script.js"></script> 
 </body>
 </html>

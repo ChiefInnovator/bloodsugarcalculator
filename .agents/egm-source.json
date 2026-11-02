@@ -2,5 +2,12 @@
   "repository": "https://github.com/google/elephant-goldfish-model",
   "commit": "403d8881d62022490637d740657b33f01e321ea8",
   "installed": "2026-11-02",
-  "layout": "skills plus agents, resources, docs; license at EGM-LICENSE"
+  "layout": "skills plus agents, resources, docs; license at EGM-LICENSE",
+  "localPatches": [
+    {
+      "date": "2026-11-02",
+      "findings": "G2-G5",
+      "description": "Pinned missing development/packaging links to the source commit; distinguished upstream tests and corrected the installed bootstrap inline scout scenario. Skill methods unchanged."
+    }
+  ]
 }

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
     <title>About | eAG/A1C Diabetes Calculator</title>
     <meta name="description" content="About the eAG/A1C Diabetes Calculator — a free, educational tool for converting between HbA1c and estimated Average Glucose using the ADA formula.">
     <meta name="author" content="Richard Crane">
@@ -71,21 +72,22 @@
     </script>
 </head>
 <body class="bg-gray-100 font-sans flex flex-col min-h-screen">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     <!-- Navigation Bar -->
     <nav class="bg-blue-600 text-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-4 py-3 max-w-5xl flex justify-between items-center">
             <a href="index.html" class="text-xl font-bold hover:text-blue-200 transition duration-300">eAG/A1C Diabetes Calculator</a>
             
             <!-- Mobile Menu Button -->
-            <button id="mobile-menu-btn" class="md:hidden p-2 rounded hover:bg-blue-700 transition duration-300" aria-label="Toggle navigation menu" aria-expanded="false">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <button type="button" id="mobile-menu-btn" aria-controls="mobile-menu" class="md:hidden p-2 rounded hover:bg-blue-700 transition duration-300" aria-label="Toggle navigation menu" aria-expanded="false">
+                <svg aria-hidden="true" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path class="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                     <path class="close-icon hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
             </button>
             
             <!-- Desktop Navigation -->
-            <div class="hidden md:flex space-x-4">
+            <div class="desktop-navigation space-x-4">
                 <a href="index.html" class="px-3 py-2 rounded hover:bg-blue-700 transition duration-300">Home</a>
                 <a href="tips.html" class="px-3 py-2 rounded hover:bg-blue-700 transition duration-300">Top Tips</a>
                 <a href="resources.html" class="px-3 py-2 rounded hover:bg-blue-700 transition duration-300">Resources</a>
@@ -105,7 +107,7 @@
     </nav>
     
     <div class="container mx-auto px-4 py-8 max-w-5xl">
-        <main class="bg-white rounded-lg shadow-md p-6">
+        <main id="main-content" tabindex="-1" class="reading-content bg-white rounded-lg shadow-md p-6">
             <h1 class="text-3xl md:text-4xl font-bold text-blue-600 mb-4">About eAG/A1C Diabetes Calculator</h1>
 
             <section class="mb-8">
@@ -130,14 +132,14 @@
                         </p>
                         <div class="flex flex-col sm:flex-row gap-4">
                             <a href="mailto:support@richcrane.ai" class="text-blue-600 hover:underline flex items-center gap-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                     <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                                     <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                                 </svg>
                                 support@richcrane.ai
                             </a>
                             <a href="https://www.mill5.com" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline flex items-center gap-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0l-1.5-1.5a2 2 0 112.828-2.828l1.5 1.5l3-3zm-2.408 6.318a2 2 0 00-2.828 0l-1.5 1.5a2 2 0 102.828 2.828l1.5-1.5zm-2.828-2.828a2 2 0 000 2.828l1.5 1.5a2 2 0 002.828 0l3-3a2 2 0 00-2.828-2.828l-1.5 1.5-1.5-1.5z" clip-rule="evenodd" />
                                 </svg>
                                 www.mill5.com
@@ -157,7 +159,7 @@
                     <li>Simple interface for quick conversions.</li>
                     <li>Support for converting A1C to eAG (in both mg/dL and mmol/L).</li>
                     <li>Support for converting eAG (in both mg/dL and mmol/L) to A1C.</li>
-                    <li>Client-side calculations for privacy (no data is sent to servers).</li>
+                    <li>Local calculations; optional sharing and external resources make network requests. Review the destination before sending values.</li>
                     <li>Educational resources explaining A1C, eAG, and factors affecting blood sugar.</li>
                     <li>Responsive design for use on various devices.</li>
                 </ul>
@@ -189,55 +191,52 @@
     </footer>
 
     <!-- Cookie Consent Banner -->
-    <div id="cookie-consent-banner" role="dialog" aria-modal="true" aria-labelledby="consent-title">
+    <div id="cookie-consent-banner" role="region" aria-labelledby="consent-title" tabindex="-1" hidden>
         <div class="consent-container">
             <div class="consent-header">
                 <div class="consent-text">
-                    <h3 id="consent-title">🍪 Cookie Preferences</h3>
-                    <p>We use cookies to improve your experience and show personalized ads. You can customize your preferences or accept all cookies. <a href="cookie.html">Learn more</a></p>
+                    <h3 id="consent-title">Privacy preferences</h3>
+                    <p>Save your analytics and advertising consent preferences on this device. No analytics or advertising tracker is currently configured; external styles and fonts still make network requests. <a href="cookie.html">Learn more</a></p>
                 </div>
                 <div class="consent-buttons">
-                    <button id="consent-accept-all" class="consent-btn consent-btn-primary">Accept All</button>
-                    <button id="consent-customize" class="consent-btn consent-btn-outline">Customize</button>
-                    <button id="consent-reject" class="consent-btn consent-btn-secondary">Reject Non-Essential</button>
+                    <button type="button" id="consent-accept-all" class="consent-btn consent-btn-primary">Accept All</button>
+                    <button type="button" id="consent-customize" class="consent-btn consent-btn-outline">Customize</button>
+                    <button type="button" id="consent-reject" class="consent-btn consent-btn-secondary">Reject Non-Essential</button>
                 </div>
             </div>
             
-            <div id="consent-options" class="consent-options">
+            <div id="consent-options" class="consent-options" hidden>
                 <div class="consent-option">
                     <div class="consent-option-info">
-                        <h4>Essential Cookies</h4>
-                        <p>Required for the website to function. Cannot be disabled.</p>
+                        <h4>Essential storage</h4>
+                        <p>Stores privacy preferences on this device. The calculator still works if storage is unavailable.</p>
+                    </div>
+                    <span class="consent-storage-state">Local only</span>
+                </div>
+                <div class="consent-option">
+                    <div class="consent-option-info">
+                        <h4>Analytics consent</h4>
+                        <p>Saves your analytics consent signal. No analytics tracker is currently configured.</p>
                     </div>
                     <label class="toggle-switch">
-                        <input type="checkbox" checked disabled aria-label="Essential cookies - always enabled">
+                        <input type="checkbox" id="consent-analytics" aria-label="Analytics consent">
                         <span class="toggle-slider"></span>
                     </label>
                 </div>
                 <div class="consent-option">
                     <div class="consent-option-info">
-                        <h4>Analytics Cookies</h4>
-                        <p>Help us understand how visitors use our website.</p>
+                        <h4>Advertising consent</h4>
+                        <p>Saves your advertising consent signal. No advertising tracker is currently configured.</p>
                     </div>
                     <label class="toggle-switch">
-                        <input type="checkbox" id="consent-analytics" aria-label="Analytics cookies">
-                        <span class="toggle-slider"></span>
-                    </label>
-                </div>
-                <div class="consent-option">
-                    <div class="consent-option-info">
-                        <h4>Advertising Cookies</h4>
-                        <p>Used to show relevant ads based on your interests.</p>
-                    </div>
-                    <label class="toggle-switch">
-                        <input type="checkbox" id="consent-advertising" aria-label="Advertising cookies">
+                        <input type="checkbox" id="consent-advertising" aria-label="Advertising consent">
                         <span class="toggle-slider"></span>
                     </label>
                 </div>
             </div>
             
-            <div id="consent-save-container" class="consent-save-container">
-                <button id="consent-save" class="consent-btn consent-btn-primary">Save Preferences</button>
+            <div id="consent-save-container" class="consent-save-container" hidden>
+                <button type="button" id="consent-save" class="consent-btn consent-btn-primary">Save Preferences</button>
             </div>
         </div>
     </div>
