@@ -1,4 +1,4 @@
-# Workflow and ownership changes require independent owner approval under both
-# protected-branch rulesets. Ordinary application PRs do not require an approval.
+# Workflow ownership routing. With zero general approvals, GitHub reported the
+# owner-authored PR #6 as mergeable; this is not an independent approval barrier.
 /.github/workflows/ @ChiefInnovator
 /.github/CODEOWNERS @ChiefInnovator

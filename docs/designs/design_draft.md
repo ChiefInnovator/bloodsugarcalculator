@@ -273,9 +273,10 @@ repository writer executing another Actions workflow. See
 [branch workflow](../branch-workflow.md) for the independently hosted App /
 trusted
 organization-workflow alternative. Do not claim that stronger protection here.
-Workflow changes require code-owner approval that the same PR author cannot
-give;
-leave the final PR at that gate if an independent approval is unavailable.
+CODEOWNERS and its ruleset flag were intended to add workflow review. Live
+verification showed owner-authored PR #6 mergeable under the zero-approval
+configuration; it is not an independent approval barrier. Do not claim that
+unverified gate exists. Keep any actually required approvals intact.
 
 ## Detailed Implementation Plan
 

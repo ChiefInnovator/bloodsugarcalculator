@@ -36,7 +36,9 @@ document top with Customize expanded; the replacement was visually accepted.
 Preserve the calculator-first identity, explicit estimate units, labeled sharing,
 deliberate transfer preview and truthful optional-storage description.
 Uncaptured reading pages and expanded accordion content remain source-reviewed.
-Deployment and independent code-owner approval are separate gates.
+Deployment is separate. The reviewer did not verify GitHub approval enforcement;
+the subsequent live check found owner-authored PR #6 mergeable with zero general
+approvals, so no independent owner-approval barrier is claimed.
 
 ## Evidence
 

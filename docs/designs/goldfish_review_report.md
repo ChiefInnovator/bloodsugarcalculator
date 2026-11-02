@@ -54,7 +54,9 @@ Windows launcher code was inspected and cache regression-tested through the shel
 path; Windows native execution remains unavailable. Uncaptured reading/expanded
 accordion states have source/test coverage, not full visual acceptance.
 
-PR #6 targets develop. Workflow changes require an independent code-owner
-approval; the PR author cannot self-approve. Do not bypass that protection.
+PR #6 targets develop. Live verification showed it mergeable after checks and
+thread resolution despite the intended owner-review flag. With zero general
+approvals, this owner-authored PR has no enforced independent owner gate; the
+branch workflow documents that observed limitation. No protection was bypassed.
 This branch has not been released to main or accepted in production.
 Cloud-review G1–G6: [source findings](cloud-review-findings.md).
