@@ -10,12 +10,20 @@ must first be brought into a local feature branch by the maintainer.
   unresolved review conversations. The required `branch-policy` check validates
   source metadata using trusted base-branch workflow code without checking out
   the proposed code or accessing deployment secrets.
-- Rulesets have no bypass actors. Human approval count is zero for this solo
-  repository; Copilot comments are not human approvals.
+- Rulesets have no bypass actors. Ordinary application PRs need zero human
+  approvals. Workflow and CODEOWNERS changes require code-owner approval;
+  Copilot comments are not human approvals. This independent approval blocks
+  PRs from changing the validator or adding workflows to spoof its status.
+  Because authors cannot approve their own PRs, owner-authored workflow
+  maintenance requires another authorized owner or an explicit admin policy
+  change. Ordinary application development does not have that restriction.
 - Automatic GitHub Copilot review is scoped to pull requests targeting
   `develop`, including subsequent real code pushes. Reviews depend on the
   author's Copilot eligibility and available credits. Never request a review
   manually or push an empty change to trigger one.
+- Account-wide automatic review is independent of repository rulesets and can
+  also review `main`. Develop-only behavior requires disabling that account
+  setting; do not change other repositories' rulesets to accomplish this.
 - Production deployment remains tied to `main`. Feature and develop changes
   reach production only through a release pull request from `develop`.
 
@@ -29,7 +37,8 @@ Keep the long-lived `develop` branch after release merges.
 The trusted workflow must exist on the default branch before its status check
 can be required. Install it through a feature-to-develop pull request and then
 a develop-to-main pull request before activating the required check. This
-bootstrap does not permit a permanent bypass in the final rulesets.
+bootstrap does not permit a permanent bypass in the final rulesets. Install
+CODEOWNERS before activating its review requirement.
 
 ## Verification
 
