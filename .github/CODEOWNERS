@@ -1,0 +1,4 @@
+# Workflow and ownership changes require independent owner approval under both
+# protected-branch rulesets. Ordinary application PRs do not require an approval.
+/.github/workflows/ @ChiefInnovator
+/.github/CODEOWNERS @ChiefInnovator
