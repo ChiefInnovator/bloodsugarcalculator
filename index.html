@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="no-referrer">
-    <title>A1C to eAG Calculator | Free Diabetes Blood Glucose Converter</title>
-    <meta name="description" content="Free A1C to eAG calculator. Convert HbA1c to estimated Average Glucose in mg/dL or mmol/L using the A1C/eAG conversion formula. Instant, accurate diabetes conversions.">
-    <meta name="keywords" content="A1C to eAG calculator, eAG to A1C, HbA1c converter, estimated average glucose, blood glucose calculator, diabetes calculator, mg/dL to mmol/L, ADA formula">
+    <title>A1C to eAG Calculator &amp; Blood Sugar Conversion Chart</title>
+    <meta name="description" content="Convert A1C to estimated average glucose (eAG) or eAG to A1C in mg/dL and mmol/L. Includes formulas, a conversion chart, and answers to common questions.">
     <meta name="author" content="Richard Crane">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
     <link rel="canonical" href="https://diabetescalculator.ai/">
@@ -20,8 +19,8 @@
     <link rel="icon" href="favicon.ico">
 
     <!-- Open Graph / Social Media Meta Tags -->
-    <meta property="og:title" content="A1C to eAG Calculator | Free Diabetes Blood Glucose Converter">
-    <meta property="og:description" content="Convert HbA1c to estimated Average Glucose (eAG) in mg/dL or mmol/L using the A1C/eAG conversion formula. Free, instant, and accurate.">
+    <meta property="og:title" content="A1C to eAG Calculator &amp; Blood Sugar Conversion Chart">
+    <meta property="og:description" content="Convert A1C to estimated average glucose (eAG) or eAG to A1C in mg/dL and mmol/L. Includes formulas, a conversion chart, and answers to common questions.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://diabetescalculator.ai/">
     <meta property="og:site_name" content="Diabetes Calculator">
@@ -35,8 +34,8 @@
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="A1C to eAG Calculator | Free Diabetes Blood Glucose Converter">
-    <meta name="twitter:description" content="Convert HbA1c to estimated Average Glucose (eAG) in mg/dL or mmol/L. A1C/eAG conversion formula.">
+    <meta name="twitter:title" content="A1C to eAG Calculator &amp; Blood Sugar Conversion Chart">
+    <meta name="twitter:description" content="Convert A1C to estimated average glucose (eAG) or eAG to A1C in mg/dL and mmol/L. Includes formulas, a conversion chart, and answers to common questions.">
     <meta name="twitter:image" content="https://diabetescalculator.ai/og-image.png">
     <meta name="twitter:image:alt" content="eAG/A1C Diabetes Calculator preview">
 
@@ -49,119 +48,174 @@
     <!-- Structured Data for SEO / AEO / GEO -->
     <script type="application/ld+json">
     {
-      "@context": "https://schema.org",
-      "@graph": [
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://diabetescalculator.ai/#website",
+      "url": "https://diabetescalculator.ai/",
+      "name": "Diabetes Calculator",
+      "description": "Convert A1C to estimated average glucose (eAG) or eAG to A1C in mg/dL and mmol/L. Includes formulas, a conversion chart, and answers to common questions.",
+      "inLanguage": "en-US",
+      "publisher": {
+        "@id": "https://diabetescalculator.ai/#person"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://diabetescalculator.ai/#person",
+      "name": "Richard Crane",
+      "url": "https://diabetescalculator.ai/about.html"
+    },
+    {
+      "@type": "WebApplication",
+      "@id": "https://diabetescalculator.ai/#app",
+      "name": "eAG/A1C Diabetes Calculator",
+      "url": "https://diabetescalculator.ai/",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "Any (web browser)",
+      "browserRequirements": "Requires JavaScript",
+      "description": "Free educational calculator converting between A1C percentage and estimated average glucose in mg/dL or mmol/L. Estimates do not replace laboratory testing or clinical advice.",
+      "inLanguage": "en-US",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "A1C to eAG conversion",
+        "eAG to A1C conversion",
+        "mg/dL and mmol/L units",
+        "A1C/eAG conversion formula",
+        "Shareable results"
+      ],
+      "author": {
+        "@id": "https://diabetescalculator.ai/#person"
+      },
+      "publisher": {
+        "@id": "https://diabetescalculator.ai/#person"
+      },
+      "mainEntityOfPage": {
+        "@id": "https://diabetescalculator.ai/#webpage"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
         {
-          "@type": "WebSite",
-          "@id": "https://diabetescalculator.ai/#website",
-          "url": "https://diabetescalculator.ai/",
-          "name": "Diabetes Calculator",
-          "description": "Free A1C to eAG blood glucose converter using the A1C/eAG conversion formula.",
-          "inLanguage": "en-US",
-          "publisher": { "@id": "https://diabetescalculator.ai/#person" }
+          "@type": "Question",
+          "@id": "https://diabetescalculator.ai/#faq-a1c-to-eag",
+          "name": "How do I convert A1C to estimated average glucose?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Use eAG (mg/dL) = 28.7 × A1C (%) − 46.7. Divide that result by 18 for eAG in mmol/L. For example, A1C of 7% gives about 154 mg/dL or 8.6 mmol/L."
+          }
         },
         {
-          "@type": "Person",
-          "@id": "https://diabetescalculator.ai/#person",
-          "name": "Richard Crane",
-          "url": "https://diabetescalculator.ai/about.html"
+          "@type": "Question",
+          "@id": "https://diabetescalculator.ai/#faq-eag-to-a1c",
+          "name": "How do I convert average blood glucose to A1C?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Use estimated A1C (%) = (average glucose in mg/dL + 46.7) ÷ 28.7. For mmol/L, multiply the average by 18 first. An average of 154 mg/dL gives an estimated A1C of about 7.0%."
+          }
         },
         {
-          "@type": "WebApplication",
-          "@id": "https://diabetescalculator.ai/#app",
-          "name": "eAG/A1C Diabetes Calculator",
-          "url": "https://diabetescalculator.ai/",
-          "applicationCategory": "HealthApplication",
-          "operatingSystem": "Any (web browser)",
-          "browserRequirements": "Requires JavaScript",
-          "description": "Converts HbA1c to estimated Average Glucose (eAG) in mg/dL or mmol/L using the ADA formula eAG (mg/dL) = 28.7 × A1C − 46.7.",
-          "inLanguage": "en-US",
-          "isAccessibleForFree": true,
-          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-          "featureList": [
-            "A1C to eAG conversion",
-            "eAG to A1C conversion",
-            "mg/dL and mmol/L units",
-            "A1C/eAG conversion formula",
-            "Shareable results"
-          ],
-          "author": { "@id": "https://diabetescalculator.ai/#person" },
-          "publisher": { "@id": "https://diabetescalculator.ai/#person" }
+          "@type": "Question",
+          "@id": "https://diabetescalculator.ai/#faq-a1c-meaning",
+          "name": "What do A1C and eAG mean?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A1C, also called HbA1c, reflects average blood glucose over roughly three months. Estimated average glucose (eAG) expresses the A1C-based estimate in mg/dL or mmol/L, the units used by glucose meters."
+          }
         },
         {
-          "@type": "HowTo",
-          "name": "How to convert A1C to estimated Average Glucose (eAG)",
-          "description": "Use the ADA formula to convert an HbA1c percentage into estimated Average Glucose.",
-          "totalTime": "PT1M",
-          "tool": [{ "@type": "HowToTool", "name": "eAG/A1C Diabetes Calculator" }],
-          "step": [
-            { "@type": "HowToStep", "position": 1, "name": "Choose conversion direction", "text": "Select 'A1C to eAG' or 'eAG to A1C'." },
-            { "@type": "HowToStep", "position": 2, "name": "Enter your value", "text": "Type your A1C percentage, or your eAG reading in mg/dL or mmol/L." },
-            { "@type": "HowToStep", "position": 3, "name": "Calculate", "text": "Click Calculate to see your converted value using the ADA formula eAG (mg/dL) = 28.7 × A1C − 46.7." },
-            { "@type": "HowToStep", "position": 4, "name": "Review and share", "text": "Review the result and share via link, email, or social." }
-          ]
+          "@type": "Question",
+          "@id": "https://diabetescalculator.ai/#faq-a1c-seven",
+          "name": "What is the average blood sugar for an A1C of 7%?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "An A1C of 7% corresponds to an estimated average glucose of about 154 mg/dL (8.6 mmol/L). This average is not a target for every individual reading."
+          }
         },
         {
-          "@type": "FAQPage",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "What is the formula to convert A1C to eAG?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "The American Diabetes Association formula is eAG (mg/dL) = 28.7 × A1C − 46.7. To get mmol/L, divide the mg/dL result by 18."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "What is A1C?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "A1C (HbA1c) is a blood test that reflects average blood sugar over the past 2–3 months. Normal is under 5.7%, prediabetes is 5.7–6.4%, and diabetes is 6.5% or higher."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "What is estimated Average Glucose (eAG)?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "eAG is your A1C expressed in the same units as a home glucose meter (mg/dL or mmol/L), making it easier to compare A1C results to daily readings."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "What eAG matches an A1C of 7%?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "An A1C of 7% equals an eAG of about 154 mg/dL (8.6 mmol/L) using the ADA formula."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Is this calculator free?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes. The eAG/A1C Diabetes Calculator is completely free, runs in your browser, and requires no sign-up."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Should I use this instead of medical advice?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "No. This tool is for educational purposes only. Always follow guidance from your healthcare provider for medical decisions."
-              }
-            }
-          ]
+          "@type": "Question",
+          "@id": "https://diabetescalculator.ai/#faq-single-reading",
+          "name": "Can I calculate A1C from one blood sugar reading?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. One fasting, after-meal, or random glucose reading is not a long-term average. Enter an average glucose value for the reverse estimate; this conversion does not replace a laboratory A1C test."
+          }
         },
         {
-          "@type": "BreadcrumbList",
-          "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://diabetescalculator.ai/" }
-          ]
+          "@type": "Question",
+          "@id": "https://diabetescalculator.ai/#faq-glucose-units",
+          "name": "How do I convert mg/dL to mmol/L?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For glucose, divide mg/dL by 18 to estimate mmol/L; multiply mmol/L by 18 to estimate mg/dL. These are glucose units. This calculator accepts A1C as a percentage, not HbA1c in mmol/mol."
+          }
+        },
+        {
+          "@type": "Question",
+          "@id": "https://diabetescalculator.ai/#faq-estimate-limits",
+          "name": "Why might my A1C estimate differ from my meter or CGM average?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The equation estimates a population relationship, not an exact personal match. Averages also hide highs and lows. Changes in red blood cells, some hemoglobin variants, and certain health conditions can affect A1C. Discuss mismatches with your healthcare professional."
+          }
+        },
+        {
+          "@type": "Question",
+          "@id": "https://diabetescalculator.ai/#faq-diagnosis",
+          "name": "Can this calculator diagnose diabetes or set my treatment target?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. It converts values for education and does not diagnose diabetes, recommend medication doses, or choose a personal glucose target. Ask your healthcare professional to interpret your results."
+          }
+        },
+        {
+          "@type": "Question",
+          "@id": "https://diabetescalculator.ai/#faq-input-ranges",
+          "name": "What values does the calculator accept?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A1C input accepts 4–20%. Average glucose input accepts 70–600 mg/dL or 3.9–33.3 mmol/L. These software input limits are not healthy ranges or treatment targets."
+          }
+        },
+        {
+          "@type": "Question",
+          "@id": "https://diabetescalculator.ai/#faq-sharing-privacy",
+          "name": "Is the calculator free, and what happens when I share a result?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The calculator is free and runs calculations in your browser without an account. Sharing is optional. A shared link includes readable calculation values; anyone with the link can access them. Email, social, and AI destinations can receive the values you choose to send. Review the destination preview before continuing."
+          }
         }
+      ],
+      "@id": "https://diabetescalculator.ai/#webpage",
+      "url": "https://diabetescalculator.ai/",
+      "name": "A1C to eAG Calculator & Blood Sugar Conversion Chart",
+      "description": "Convert A1C to estimated average glucose (eAG) or eAG to A1C in mg/dL and mmol/L. Includes formulas, a conversion chart, and answers to common questions.",
+      "inLanguage": "en-US",
+      "isPartOf": {
+        "@id": "https://diabetescalculator.ai/#website"
+      },
+      "about": {
+        "@id": "https://diabetescalculator.ai/#app"
+      },
+      "author": {
+        "@id": "https://diabetescalculator.ai/#person"
+      },
+      "dateModified": "2026-11-02",
+      "citation": [
+        "https://professional.diabetes.org/glucose_calc",
+        "https://www.niddk.nih.gov/health-information/diagnostic-tests/a1c-test"
       ]
     }
+  ]
+}
     </script>
 
     <!-- Google Consent Mode v2 - Default denied until user consents -->
@@ -218,8 +272,14 @@
         <header class="text-center mb-8">
             <h1 class="text-3xl md:text-4xl font-bold text-blue-600 mb-4">eAG/A1C Diabetes Calculator</h1>
             <p class="text-lg text-gray-700">
-                Convert between estimated average glucose (eAG) and A1C for diabetes management.
+                Convert A1C (HbA1c) to estimated average glucose (eAG), or convert an average glucose value back to an A1C estimate, in mg/dL or mmol/L.
             </p>
+            <p class="text-sm text-gray-700 mt-3">Free to use, with no sign-up. An educational estimate, not a diagnosis or a replacement for a lab test.</p>
+            <nav aria-label="Calculator page sections" class="mt-3 text-sm space-x-4">
+                <a href="#conversion-formulas" class="text-blue-600 underline">Formulas</a>
+                <a href="#a1c-chart" class="text-blue-600 underline">Conversion chart</a>
+                <a href="#faq" class="text-blue-600 underline">FAQ</a>
+            </nav>
         </header>
 
         <!-- 3-Column Layout -->
@@ -383,6 +443,91 @@
                 </div>
             </div>
         </div>
+
+        <!-- Searchable educational content is present without JavaScript. -->
+        <section id="conversion-formulas" aria-labelledby="formulas-heading" class="bg-white rounded-lg shadow-md p-6 mt-8">
+            <h2 id="formulas-heading" class="text-2xl font-semibold text-gray-800 mb-4">A1C and average blood glucose conversion formulas</h2>
+            <p class="text-gray-700 mb-3">The <a href="https://professional.diabetes.org/glucose_calc" class="text-blue-600 underline">American Diabetes Association conversion tool</a> publishes the A1C-Derived Average Glucose (ADAG) equation used here:</p>
+            <ul class="list-disc list-inside text-gray-700 space-y-2">
+                <li><strong>A1C to eAG:</strong> eAG (mg/dL) = 28.7 × A1C (%) − 46.7</li>
+                <li><strong>eAG to A1C:</strong> estimated A1C (%) = (eAG in mg/dL + 46.7) ÷ 28.7</li>
+                <li><strong>Glucose units:</strong> mmol/L = mg/dL ÷ 18; mg/dL = mmol/L × 18</li>
+            </ul>
+            <p class="text-gray-700 mt-3">Example: 28.7 × 7 − 46.7 = 154.2 mg/dL, displayed as 154 mg/dL and 8.6 mmol/L. Calculations keep full precision before rounding the display.</p>
+        </section>
+
+        <section id="a1c-chart" aria-labelledby="chart-heading" class="bg-white rounded-lg shadow-md p-6 mt-6">
+            <h2 id="chart-heading" class="text-2xl font-semibold text-gray-800 mb-4">A1C to average blood sugar conversion chart</h2>
+            <div class="conversion-table-wrap" role="region" aria-label="A1C conversion chart" tabindex="0">
+                <table class="conversion-table">
+                    <caption>Illustrative estimates from the ADAG equation; not treatment targets.</caption>
+                    <thead><tr><th scope="col">A1C (%)</th><th scope="col">eAG (mg/dL)</th><th scope="col">eAG (mmol/L)</th></tr></thead>
+                    <tbody>
+                        <tr><th scope="row">6%</th><td>126 mg/dL</td><td>7.0 mmol/L</td></tr>
+                        <tr><th scope="row">6.5%</th><td>140 mg/dL</td><td>7.8 mmol/L</td></tr>
+                        <tr><th scope="row">7%</th><td>154 mg/dL</td><td>8.6 mmol/L</td></tr>
+                        <tr><th scope="row">8%</th><td>183 mg/dL</td><td>10.2 mmol/L</td></tr>
+                        <tr><th scope="row">9%</th><td>212 mg/dL</td><td>11.8 mmol/L</td></tr>
+                        <tr><th scope="row">10%</th><td>240 mg/dL</td><td>13.4 mmol/L</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="text-sm text-gray-700 mt-3">Values are rounded to whole mg/dL and one decimal place for mmol/L. Use the calculator above for other values.</p>
+        </section>
+
+        <section id="faq" aria-labelledby="faq-heading" class="bg-white rounded-lg shadow-md p-6 mt-6">
+            <h2 id="faq-heading" class="text-2xl font-semibold text-gray-800 mb-6">A1C and eAG calculator FAQ</h2>
+                <article id="faq-a1c-to-eag" class="mb-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">How do I convert A1C to estimated average glucose?</h3>
+                    <p class="text-gray-700">Use eAG (mg/dL) = 28.7 × A1C (%) − 46.7. Divide that result by 18 for eAG in mmol/L. For example, A1C of 7% gives about 154 mg/dL or 8.6 mmol/L.</p>
+                </article>
+                <article id="faq-eag-to-a1c" class="mb-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">How do I convert average blood glucose to A1C?</h3>
+                    <p class="text-gray-700">Use estimated A1C (%) = (average glucose in mg/dL + 46.7) ÷ 28.7. For mmol/L, multiply the average by 18 first. An average of 154 mg/dL gives an estimated A1C of about 7.0%.</p>
+                </article>
+                <article id="faq-a1c-meaning" class="mb-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">What do A1C and eAG mean?</h3>
+                    <p class="text-gray-700">A1C, also called HbA1c, reflects average blood glucose over roughly three months. Estimated average glucose (eAG) expresses the A1C-based estimate in mg/dL or mmol/L, the units used by glucose meters.</p>
+                </article>
+                <article id="faq-a1c-seven" class="mb-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">What is the average blood sugar for an A1C of 7%?</h3>
+                    <p class="text-gray-700">An A1C of 7% corresponds to an estimated average glucose of about 154 mg/dL (8.6 mmol/L). This average is not a target for every individual reading.</p>
+                </article>
+                <article id="faq-single-reading" class="mb-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Can I calculate A1C from one blood sugar reading?</h3>
+                    <p class="text-gray-700">No. One fasting, after-meal, or random glucose reading is not a long-term average. Enter an average glucose value for the reverse estimate; this conversion does not replace a laboratory A1C test.</p>
+                </article>
+                <article id="faq-glucose-units" class="mb-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">How do I convert mg/dL to mmol/L?</h3>
+                    <p class="text-gray-700">For glucose, divide mg/dL by 18 to estimate mmol/L; multiply mmol/L by 18 to estimate mg/dL. These are glucose units. This calculator accepts A1C as a percentage, not HbA1c in mmol/mol.</p>
+                </article>
+                <article id="faq-estimate-limits" class="mb-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Why might my A1C estimate differ from my meter or CGM average?</h3>
+                    <p class="text-gray-700">The equation estimates a population relationship, not an exact personal match. Averages also hide highs and lows. Changes in red blood cells, some hemoglobin variants, and certain health conditions can affect A1C. Discuss mismatches with your healthcare professional.</p>
+                </article>
+                <article id="faq-diagnosis" class="mb-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Can this calculator diagnose diabetes or set my treatment target?</h3>
+                    <p class="text-gray-700">No. It converts values for education and does not diagnose diabetes, recommend medication doses, or choose a personal glucose target. Ask your healthcare professional to interpret your results.</p>
+                </article>
+                <article id="faq-input-ranges" class="mb-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">What values does the calculator accept?</h3>
+                    <p class="text-gray-700">A1C input accepts 4–20%. Average glucose input accepts 70–600 mg/dL or 3.9–33.3 mmol/L. These software input limits are not healthy ranges or treatment targets.</p>
+                </article>
+                <article id="faq-sharing-privacy" class="mb-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Is the calculator free, and what happens when I share a result?</h3>
+                    <p class="text-gray-700">The calculator is free and runs calculations in your browser without an account. Sharing is optional. A shared link includes readable calculation values; anyone with the link can access them. Email, social, and AI destinations can receive the values you choose to send. Review the destination preview before continuing.</p>
+                </article>
+            <p class="text-sm text-gray-700">Learn more in our <a href="resources.html" class="text-blue-600 underline">A1C and glucose resources</a>, <a href="tips.html" class="text-blue-600 underline">calculator tips</a>, and <a href="privacy.html" class="text-blue-600 underline">privacy policy</a>.</p>
+        </section>
+
+        <section aria-labelledby="sources-heading" class="bg-blue-50 rounded-lg p-6 mt-6 border border-blue-200">
+            <h2 id="sources-heading" class="text-xl font-semibold text-gray-800 mb-3">Sources and content information</h2>
+            <ul class="list-disc list-inside text-gray-700 space-y-2">
+                <li><a href="https://professional.diabetes.org/glucose_calc" class="text-blue-600 underline">ADA: eAG/A1C conversion calculator and ADAG study</a> — equation and conversion reference.</li>
+                <li><a href="https://www.niddk.nih.gov/health-information/diagnostic-tests/a1c-test" class="text-blue-600 underline">NIDDK: The A1C Test &amp; Diabetes</a> — A1C interpretation and limitations.</li>
+            </ul>
+            <p class="text-sm text-gray-700 mt-3">Created by <a href="about.html" class="text-blue-600 underline">Richard Crane</a>. Content updated <time datetime="2026-11-02">November 2, 2026</time>. Educational information, not medical advice. Listing these sources does not imply endorsement or clinical review of this calculator.</p>
+        </section>
 
         <!-- Support Section -->
         <div class="flex justify-center mt-8">

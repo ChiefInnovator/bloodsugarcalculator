@@ -351,3 +351,29 @@ test("Escape does not steal focus from content outside an open mobile menu", asy
     assert.equal(f.get("mobile-menu-btn").getAttribute("aria-expanded"), "false");
     assert.equal(f.document.activeElement, f.get("main-content"));
 });
+
+
+test("half-value glucose rounding agrees across result, explanation, status and sharing", async () => {
+    const f = fixture();
+    await calculate(f, "6");
+    assert.equal(f.get("result-value").children[0].textContent, "eAG: 126 mg/dL");
+    assert.match(f.get("result-explanation").textContent, /126 mg\/dL/);
+    assert.match(f.get("result-status").textContent, /126 mg\/dL/);
+    await f.get("share-email").fire("click");
+    assert.match(f.get("external-action-preview").textContent, /126 mg\/dL/);
+    await calculate(f, "5.9999");
+    assert.equal(f.get("result-value").children[0].textContent, "eAG: 125 mg/dL");
+    await calculate(f, "4.013937282229965");
+    assert.equal(f.get("result-value").children[0].textContent, "eAG: 68 mg/dL");
+    assert.match(f.get("result-status").textContent, /68 mg\/dL/);
+    f.groups["conversion-direction"].forEach(radio => { radio.checked = radio.value === "eag-to-a1c"; });
+    f.groups["eag-units"].forEach(radio => { radio.checked = radio.value === "mmoll"; });
+    await f.get("eag-to-a1c").fire("change");
+    f.get("eag-input").value = "7.75";
+    await f.get("calculator-form").fire("submit");
+    assert.match(f.get("result-status").textContent, /140 mg\/dL/);
+    f.groups["eag-units"].forEach(radio => { radio.checked = radio.value === "mgdl"; });
+    f.get("eag-input").value = "139.49999999999997";
+    await f.get("calculator-form").fire("submit");
+    assert.match(f.get("result-status").textContent, /139 mg\/dL/);
+});
